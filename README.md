@@ -201,6 +201,10 @@ buildscript {
 allprojects {
     repositories {
         mavenLocal()
+        maven {
+            name 'hypertrack'
+            url 'http://m2.hypertrack.com'
+        }
         jcenter()
         maven {
             // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
