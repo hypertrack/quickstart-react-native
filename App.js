@@ -246,7 +246,7 @@ export default class HyperTrackQuickstart extends Component {
   }
 
   /**
-   * Send a custom event
+   * Set a trip marker
    *
    * @param metadata Dictionary of type `<NSString*, id>`. Include
    * anything that can be parsed into JSON. Custom types are not allowed.
@@ -255,8 +255,8 @@ export default class HyperTrackQuickstart extends Component {
    * made to this API during an internet outage will be recorded and sent
    * when the connection is available.
    */
-  sendCustomEvent(metadata) {
-    RNHyperTrack.sendCustomEvent(metadata).then(resp => {
+  setTripMarker(metadata) {
+    RNHyperTrack.setTripMarker(metadata).then(resp => {
       console.log("success");
     }, error => {
       console.log(error);

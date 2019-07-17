@@ -83,6 +83,7 @@ Check out the [dashboard](#dashboard) to see the live location of your devices o
 3. [Import the module](#step-3-import-the-module)
 4. [Configure the Publishable Key](#step-4-configure-the-publishable-key)
 5. [Enable native capabilities on iOS](#step-5-enable-native-capabilities-on-ios)
+6. [(optional) Enable remote notifications](#step-6-enable-remote-notifications)
 
 ### Step 1: Install the module
 
@@ -259,6 +260,106 @@ You can ask for "When In Use" permission only, but be advised that the device wi
 ![In use authorization location](Images/In_Use_Authorization.png)
 
 Be advised, purpose strings are mandatory, and the app crashes without them.
+
+### Step 6. Enable remote notifications
+
+The SDK has a bi-directional communication model with the server. This enables the SDK to run on a variable frequency model, which balances the fine trade-off between low latency tracking and battery efficiency, and improves robustness. For this purpose, the iOS SDK uses APNs silent remote notifications and Android SDK uses FCM silent notifications.
+
+#### iOS
+
+This guide assumes you have configured APNs in your application. If you haven't, read the [iOS documentation on APNs](https://developer.apple.com/documentation/usernotifications/registering_your_app_with_apns).
+
+##### Configure APNs on the dashboard
+
+Log into the HyperTrack dashboard, and open the [setup page](https://dashboard.hypertrack.com/setup). Upload your Auth Key (file in the format `AuthKey_KEYID.p8`) and fill in your Team ID.
+
+This key will only be used to send remote push notifications to your apps.
+
+##### Enable remote notifications in the app
+
+In the app capabilities, ensure that **remote notifications** inside background modes is enabled.
+
+![Remote Notifications in Xcode](Images/Remote_Notifications.png)
+
+In the same tab, ensure that **push notifications** is enabled.
+
+![Push Notifications in Xcode](Images/Push_Notifications.png)
+
+##### Registering and receiving notifications
+
+The following changes inside AppDelegate will register the SDK for push notifications and route HyperTrack notifications to the SDK.
+
+###### Register for notifications
+
+Inside `didFinishLaunchingWithOptions`, use the SDK method to register for notifications.
+
+```objc
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [HTSDK registerForRemoteNotifications];
+    return YES;
+}
+```
+
+###### Register device token
+
+Inside and `didRegisterForRemoteNotificationsWithDeviceToken` and `didFailToRegisterForRemoteNotificationsWithError` methods, add the relevant lines so that HyperTrack can register the device token.
+
+```objc
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    [HTSDK didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    [HTSDK didFailToRegisterForRemoteNotificationsWithError:error];
+}
+```
+
+###### Receive notifications
+
+Inside the `didReceiveRemoteNotification` method, add the HyperTrack receiver. This method parses only the notifications that sent from HyperTrack.
+
+```objc
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    [HTSDK didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];
+}
+```
+
+If you want to make sure to only pass HyperTrack notifications to the SDK, you can use the "hypertrack" key:
+
+```objc
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    if (userInfo[@"hypertrack"] != nil) {
+        // This is HyperTrack's notification
+        [HTSDK didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];
+    } else {
+        // Handle your server's notification here
+    }
+}
+```
+
+#### Android
+
+This guide assumes you have configured FCM in your application. If you haven't, read the [Firebase guide](https://firebase.google.com/docs/android/setup).
+
+##### Configure FCM key on the Dashboard
+
+Log into the HyperTrack dashboard, and open the [setup page](https://dashboard.hypertrack.com/setup). Enter your FCM Key.
+
+This key will only be used to send remote push notifications to your apps.
+
+###### Enable server to device communication
+Server to device communication uses firebase push notifications as transport for commands so for remote tracking state management Firebase integration is required. So you need to [setup Firebase Cloud Messaging](https://firebase.google.com/docs/android/setup), if you have no push notifications enabled so far. Next step is to specify `HyperTrackMessagingService` as push messages receiver by adding following snippet to your apps Android manifest:
+```xml
+...
+  <service android:name="com.hypertrack.sdk.HyperTrackMessagingService" android:exported="false">
+      <intent-filter>
+          <action android:name="com.google.firebase.MESSAGING_EVENT" />
+      </intent-filter>
+  </service>
+</application>
+```
+If you already use firebase push notifications you can extend `HyperTrackMessagingService` instead of Firebase, or declare two receivers side by side, if you wish.
+Check out [Quickstart app with notifications integrated](https://github.com/hypertrack/quickstart-android/tree/push-integration-example) if you prefer to get a look at example.
 
 ### You are all set
 
