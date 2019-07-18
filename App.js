@@ -173,7 +173,7 @@ export default class HyperTrackQuickstart extends Component {
   shareLocation() {
     this.getTrackingLinkFromServer()
     .then((responseJson) => {
-      var result = `https://track.hypertrack.com/${responseJson}`;
+      var result = `https://trck.at/${responseJson}`;
       Share.share({
         url: result,
       }, {
