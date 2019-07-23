@@ -1,6 +1,10 @@
 # React Native Quickstart for HyperTrack SDKs
 
 ![GitHub](https://img.shields.io/github/license/hypertrack/quickstart-react-native.svg)
+[![RN SDK](https://img.shields.io/badge/RN%20SDK-3.0.0-brightgreen.svg)](https://www.npmjs.com/package/hypertrack-sdk-react-native)
+[![iOS SDK](https://img.shields.io/badge/iOS%20SDK-3.3.5-brightgreen.svg)](https://cocoapods.org/pods/HyperTrack)
+![Android SDK](https://img.shields.io/badge/Android%20SDK-3.3.0-brightgreen.svg)
+
 
 [HyperTrack](https://www.hypertrack.com) lets you add live location tracking to your mobile app. Live location is made available along with ongoing activity, tracking controls and tracking outage with reasons. This repo contains an example React Native app that has everything you need to get started in minutes.
 
@@ -83,7 +87,7 @@ Check out the [dashboard](#dashboard) to see the live location of your devices o
 3. [Import the module](#step-3-import-the-module)
 4. [Configure the Publishable Key](#step-4-configure-the-publishable-key)
 5. [Enable native capabilities on iOS](#step-5-enable-native-capabilities-on-ios)
-6. [(optional) Enable remote notifications](#step-6-enable-remote-notifications)
+6. [Enable remote notifications](#step-6-enable-remote-notifications)
 
 ### Step 1: Install the module
 
@@ -217,6 +221,17 @@ allprojects {
         }
     }
 }
+```
+
+##### Allow backups
+
+Set `allowBackup` to `true` in `android > app > src > main > AndroidManifest.xml`. This allows HyperTrack to persist important tracking metadata between app updates.
+
+```
+    <application
+      ...
+      android:allowBackup="true"
+      android:theme="@style/AppTheme">
 ```
 
 ### Step 3: Import the module

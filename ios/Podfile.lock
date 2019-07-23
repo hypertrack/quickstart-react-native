@@ -1,10 +1,6 @@
 PODS:
-  - CocoaLumberjack/Default (3.4.2)
-  - CocoaLumberjack/Swift (3.4.2):
-    - CocoaLumberjack/Default
   - GRDB.swift (3.6.2)
-  - HyperTrack (3.3.3):
-    - CocoaLumberjack/Swift (= 3.4.2)
+  - HyperTrack (3.3.5):
     - GRDB.swift (= 3.6.2)
 
 DEPENDENCIES:
@@ -12,15 +8,13 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - CocoaLumberjack
     - GRDB.swift
     - HyperTrack
 
 SPEC CHECKSUMS:
-  CocoaLumberjack: db7cc9e464771f12054c22ff6947c5a58d43a0fd
   GRDB.swift: e10787d857b6b8135354b9e08fb23b4bb8e2fab7
-  HyperTrack: d5f4e2ac47b53cf26f57c265e0bc33faa64b968c
+  HyperTrack: 2b64a86a1ce9c3d6d790b9c3c2f7c5dab5e00590
 
-PODFILE CHECKSUM: 5ae4eac2abbec5dc5d3ad69b4c6b3071a624e255
+PODFILE CHECKSUM: 14a64f7fd1f45f840ee06b933ba97f5a12dff25a
 
-COCOAPODS: 1.7.4
+COCOAPODS: 1.7.5
