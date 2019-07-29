@@ -1,7 +1,7 @@
 # React Native Quickstart for HyperTrack SDKs
 
 ![GitHub](https://img.shields.io/github/license/hypertrack/quickstart-react-native.svg)
-[![RN SDK](https://img.shields.io/badge/RN%20SDK-3.0.0-brightgreen.svg)](https://www.npmjs.com/package/hypertrack-sdk-react-native)
+[![RN SDK](https://img.shields.io/badge/RN%20SDK-4.0.1-brightgreen.svg)](https://www.npmjs.com/package/hypertrack-sdk-react-native)
 [![iOS SDK](https://img.shields.io/badge/iOS%20SDK-3.3.5-brightgreen.svg)](https://cocoapods.org/pods/HyperTrack)
 ![Android SDK](https://img.shields.io/badge/Android%20SDK-3.3.0-brightgreen.svg)
 

@@ -23,7 +23,7 @@ export default class HyperTrackQuickstart extends Component {
 
     // Initialize HyperTrack with a publishable key
     // Set your Publishable Key here
-    RNHyperTrack.initialize(this.state.publishableKey);
+    RNHyperTrack.initialize(this.state.publishableKey, true);
   }
 
   componentWillMount() {
