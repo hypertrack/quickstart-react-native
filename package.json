@@ -1,24 +1,29 @@
 {
-  "name": "Quickstart",
-  "version": "1.0.0",
+  "name": "hypertrack-rnquickstart",
+  "version": "3.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "start": "react-native start",
+    "and": "react-native run-android",
+    "abundle": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
+    "test": "jest",
+    "lint": "eslint ."
   },
   "dependencies": {
-    "apsl-react-native-button": "^3.1.1",
-    "hypertrack-sdk-react-native": "^4.0.1",
-    "react": "16.8.3",
-    "react-native": "0.59.8"
+    "react": "16.8.6",
+    "react-native": "0.59.8",
+    "hypertrack-sdk-react-native": "5.0.5",
+    "apsl-react-native-button": "^3.1.1"
   },
   "devDependencies": {
-    "@babel/core": "7.4.5",
-    "@babel/runtime": "^7.5.4",
-    "babel-jest": "24.8.0",
-    "jest": "24.8.0",
-    "metro-react-native-babel-preset": "0.55.0",
-    "react-test-renderer": "16.8.3"
+    "@babel/core": "7.5.5",
+    "@babel/runtime": "7.5.5",
+    "@react-native-community/eslint-config": "0.0.3",
+    "babel-jest": "24.9.0",
+    "eslint": "6.1.0",
+    "jest": "24.9.0",
+    "metro-react-native-babel-preset": "0.54.1",
+    "react-test-renderer": "16.8.6"
   },
   "jest": {
     "preset": "react-native"

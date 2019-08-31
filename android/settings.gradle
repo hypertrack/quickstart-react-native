@@ -1,4 +1,4 @@
-rootProject.name = 'Quickstart'
+rootProject.name = 'hypertrack-rnquickstart'
 include ':hypertrack-sdk-react-native'
 project(':hypertrack-sdk-react-native').projectDir = new File(rootProject.projectDir, '../node_modules/hypertrack-sdk-react-native/android')
 
