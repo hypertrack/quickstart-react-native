@@ -1,31 +1,42 @@
 import React, {Component} from 'react';
 import {Platform, Share, StyleSheet, Text, View} from 'react-native';
 import Button from 'apsl-react-native-button'
+
+// Import HyperTrack SDK API
+// You can also use CriticalErrors to react to different kind of errors preventing tracking (ex: permissions deined)
 import {CriticalErrors, HyperTrack} from 'hypertrack-sdk-react-native';
 
-const PUBLISHABLE_KEY = "YOUR_PUBLISHABLE_KEY";
+const PUBLISHABLE_KEY = "Paste_your_publishable_key_here";
 
 export default class HyperTrackQuickstart extends Component {
 
     state = {
         deviceId: "",
-        trackingState: "",
-        isTracking: false,
+        trackingState: "Started",
+        isTracking: true,
         isShareButtonDisabled: false
     };
 
-    constructor(props) {
-        super(props);
-        // Initialize HyperTrack with a publishable key
-        // Set your Publishable Key here
-        HyperTrack.initialize(PUBLISHABLE_KEY, false);
+    _initializeHyperTrack = async () => {
+        // (Optional) This turns on logging for underlying native SDKs. Placed on top so SDKs start logging immediately
         HyperTrack.enableDebugLogging(true);
-        // return a string which is used by HyperTrack to uniquely identify the user.
-        HyperTrack.getDeviceID().then((deviceId) => this.setState({deviceId: deviceId}));
-    }
 
-    componentWillMount() {
-        HyperTrack.addTrackingListeners(this,
+        // Initialize HyperTrack with a publishable key
+        this.hyperTrack = await HyperTrack.createInstance(PUBLISHABLE_KEY);
+
+        // Obtain the unique HyperTrack's DeviceID identifier to use it with HyperTrack's APIs
+        const deviceId = await this.hyperTrack.getDeviceID();
+        this.setState({deviceId: deviceId});
+
+        // (Optional) Set the device name to display in dashboard (for ex. user name)
+        this.hyperTrack.setDeviceName("RN Quickstart");
+
+        // (Optional) Attach any JSON metadata to this device to see in HyperTrack's API responses
+        this.hyperTrack.setMetadata({driver_id: "83B3X5", state: "IN_PROGRESS"});
+
+        // (Optional) Register tracking listeners to update your UI when SDK starts/stops or react to errors
+        this.hyperTrack.registerTrackingListeners(this,
+            // Display or log errors
             (error) => {
                 if (error.code === CriticalErrors.INVALID_PUBLISHABLE_KEY
                     || error.code === CriticalErrors.AUTHORIZATION_FAILED) {
@@ -38,16 +49,27 @@ export default class HyperTrackQuickstart extends Component {
                     isTracking: false
                 })
             },
+            // Update UI when tracking starts
             () => this.setState({trackingState: "Started", isTracking: true}),
+            // Update UI when tracking stops
             () => this.setState({trackingState: "Stopped", isTracking: false}));
+    };
+
+    _onPressTrackingButton = async () => {
+        const isTracking = await this.hyperTrack.isTracking();
+
+        if (isTracking) this.hyperTrack.stopTracking();
+        else this.hyperTrack.startTracking();
+    };
+
+    // Call the initialization in componentWillMount
+    componentWillMount() {
+        this._initializeHyperTrack();
     }
 
+    // (Optional) Unregister tracking listeners if they were registered in previous step
     componentWillUnmount() {
-        HyperTrack.removeTrackingListeners(this);
-    }
-
-    async _onStartStopButtonPress() {
-        await HyperTrack.isTracking() ? HyperTrack.stopTracking() : HyperTrack.startTracking()
+        this.hyperTrack.unregisterTrackingListeners(this);
     }
 
     render() {
@@ -79,7 +101,7 @@ export default class HyperTrackQuickstart extends Component {
                 </View>
                 <View style={styles.buttonContainer}>
                     <Button
-                        onPress={this._onStartStopButtonPress}
+                        onPress={this._onPressTrackingButton.bind(this)}
                         style={isTracking ? styles.stopButton : styles.startButton}
                         textStyle={styles.buttonText}
                     >
@@ -95,7 +117,7 @@ export default class HyperTrackQuickstart extends Component {
         this._getTrackingLinkFromServer()
             .then((responseJson) => {
                 this.setState({isShareButtonDisabled: false});
-                var result = `https://trck.at/${responseJson}`;
+                const result = `https://trck.at/${responseJson}`;
                 Share.share({
                     message: result,
                     url: result

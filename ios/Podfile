@@ -2,7 +2,7 @@ platform :ios, '11.0'
 
 target 'Quickstart' do
   use_frameworks!
-  pod 'HyperTrack', '3.6.0'
+  pod 'HyperTrack', '3.7.0'
 end
 
 post_install do |installer|

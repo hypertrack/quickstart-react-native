@@ -1,10 +1,9 @@
 # React Native Quickstart for HyperTrack SDKs
 
 ![GitHub](https://img.shields.io/github/license/hypertrack/quickstart-react-native.svg)
-[![RN SDK](https://img.shields.io/badge/RN%20SDK-5.0.5-brightgreen.svg)](https://www.npmjs.com/package/hypertrack-sdk-react-native)
-[![iOS SDK](https://img.shields.io/badge/iOS%20SDK-3.6.0-brightgreen.svg)](https://cocoapods.org/pods/HyperTrack)
-![Android SDK](https://img.shields.io/badge/Android%20SDK-3.4.5-brightgreen.svg)
-
+[![RN SDK](https://img.shields.io/npm/v/hypertrack-sdk-react-native.svg)](https://www.npmjs.com/package/hypertrack-sdk-react-native)
+[![iOS SDK](https://img.shields.io/badge/iOS%20SDK-3.7.0-brightgreen.svg)](https://cocoapods.org/pods/HyperTrack)
+![Android SDK](https://img.shields.io/badge/Android%20SDK-3.4.6-brightgreen.svg)
 
 [HyperTrack](https://www.hypertrack.com) lets you add live location tracking to your mobile app. Live location is made available along with ongoing activity, tracking controls and tracking outage with reasons. This repo contains an example React Native app that has everything you need to get started in minutes.
 
@@ -79,6 +78,8 @@ After enabling location and activity permissions (choose "Always Allow" if you w
 Check out the [dashboard](#dashboard) to see the live location of your devices on the map.
 
 ## Integrate the [React Native SDK](https://github.com/hypertrack/sdk-react-native)
+
+You will need either [npm](https://www.npmjs.com/) or [Yarn](https://yarnpkg.com) in order to install the SDK and configure the Android and iOS projects.
 
 1. [Create React Native project](#step-1-create-react-native-project)
 2. [Install JavaScript packages](#step-2-install-javascript-packages)
@@ -240,7 +241,7 @@ After Cocoapods is finished installing dependencies, we need to manually link th
 
 1. Open the iOS module files directory, located inside `node_modules/hypertrack-sdk-react-native/ios/`.
 2. Open the app's workspace file (`.xcworkspace`) in Xcode.
-3. Move the `HyperTrack.h` and `HyperTrack.m` files to your project. When shown a popup window, select `Create folder references` and make sure `Copy items if needed` is deselected. This will allow to update those files every time the JS module updates.
+3. Move the `HyperTrack.h` and `HyperTrack.m` files to your project. When shown a popup window, select `Create folder references` and make sure `Copy items if needed` is deselected. This will allow these files to update every time the JS module updates.
 
 ![Linking on iOS](Images/link.gif)
 
@@ -368,37 +369,38 @@ If you want to make sure to only pass HyperTrack notifications to the SDK, you c
 
 ### Step 5: Usage
 
-#### Initialize
-
 ```js
-import {HyperTrack} from 'hypertrack-sdk-react-native';
+// Import HyperTrack SDK API
+// You can also use CriticalErrors to react to different kind of errors preventing tracking (ex: permissions deined)
+import {CriticalErrors, HyperTrack} from 'hypertrack-sdk-react-native';
 
-const PUBLISHABLE_KEY = "paste_your_key_here";
-export default class App extends Component<{}> {
-
-    constructor(props) {
-            super(props);
-            HyperTrack.initialize(PUBLISHABLE_KEY);
-            HyperTrack.enableDebugLogging(true);
-        }
-
-}
-```
-
-#### Add tracking listeners
-
-```js
-export default class App extends Component<{}> {
-    ...
+export default class App extends Component {
 
     state = {
-        ...
-        isTracking: false,
-        trackingState: "",
+        deviceID: "",
+        isTracking: true
     };
 
-    componentWillMount() {
-        HyperTrack.addTrackingListeners(this,
+    _initializeHyperTrack = async () => {
+        // (Optional) This turns on logging for underlying native SDKs. Placed on top so SDKs start logging immediately
+        HyperTrack.enableDebugLogging(true);
+
+        // Initialize HyperTrack with a publishable key
+        this.hyperTrack = await HyperTrack.createInstance("paste_your_key_here");
+
+        // Obtain the unique HyperTrack's DeviceID identifier to use it with HyperTrack's APIs
+        const deviceID = await this.hyperTrack.getDeviceID();
+        this.setState({deviceID: deviceID});
+
+        // (Optional) Set the device name to display in dashboard (for ex. user name)
+        this.hyperTrack.setDeviceName("Your Device Name");
+
+        // (Optional) Attach any JSON metadata to this device to see in HyperTrack's API responses
+        this.hyperTrack.setMetadata({driver_id: "83B3X5", state: "IN_PROGRESS"});
+
+        // (Optional) Register tracking listeners to update your UI when SDK starts/stops or react to errors
+        this.hyperTrack.registerTrackingListeners(this,
+            // Log errors or update UI accordingly
             (error) => {
                 if (error.code === CriticalErrors.INVALID_PUBLISHABLE_KEY
                     || error.code === CriticalErrors.AUTHORIZATION_FAILED) {
@@ -406,18 +408,26 @@ export default class App extends Component<{}> {
                 } else {
                     console.log("Tracking failed")
                 }
-                this.setState({
-                    trackingState: "Stopped with error: " + ((error.code + " - " + error.message) || "unknown"),
-                    isTracking: false
-                })
             },
-            () => this.setState({trackingState: "Started", isTracking: true}),
-            () => this.setState({trackingState: "Stopped", isTracking: false}));
+            // Update UI when tracking starts
+            () => this.setState({isTracking: true}),
+            // Update UI when tracking stops
+            () => this.setState({isTracking: false})
+        );
+
+
+    };
+
+    // Call the initialization in componentWillMount
+    componentWillMount() {
+        this._initializeHyperTrack();
     }
 
+    // (Optional) Unregister tracking listeners if they were registered in previous step
     componentWillUnmount() {
-        HyperTrack.removeTrackingListeners(this);
+        this.hyperTrack.unregisterTrackingListeners(this);
     }
+
 }
 ```
 
@@ -440,7 +450,7 @@ Once your app is running, go to the [dashboard](https://dashboard.hypertrack.com
 
 #### Supported versions on iOS
 
-Currently we do support all of the iOS versions starting from iOS 10.
+Currently we do support all of the iOS versions starting from iOS 11.
 
 #### Error: Access to Activity services has not been authorized
 You are running the Quickstart app on the iOS simulator, which currently does not support CoreMotion services. You can test the quickstart app on real iOS devices only.
