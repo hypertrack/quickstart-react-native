@@ -9,7 +9,7 @@
 
 * [Publishable Key](#publishable-key)–Sign up and get your keys
 * [Quickstart](#quickstart-app)–Start with a ready-to-go app with reliable background service
-* [Integrate the React Native SDK](#integrate-the-react-native-sdk)–Integrate the React Native SDK into your app
+* [Integrate the SDK](#integrate-the-sdk)–Integrate the SDK into your app
 * [Dashboard](#dashboard)–See live location of all your devices on your HyperTrack dashboard
 * [FAQs](#frequently-asked-questions)–Frequently asked questions
 * [Support](#support)–Support
@@ -77,7 +77,7 @@ After enabling location and activity permissions (choose "Always Allow" if you w
 
 Check out the [dashboard](#dashboard) to see the live location of your devices on the map.
 
-## Integrate the [React Native SDK](https://github.com/hypertrack/sdk-react-native)
+## Integrate the SDK
 
 You will need either [npm](https://www.npmjs.com/) or [Yarn](https://yarnpkg.com) in order to install the SDK and configure the Android and iOS projects.
 
