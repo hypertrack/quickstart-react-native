@@ -126,6 +126,7 @@ react-native link hypertrack-sdk-react-native
 #### Android
 
 Assuming you have [Android Studio](http://developer.android.com/sdk/index.html) installed, open the project with Android Studio.
+You also have to add `ANDROID_SDK_ROOT=<path-to-android-sdk>` in `PATH` or `sdk.dir=<path-to-android-sdk>` in `/android/local.properties`
 
 Go to `MainApplication.java` under `app/src/main/java/com/<project name>/` to complete setup.
 
