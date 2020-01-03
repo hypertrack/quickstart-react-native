@@ -1069,7 +1069,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.hypertrack.reactIos.quickstart.github.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hypertrack.quickstart.reactIos.github.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Quickstart.app/Quickstart";
 			};
@@ -1088,7 +1088,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.hypertrack.reactIos.quickstart.github.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hypertrack.quickstart.reactIos.github.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Quickstart.app/Quickstart";
 			};
@@ -1110,7 +1110,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hypertrack.reactIos.quickstart.github;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hypertrack.quickstart.reactIos.github;
 				PRODUCT_NAME = Quickstart;
 				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1132,7 +1132,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hypertrack.reactIos.quickstart.github;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hypertrack.quickstart.reactIos.github;
 				PRODUCT_NAME = Quickstart;
 				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";

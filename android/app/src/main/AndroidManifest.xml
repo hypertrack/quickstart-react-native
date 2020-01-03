@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.hypertrack.reactAndroid.quickstart.github">
+    package="com.hypertrack.quickstart.reactAndroid.github">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
