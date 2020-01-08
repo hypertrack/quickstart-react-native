@@ -17,6 +17,3 @@ yarn-error.log
 
 # CocoaPods
 /ios/Pods/
-
-#OSX hidden
-**/.DS_Store
