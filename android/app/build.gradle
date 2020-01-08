@@ -52,7 +52,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.hypertrack.rnquickstart"
+        applicationId "com.hypertrack.quickstart.react.android.github"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode getGitVersion()
