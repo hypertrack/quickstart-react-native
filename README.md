@@ -2,7 +2,7 @@
 
 ![GitHub](https://img.shields.io/github/license/hypertrack/quickstart-react-native.svg)
 [![RN SDK](https://img.shields.io/npm/v/hypertrack-sdk-react-native.svg)](https://www.npmjs.com/package/hypertrack-sdk-react-native)
-[![iOS SDK](https://img.shields.io/badge/iOS%20SDK-3.7.0-brightgreen.svg)](https://cocoapods.org/pods/HyperTrack)
+[![iOS SDK](https://img.shields.io/badge/iOS%20SDK-4.0.1-brightgreen.svg)](https://cocoapods.org/pods/HyperTrack)
 ![Android SDK](https://img.shields.io/badge/Android%20SDK-3.4.6-brightgreen.svg)
 
 [HyperTrack](https://www.hypertrack.com) lets you add live location tracking to your mobile app. Live location is made available along with ongoing activity, tracking controls and tracking outage with reasons. This repo contains an example React Native app that has everything you need to get started in minutes.
@@ -210,20 +210,11 @@ Edit the Podfile to include `HyperTrack` as a dependency for your project by add
 ```bash
 platform :ios, '11.0'
 
-target 'YourApp' do
+target 'Quickstart' do
   use_frameworks!
-  pod 'HyperTrack'
+  pod 'HyperTrack/Objective-C', '4.0.1'
 end
 
-post_install do |installer|
-  installer.pods_project.targets.each do |target|
-    if ['GRDB.swift'].include? target.name
-      target.build_configurations.each do |config|
-        config.build_settings['SWIFT_VERSION'] = '4.2'
-      end
-    end
-  end
-end
 ```
 
 Check the Swift version in build settings. Open your `.xcodeproj` project file with Xcode. Select the projects Xcode project file in the navigator, go to your app's target (Should be with the same name as a project name) > Build Settings and search for `SWIFT_VERSION` flag. If there isn't one, create a new Swift file without creating a bridging header, and Xcode will create this setting for you. Set it to `4.2`. You can then delete the file.
