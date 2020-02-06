@@ -93,7 +93,7 @@ After the trip is created check out the [dashboard](#dashboard) to see the live 
 You can use our [Postman collection](https://www.getpostman.com/run-collection/a2318d122f1b88fae3c1) to create a trip using [HyperTrack REST API](https://docs.hypertrack.com/#references-apis-trips-post-trips) or use the following cURL request:
 
 ```curl
-curl -u USERNAME:PASSWORD --location --request POST 'https://v3.api.hypertrack.com/trips/' \
+curl -u ACCOUNTID:SECRETKEY --location --request POST 'https://v3.api.hypertrack.com/trips/' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "device_id": "DEVICEID",
@@ -108,7 +108,7 @@ curl -u USERNAME:PASSWORD --location --request POST 'https://v3.api.hypertrack.c
 
 Substitute:
 * `DEVICEID` for Device ID of your device (can be seen on the app itself or in logs)
-* `USERNAME` and `PASSWORD` for `AccountId` and `SecretKey` obtained in the [Setup page](https://dashboard.hypertrack.com/setup)
+* `ACCOUNTID` and `SECRETKEY` for values obtained in the [Setup page](https://dashboard.hypertrack.com/setup)'s API section.
 * `LATITUDE` and `LONGITUDE` for real values of your destination
 
 ## Dashboard
