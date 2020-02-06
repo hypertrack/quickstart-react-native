@@ -55,13 +55,6 @@ export default class HyperTrackQuickstart extends Component {
             () => this.setState({trackingState: "Stopped", isTracking: false}));
     };
 
-    _onPressTrackingButton = async () => {
-        const isTracking = await this.hyperTrack.isTracking();
-
-        if (isTracking) this.hyperTrack.stopTracking();
-        else this.hyperTrack.startTracking();
-    };
-
     // Call the initialization in componentWillMount
     componentWillMount() {
         this._initializeHyperTrack();
@@ -89,67 +82,16 @@ export default class HyperTrackQuickstart extends Component {
                     {"Tracking state"}
                 </Text>
                 <Text style={styles.text}>{trackingState}</Text>
-                <View style={styles.middleButtonContainer}>
-                    <Button
-                        onPress={() => this._shareLocation()}
-                        style={styles.shareButton}
-                        textStyle={styles.buttonText}
-                        isDisabled={isShareButtonDisabled}
-                    >
-                        {"Share Your Location"}
-                    </Button>
-                </View>
                 <View style={styles.buttonContainer}>
                     <Button
-                        onPress={this._onPressTrackingButton.bind(this)}
-                        style={isTracking ? styles.stopButton : styles.startButton}
+                        style={isTracking ? styles.startButton : styles.stopButton }
                         textStyle={styles.buttonText}
                     >
-                        {isTracking ? "Stop Tracking" : "Start Tracking"}
+                        {isTracking ? "Tracking" : "Not Tracking"}
                     </Button>
                 </View>
             </View>
         );
-    }
-
-    _shareLocation() {
-        this.setState({isShareButtonDisabled: true});
-        this._getTrackingLinkFromServer()
-            .then((responseJson) => {
-                this.setState({isShareButtonDisabled: false});
-                const result = `https://trck.at/${responseJson}`;
-                Share.share({
-                    message: result,
-                    url: result
-                }, {
-                    // Android only:
-                    dialogTitle: 'Share Location',
-                    // iOS only:
-                    excludedActivityTypes: []
-                });
-            });
-    }
-
-    _getTrackingLinkFromServer() {
-        return fetch('https://7kcobbjpavdyhcxfvxrnktobjm.appsync-api.us-west-2.amazonaws.com/graphql', {
-            method: 'POST',
-            headers: {
-                'X-Api-Key': 'da2-nt5vwlflmngjfbe6cbsone4emm',
-            },
-            body: JSON.stringify({
-                'operationName': 'getPublicTrackingIdQuery',
-                'variables':
-                    {
-                        "deviceId": this.state.deviceId,
-                        "publishableKey": PUBLISHABLE_KEY
-                    },
-                'query': 'query getPublicTrackingIdQuery($publishableKey: String!, $deviceId: String!){\n  getPublicTrackingId(publishable_key: $publishableKey, device_id: $deviceId){\n    tracking_id\n  }\n}',
-            }),
-        })
-            .then((response) => response.json())
-            .then((responseJson) => {
-                return responseJson.data.getPublicTrackingId.tracking_id;
-            });
     }
 }
 
