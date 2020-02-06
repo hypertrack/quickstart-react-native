@@ -115,8 +115,6 @@ Substitute:
 
 Once your app is running, go to the [dashboard](https://dashboard.hypertrack.com/devices) where you can see a list of all your devices and their live location with ongoing activity on the map.
 
-![Dashboard](Images/Dashboard.png)
-
 ## Documentation
 
 You can find our integration guide at the [SDK's README](https://github.com/hypertrack/sdk-react-native#integrate-the-react-native-sdk) and API reference on our [documentation website](https://docs.hypertrack.com/#references-sdks). There is also a full in-code reference for all SDK methods.
