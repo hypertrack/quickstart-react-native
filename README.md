@@ -49,6 +49,8 @@ Open the `App.js` file. Locate the line with `publishableKey: "YOUR_PUBLISHABLE_
 
 Log into the HyperTrack dashboard, and open the [setup page](https://dashboard.hypertrack.com/setup) and scroll to "Server to Device communication" section.
 
+> If you prefer to use your own messaging service to manage server-to-device communication, use the `sync()` method.
+
 #### Android
 
 Enter your "Server key", which you can obtain by going to your [Firebase Console](https://console.firebase.google.com/), navigate to your project, project settings, Cloud Messaging and copying it from "Project credentials" section.
