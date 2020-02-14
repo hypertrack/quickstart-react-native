@@ -1,4 +1,4 @@
-package com.hypertrack.rnquickstart;
+package com.hypertrack.quickstart.react.android.github;
 
 import com.facebook.react.ReactActivity;
 
