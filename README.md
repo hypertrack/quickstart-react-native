@@ -63,7 +63,7 @@ Upload your Auth Key (file in the format `AuthKey_KEYID.p8` obtained/created fro
 
 ### Run the app
 
-To run the iOS version open the app's workspace file (`/ios/Quickstart.xcworkspace`) with Xcode. Select your device and hit Run.
+To run the iOS version open the app's workspace file (`/ios/Quickstart.xcworkspace`) with Xcode. Select your device (SDK requires real device, and won't work using simulator) and hit Run.
 
 To run the Android version execute `react-native run-android` in the repo's root directory.
 
