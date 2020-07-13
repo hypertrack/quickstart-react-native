@@ -2,7 +2,7 @@
 
 ![GitHub](https://img.shields.io/github/license/hypertrack/quickstart-react-native.svg)
 [![RN SDK](https://img.shields.io/npm/v/hypertrack-sdk-react-native.svg)](https://www.npmjs.com/package/hypertrack-sdk-react-native)
-[![iOS SDK](https://img.shields.io/badge/iOS%20SDK-4.0.1-brightgreen.svg)](https://cocoapods.org/pods/HyperTrack)
+[![iOS SDK](https://img.shields.io/badge/iOS%20SDK-4.2.0-brightgreen.svg)](https://cocoapods.org/pods/HyperTrack)
 ![Android SDK](https://img.shields.io/badge/Android%20SDK-3.4.7-brightgreen.svg)
 
 [HyperTrack](https://www.hypertrack.com) lets you add live location tracking to your mobile app.
@@ -11,7 +11,7 @@ This repo contains an example React Native app that has everything you need to g
 
 ## Create HyperTrack Account
 
-[Sign up](https://dashboard.hypertrack.com/signup) for HyperTrack and 
+[Sign up](https://dashboard.hypertrack.com/signup) for HyperTrack and
 get your publishable key from the [Setup page](https://dashboard.hypertrack.com/setup).
 
 ## Clone Quickstart app
@@ -84,7 +84,7 @@ to control device tracking from your backend.
 
 ### Track devices during work
 
-Track devices when user is logged in to work, or during work hours by calling the 
+Track devices when user is logged in to work, or during work hours by calling the
 [Devices API](https://www.hypertrack.com/docs/references/#references-apis-devices).
 
 To start, call the [start](https://www.hypertrack.com/docs/references/#references-apis-devices-start-tracking) API.
@@ -124,8 +124,8 @@ and add destination.
 HyperTrack Trips API offers extra fields to get additional intelligence over the Devices API.
 * set destination to track route and ETA
 * set scheduled_at to track delays
-* share live tracking URL of the trip with customers 
-* embed live tracking view of the trip in your ops dashboard 
+* share live tracking URL of the trip with customers
+* embed live tracking view of the trip in your ops dashboard
 
 ```curl
 curl -u {AccountId}:{SecretKey} --location --request POST 'https://v3.api.hypertrack.com/trips/' \
@@ -163,7 +163,7 @@ curl -X POST \
   -u {AccountId}:{SecretKey} \
   https://v3.api.hypertrack.com/trips/{trip_id}
 ```
- 
+
 
 ### Track trips with geofences
 
