@@ -2895,10 +2895,10 @@ http-signature@~1.2.0:
     jsprim "^1.2.2"
     sshpk "^1.7.0"
 
-hypertrack-sdk-react-native@6.3.0:
-  version "6.3.0"
-  resolved "https://registry.yarnpkg.com/hypertrack-sdk-react-native/-/hypertrack-sdk-react-native-6.3.0.tgz#80fda8799f95c0d42bf9283a49d94b0fdfeae98b"
-  integrity sha512-hsLu+wUmCXn2NurlG6RW/v6uJ/fpO/a3xZQdZGAyi7F2Zg7JZZHZTLjtLenNzgN/2FMAnjmk4zJvCHmRJN+sWQ==
+hypertrack-sdk-react-native@6.5.0:
+  version "6.5.0"
+  resolved "https://registry.yarnpkg.com/hypertrack-sdk-react-native/-/hypertrack-sdk-react-native-6.5.0.tgz#7cba53c6b414ed9f862f4c88adfbeb7ffcee1f5e"
+  integrity sha512-vGmhuoSFKBmKMrReMU7qrQT0yalqo7zgxqyYh4TMqI9XLVbAcFeuPnNpgkh9G5TBGRdwZ6c0NbRoehj/FnzT6g==
 
 iconv-lite@0.4.24, iconv-lite@^0.4.17, iconv-lite@^0.4.24, iconv-lite@^0.4.4, iconv-lite@~0.4.13:
   version "0.4.24"
