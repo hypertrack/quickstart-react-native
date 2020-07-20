@@ -2,5 +2,5 @@ platform :ios, '11.0'
 
 target 'Quickstart' do
   use_frameworks!
-  pod 'HyperTrack/Objective-C', '4.2.1'
+  pod 'HyperTrack/Objective-C', '4.2.2'
 end
