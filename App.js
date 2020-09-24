@@ -22,7 +22,7 @@ export default class HyperTrackQuickstart extends Component {
         HyperTrack.enableDebugLogging(true);
 
         // Initialize HyperTrack with a publishable key
-        this.hyperTrack = await HyperTrack.createInstance(PUBLISHABLE_KEY);
+        this.hyperTrack = await HyperTrack.createInstance(PUBLISHABLE_KEY, false);
 
         // Obtain the unique HyperTrack's DeviceID identifier to use it with HyperTrack's APIs
         const deviceId = await this.hyperTrack.getDeviceID();

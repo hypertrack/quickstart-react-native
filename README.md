@@ -2,7 +2,7 @@
 
 ![GitHub](https://img.shields.io/github/license/hypertrack/quickstart-react-native.svg)
 [![RN SDK](https://img.shields.io/npm/v/hypertrack-sdk-react-native.svg)](https://www.npmjs.com/package/hypertrack-sdk-react-native)
-[![iOS SDK](https://img.shields.io/badge/iOS%20SDK-4.2.2-brightgreen.svg)](https://cocoapods.org/pods/HyperTrack)
+[![iOS SDK](https://img.shields.io/badge/iOS%20SDK-4.5.0-brightgreen.svg)](https://cocoapods.org/pods/HyperTrack)
 ![Android SDK](https://img.shields.io/badge/Android%20SDK-4.5.1-brightgreen.svg)
 
 [HyperTrack](https://www.hypertrack.com) lets you add live location tracking to your mobile app.
