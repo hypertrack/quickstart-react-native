@@ -1,6 +1,18 @@
+/*
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ * @flow strict-local
+ */
+
+
 import React, {Component} from 'react';
-import {Platform, Share, StyleSheet, Text, View} from 'react-native';
-import Button from 'apsl-react-native-button'
+import Button from 'apsl-react-native-button';
+import {
+  StyleSheet,
+  View,
+  Text
+} from 'react-native';
 
 // Import HyperTrack SDK API
 // You can also use CriticalErrors to react to different kind of errors preventing tracking (ex: permissions deined)
@@ -12,9 +24,8 @@ export default class HyperTrackQuickstart extends Component {
 
     state = {
         deviceId: "",
-        trackingState: "Started",
-        isTracking: true,
-        isShareButtonDisabled: false
+        trackingState: "Stopped",
+        isTracking: false
     };
 
     _initializeHyperTrack = async () => {
@@ -56,20 +67,19 @@ export default class HyperTrackQuickstart extends Component {
     };
 
     // Call the initialization in componentWillMount
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         this._initializeHyperTrack();
     }
 
     // (Optional) Unregister tracking listeners if they were registered in previous step
-    componentWillUnmount() {
+    UNSAFE_componentWillUnmount() {
         this.hyperTrack.unregisterTrackingListeners(this);
     }
 
     render() {
         const {
             isTracking,
-            trackingState,
-            isShareButtonDisabled
+            trackingState
         } = this.state;
 
         return (
@@ -130,10 +140,6 @@ const stylesBase = {
         backgroundColor: "#fff",
         justifyContent: 'center',
         alignItems: 'center'
-    },
-    shareButton: {
-        backgroundColor: "#040504",
-        borderWidth: 0
     },
     startButton: {
         backgroundColor: "#00ce5b",

@@ -17,3 +17,4 @@ yarn-error.log
 
 # CocoaPods
 /ios/Pods/
+.DS_Store
