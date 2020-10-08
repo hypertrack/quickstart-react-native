@@ -1,6 +1,6 @@
 {
   "name": "hypertrack-rnquickstart",
-  "version": "3.1.0",
+  "version": "4.0.0",
   "private": true,
   "scripts": {
     "start": "react-native start",
@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "apsl-react-native-button": "^3.1.1",
-    "hypertrack-sdk-react-native": "/Users/dmytroshapovalov/sdk-react-native",
+    "hypertrack-sdk-react-native": "^7.0.1",
     "react": "16.13.1",
     "react-native": "0.63.3"
   },

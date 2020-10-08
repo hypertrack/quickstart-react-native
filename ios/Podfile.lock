@@ -67,12 +67,12 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
-  - hypertrack-sdk-react-native (6.6.0):
-    - HyperTrack/Objective-C
+  - hypertrack-sdk-react-native (7.0.1):
+    - HyperTrack/Objective-C (= 4.5.1)
     - React
-  - HyperTrack/Objective-C (4.5.0):
+  - HyperTrack/Objective-C (4.5.1):
     - HyperTrack/Swift
-  - HyperTrack/Swift (4.5.0)
+  - HyperTrack/Swift (4.5.1)
   - OpenSSL-Universal (1.0.2.19):
     - OpenSSL-Universal/Static (= 1.0.2.19)
   - OpenSSL-Universal/Static (1.0.2.19)
@@ -444,8 +444,8 @@ SPEC CHECKSUMS:
   FlipperKit: ab353d41aea8aae2ea6daaf813e67496642f3d7d
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
-  HyperTrack: 487d1d02bdc6b297ca869542f7d07653f93138b0
-  hypertrack-sdk-react-native: f63c2cf800f3e527c0178aef889e0ec36469e8ee
+  HyperTrack: 595288ee7b489290310a6b91a0db816ddeb2b81e
+  hypertrack-sdk-react-native: 5400d52a0e9e7c2d0b552e9704dabd18c22c064b
   OpenSSL-Universal: 8b48cc0d10c1b2923617dfe5c178aa9ed2689355
   RCTRequired: 48884c74035a0b5b76dbb7a998bd93bcfc5f2047
   RCTTypeSafety: edf4b618033c2f1c5b7bc3d90d8e085ed95ba2ab
