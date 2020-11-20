@@ -15,12 +15,12 @@ PODS:
     - Flipper-Folly (~> 2.2)
     - Flipper-RSocket (~> 1.1)
   - Flipper-DoubleConversion (1.1.7)
-  - Flipper-Folly (2.2.0):
+  - Flipper-Folly (2.3.0):
     - boost-for-react-native
     - CocoaLibEvent (~> 1.0)
     - Flipper-DoubleConversion
     - Flipper-Glog
-    - OpenSSL-Universal (= 1.0.2.19)
+    - OpenSSL-Universal (= 1.0.2.20)
   - Flipper-Glog (0.3.6)
   - Flipper-PeerTalk (0.0.4)
   - Flipper-RSocket (1.1.0):
@@ -67,15 +67,13 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
-  - hypertrack-sdk-react-native (7.0.1):
-    - HyperTrack/Objective-C (= 4.5.1)
-    - React
-  - HyperTrack/Objective-C (4.5.1):
-    - HyperTrack/Swift
-  - HyperTrack/Swift (4.5.1)
-  - OpenSSL-Universal (1.0.2.19):
-    - OpenSSL-Universal/Static (= 1.0.2.19)
-  - OpenSSL-Universal/Static (1.0.2.19)
+  - hypertrack-sdk-react-native (7.1.0):
+    - HyperTrack/Objective-C (= 4.6.0)
+    - React-Core
+  - HyperTrack/Objective-C (4.6.0)
+  - OpenSSL-Universal (1.0.2.20):
+    - OpenSSL-Universal/Static (= 1.0.2.20)
+  - OpenSSL-Universal/Static (1.0.2.20)
   - RCTRequired (0.63.3)
   - RCTTypeSafety (0.63.3):
     - FBLazyVector (= 0.63.3)
@@ -437,16 +435,16 @@ SPEC CHECKSUMS:
   FBReactNativeSpec: 7da9338acfb98d4ef9e5536805a0704572d33c2f
   Flipper: be611d4b742d8c87fbae2ca5f44603a02539e365
   Flipper-DoubleConversion: 38631e41ef4f9b12861c67d17cb5518d06badc41
-  Flipper-Folly: c12092ea368353b58e992843a990a3225d4533c3
+  Flipper-Folly: e4493b013c02d9347d5e0cb4d128680239f6c78a
   Flipper-Glog: 1dfd6abf1e922806c52ceb8701a3599a79a200a6
   Flipper-PeerTalk: 116d8f857dc6ef55c7a5a75ea3ceaafe878aadc9
   Flipper-RSocket: 64e7431a55835eb953b0bf984ef3b90ae9fdddd7
   FlipperKit: ab353d41aea8aae2ea6daaf813e67496642f3d7d
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
-  HyperTrack: 595288ee7b489290310a6b91a0db816ddeb2b81e
-  hypertrack-sdk-react-native: 5400d52a0e9e7c2d0b552e9704dabd18c22c064b
-  OpenSSL-Universal: 8b48cc0d10c1b2923617dfe5c178aa9ed2689355
+  HyperTrack: 7348ec6feb266c7909496ea59602ac4ad78b972b
+  hypertrack-sdk-react-native: 6a5558689ff7093f23e90ebdd19b41fbc1736758
+  OpenSSL-Universal: ff34003318d5e1163e9529b08470708e389ffcdd
   RCTRequired: 48884c74035a0b5b76dbb7a998bd93bcfc5f2047
   RCTTypeSafety: edf4b618033c2f1c5b7bc3d90d8e085ed95ba2ab
   React: f36e90f3ceb976546e97df3403e37d226f79d0e3
@@ -472,4 +470,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: e3c69e1bc7bf87af598b7d2f7a93324e0793094f
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.0
