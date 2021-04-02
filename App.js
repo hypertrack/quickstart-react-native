@@ -66,6 +66,24 @@ export default class HyperTrackQuickstart extends Component {
             () => this.setState({trackingState: "Stopped", isTracking: false}));
     };
 
+    startTracking = function () {
+        console.log("Start tracking")
+        this.hyperTrack.startTracking()
+    };
+    stopTracking = function () {
+        console.log("Stop tracking")
+        this.hyperTrack.stopTracking()
+    };
+
+    getotag = async () => {
+        console.log("Add geotag")
+        // this.hyperTrack.addGeotag({'test': true})
+        let expectedLocation = {latitude: 37.7953, longitude: -122.3969}
+        let result = await this.hyperTrack.addGeotag({'test': true}, expectedLocation, true);
+       console.log("Got geotag result " + result?.code);
+    };
+
+
     // Call the initialization in componentWillMount
     UNSAFE_componentWillMount() {
         this._initializeHyperTrack();
@@ -92,6 +110,9 @@ export default class HyperTrackQuickstart extends Component {
                     {"Tracking state"}
                 </Text>
                 <Text style={styles.text}>{trackingState}</Text>
+                <Button onPress={() => { this.startTracking(); }}>Start Tracking</Button>
+                <Button onPress={() => { this.stopTracking();  }}>Stop Tracking</Button>
+                <Button onPress={() => { this.getotag(); }}>Add Geotag</Button>
                 <View style={styles.buttonContainer}>
                     <Button
                         style={isTracking ? styles.startButton : styles.stopButton }
