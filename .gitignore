@@ -1,3 +1,6 @@
+# Project local config
+.env
+
 # Xcode project files
 *.xcworkspace
 

@@ -13,12 +13,14 @@ import {
   View,
   Text
 } from 'react-native';
+import Config from 'react-native-config'
 
 // Import HyperTrack SDK API
 // You can also use CriticalErrors to react to different kind of errors preventing tracking (ex: permissions deined)
 import {CriticalErrors, HyperTrack} from 'hypertrack-sdk-react-native';
 
-const PUBLISHABLE_KEY = "Paste_your_publishable_key_here";
+//put your publishable key in .env file in porject root folder (or inject it in any other way)
+const PUBLISHABLE_KEY = Config.PUBLISHABLE_KEY;
 
 export default class HyperTrackQuickstart extends Component {
 
@@ -33,17 +35,19 @@ export default class HyperTrackQuickstart extends Component {
         HyperTrack.enableDebugLogging(true);
 
         // Initialize HyperTrack with a publishable key
+        console.log(`Initializing HyperTrack with publishable key ${PUBLISHABLE_KEY}`)
         this.hyperTrack = await HyperTrack.createInstance(PUBLISHABLE_KEY, false);
 
         // Obtain the unique HyperTrack's DeviceID identifier to use it with HyperTrack's APIs
         const deviceId = await this.hyperTrack.getDeviceID();
+        console.log(`deviceId = ${deviceId}`)
         this.setState({deviceId: deviceId});
 
         // (Optional) Set the device name to display in dashboard (for ex. user name)
         this.hyperTrack.setDeviceName("RN Quickstart");
 
         // (Optional) Attach any JSON metadata to this device to see in HyperTrack's API responses
-        this.hyperTrack.setMetadata({driver_id: "83B3X5", state: "IN_PROGRESS"});
+        this.hyperTrack.setMetadata({driver_id: "RN Quickstart Driver", state: "IN_PROGRESS"});
 
         // (Optional) Register tracking listeners to update your UI when SDK starts/stops or react to errors
         this.hyperTrack.registerTrackingListeners(this,
@@ -51,9 +55,9 @@ export default class HyperTrackQuickstart extends Component {
             (error) => {
                 if (error.code === CriticalErrors.INVALID_PUBLISHABLE_KEY
                     || error.code === CriticalErrors.AUTHORIZATION_FAILED) {
-                    console.log("Initialization failed")
+                    console.log(`Initialization failed: ${error.code} ${error.message}`)
                 } else {
-                    console.log("Tracking failed")
+                    console.log(`Tracking failed: ${error.code} ${error.message}`)
                 }
                 this.setState({
                     trackingState: "Stopped with error: " + error.code + " - " + error.message,
@@ -65,6 +69,12 @@ export default class HyperTrackQuickstart extends Component {
             // Update UI when tracking stops
             () => this.setState({trackingState: "Stopped", isTracking: false}));
     };
+
+    // Call the initialization in constructor
+    constructor(props) {
+        super(props);
+        this._initializeHyperTrack();
+    }
 
     startTracking = function () {
         console.log("Start tracking")
@@ -83,14 +93,8 @@ export default class HyperTrackQuickstart extends Component {
        console.log("Got geotag result " + result?.code);
     };
 
-
-    // Call the initialization in componentWillMount
-    UNSAFE_componentWillMount() {
-        this._initializeHyperTrack();
-    }
-
     // (Optional) Unregister tracking listeners if they were registered in previous step
-    UNSAFE_componentWillUnmount() {
+    componentWillUnmount() {
         this.hyperTrack.unregisterTrackingListeners(this);
     }
 
