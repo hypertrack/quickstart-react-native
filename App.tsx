@@ -10,11 +10,7 @@ import {
   StatusBar,
 } from 'react-native';
 
-import HyperTrack, {
-  GeotagError,
-  Location,
-  LocationError,
-} from 'hypertrack-sdk-react-native';
+import HyperTrack, {Location, LocationError} from 'hypertrack-sdk-react-native';
 
 const Button = ({title, onPress}: {title: string; onPress: () => void}) => (
   <Pressable
@@ -54,7 +50,10 @@ const App = () => {
       }
 
       try {
-        const hyperTrack = await HyperTrack.initialize(PUBLISHABLE_KEY, true);
+        const hyperTrack = await HyperTrack.createInstance(
+          PUBLISHABLE_KEY,
+          true,
+        );
         hyperTrackRef.current = hyperTrack;
 
         const ID = await hyperTrackRef.current?.getDeviceID();
@@ -116,7 +115,7 @@ const App = () => {
   };
 
   const addGeoTag = async () => {
-    function isLocation(loc: GeotagError | Location): loc is Location {
+    function isLocation(loc: LocationError | Location): loc is Location {
       return (loc as Location).location !== undefined;
     }
     if (hyperTrackRef.current !== null) {
