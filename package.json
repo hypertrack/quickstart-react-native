@@ -10,9 +10,9 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
+    "hypertrack-sdk-react-native": "https://github.com/poterstar/sdk-react-native#feature/upgrading-legacy-api",
     "react": "18.0.0",
-    "react-native": "0.69.1",
-    "react-native-hypertrack-sdk": "https://github.com/poterstar/sdk-react-native#feature/upgrading-legacy-api"
+    "react-native": "0.69.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

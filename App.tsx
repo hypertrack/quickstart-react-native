@@ -1,4 +1,3 @@
-import {string} from 'prop-types';
 import React, {useEffect, useRef, useState} from 'react';
 import {
   View,
@@ -8,9 +7,14 @@ import {
   Alert,
   ScrollView,
   SafeAreaView,
+  StatusBar,
 } from 'react-native';
 
-import HyperTrack, {Location, LocationError} from 'react-native-hypertrack-sdk';
+import HyperTrack, {
+  GeotagError,
+  Location,
+  LocationError,
+} from 'hypertrack-sdk-react-native';
 
 const Button = ({title, onPress}: {title: string; onPress: () => void}) => (
   <Pressable
@@ -58,7 +62,7 @@ const App = () => {
         console.log('ID', ID);
 
         // (Optional) Set the device name to display in dashboard (for ex. user name)
-        hyperTrackRef.current?.setDeviceName('RN Legacy');
+        hyperTrackRef.current?.setDeviceName('RN Driver');
 
         // (Optional) Attach any JSON metadata to this device to see in HyperTrack's API responses
         hyperTrackRef.current?.setMetadata({
@@ -66,6 +70,9 @@ const App = () => {
           state: 'IN_PROGRESS',
         });
         setEnableListeners(true);
+
+        const available = await hyperTrackRef.current?.isAvailable();
+        setAvailability(available ?? false);
       } catch (error) {
         console.log(error);
       }
@@ -96,37 +103,45 @@ const App = () => {
       return (loc as Location).location !== undefined;
     }
     if (hyperTrackRef.current !== null) {
-      const location = await hyperTrackRef.current?.getLocation();
-      console.log('location', location);
+      const loc = await hyperTrackRef.current?.getLocation();
+      console.log('location', loc);
 
-      if (isLocation(location)) {
-        console.log('location', location);
-        setLocation({...location.location});
+      if (isLocation(loc)) {
+        console.log('location', loc);
+        setLocation({...loc.location});
       } else {
-        Alert.alert(JSON.stringify(location));
+        Alert.alert(JSON.stringify(loc));
       }
     }
   };
 
   const addGeoTag = async () => {
-    try {
-      const geoTag = await hyperTrackRef.current?.addGeotag({parking: 'test'});
-      console.log('geoTag added to: ', geoTag);
-      Alert.alert('successfully added');
-    } catch (error) {
-      console.log(error);
+    function isLocation(loc: GeotagError | Location): loc is Location {
+      return (loc as Location).location !== undefined;
+    }
+    if (hyperTrackRef.current !== null) {
+      const geoTag = await hyperTrackRef.current?.addGeotag({
+        parking: 'test',
+      });
+      if (isLocation(geoTag)) {
+        console.log('geoTag added to: ', geoTag);
+        Alert.alert('successfully added');
+      } else {
+        Alert.alert(JSON.stringify(geoTag));
+      }
     }
   };
 
   const isAvailable = async () => {
-    const isAvailable = await hyperTrackRef.current?.isAvailable();
-    console.log('isAvailable', isAvailable);
-    setAvailability(isAvailable ?? false);
+    const available = await hyperTrackRef.current?.isAvailable();
+    console.log('isAvailable', available);
+    setAvailability(available ?? false);
   };
 
   const changeAvailability = async () => {
-    hyperTrackRef.current?.setAvailability(!availability);
-    Alert.alert("Press 'Get availability' to fetch new result");
+    const res = await hyperTrackRef.current?.setAvailability(!availability);
+    console.log(res);
+    setAvailability(res ?? false);
   };
 
   const startTracking = async () => {
@@ -142,6 +157,7 @@ const App = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar barStyle={'dark-content'} />
       <ScrollView style={styles.wrapper}>
         <Text style={styles.titleText}>Device ID:</Text>
         <Text selectable style={styles.text}>
