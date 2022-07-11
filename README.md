@@ -1,6 +1,6 @@
 # React Native Quickstart for HyperTrack SDKs
 
-![GitHub](https://img.shields.io/github/license/hypertrack/sdk-react-native.svg) ![npm](https://img.shields.io/npm/v/hypertrack-sdk-react-native.svg) ![iOS SDK](https://img.shields.io/badge/iOS%20SDK-4.12.3-brightgreen.svg) ![Android SDK](https://img.shields.io/badge/Android%20SDK-6.1.4-brightgreen.svg)
+![GitHub](https://img.shields.io/github/license/hypertrack/sdk-react-native.svg) ![npm](https://img.shields.io/npm/v/hypertrack-sdk-react-native.svg) ![iOS SDK](https://img.shields.io/badge/iOS%20SDK-4-brightgreen.svg) ![Android SDK](https://img.shields.io/badge/Android%20SDK-6.1.4-brightgreen.svg)
 
 [HyperTrack](https://www.hypertrack.com/) lets you add live location tracking to your mobile app. Live location is made available along with ongoing activity, tracking controls and tracking outage with reasons. This repo contains an example React Native app that has everything you need to get started in minutes.
 
