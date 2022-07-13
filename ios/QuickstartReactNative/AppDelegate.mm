@@ -5,8 +5,8 @@
 #import <React/RCTRootView.h>
 
 #import <React/RCTAppSetupUtils.h>
-@import HyperTrack;
-
+#import <CoreLocation/CoreLocation.h>
+#import <HyperTrack/HyperTrack-Swift.h>
 
 #if RCT_NEW_ARCH_ENABLED
 #import <React/CoreModulesPlugins.h>
