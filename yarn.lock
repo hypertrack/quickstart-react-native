@@ -3522,7 +3522,7 @@ human-signals@^1.1.1:
 
 "hypertrack-sdk-react-native@https://github.com/poterstar/sdk-react-native#feature/upgrading-legacy-api":
   version "7.18.4"
-  resolved "https://github.com/poterstar/sdk-react-native#c0e7115462c05d1633c5244ff0ba7e432f104fb0"
+  resolved "https://github.com/poterstar/sdk-react-native#bce437aa24ba3573e4fae5b1f2b9e1e97cf4f66b"
 
 iconv-lite@0.4.24:
   version "0.4.24"

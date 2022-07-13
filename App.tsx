@@ -82,6 +82,7 @@ const App = () => {
   useEffect(() => {
     const errorsListener = hyperTrackRef.current?.subscribeToErrors(error => {
       console.log('Error: ', error);
+      Alert.alert(JSON.stringify(error));
     });
 
     const trackingListener = hyperTrackRef.current?.subscribeToTracking(
