@@ -1,6 +1,6 @@
 # React Native Quickstart for HyperTrack SDKs
 
-![GitHub](https://img.shields.io/github/license/hypertrack/sdk-react-native.svg) ![npm](https://img.shields.io/npm/v/hypertrack-sdk-react-native.svg) ![iOS SDK](https://img.shields.io/badge/iOS%20SDK-4-brightgreen.svg) ![Android SDK](https://img.shields.io/badge/Android%20SDK-6.1.4-brightgreen.svg)
+![GitHub](https://img.shields.io/github/license/hypertrack/sdk-react-native.svg) ![npm](https://img.shields.io/npm/v/hypertrack-sdk-react-native.svg) ![iOS SDK](https://img.shields.io/badge/iOS%20SDK-4.12.4-brightgreen.svg) ![Android SDK](https://img.shields.io/badge/Android%20SDK-6.2.0-brightgreen.svg)
 
 [HyperTrack](https://www.hypertrack.com/) lets you add live location tracking to your mobile app. Live location is made available along with ongoing activity, tracking controls and tracking outage with reasons. This repo contains an example React Native app that has everything you need to get started in minutes.
 
@@ -15,7 +15,9 @@ git clone https://github.com/hypertrack/quickstart-react-native
 ```
 
 ### Install SDKs Dependencies
+
 **General Dependencies**
+
 - `yarn` or `npm install`
 
 **iOS dependencies**
@@ -23,6 +25,7 @@ git clone https://github.com/hypertrack/quickstart-react-native
 Quickstart app uses [CocoaPods](https://cocoapods.org/) dependency manager to install the latest version of the iOS SDK. Using the latest version of CocoaPods is advised.
 
 If you don't have CocoaPods, [install it first](https://guides.cocoapods.org/using/getting-started.html#installation).
+
 ```sh
 cd ios
 pod install
@@ -78,7 +81,6 @@ curl -X POST \
   https://v3.api.hypertrack.com/devices/{device_id}/start
 ```
 
-
 Get the tracking status of the device by calling
 [GET /devices/{device_id}](https://www.hypertrack.com/docs/references/#references-apis-devices-get-device-location-and-status) api.
 
@@ -105,10 +107,11 @@ If you want to track a device on its way to a destination, call the [Trips API](
 and add destination.
 
 HyperTrack Trips API offers extra fields to get additional intelligence over the Devices API.
-* set destination to track route and ETA
-* set scheduled_at to track delays
-* share live tracking URL of the trip with customers
-* embed live tracking view of the trip in your ops dashboard
+
+- set destination to track route and ETA
+- set scheduled_at to track delays
+- share live tracking URL of the trip with customers
+- embed live tracking view of the trip in your ops dashboard
 
 ```curl
 curl -u {AccountId}:{SecretKey} --location --request POST 'https://v3.api.hypertrack.com/trips/' \
@@ -131,6 +134,7 @@ To get `{longitude}` and `{latitude}` of your destination, you can use for examp
 The returned JSON includes the embed_url for your dashboard and share_url for your customers.
 
 When you are done tracking this trip, call [complete](https://www.hypertrack.com/docs/references/#references-apis-trips-complete-trip) Trip API using the `trip_id` from the create trip call above.
+
 ```
 curl -X POST \
   -u {AccountId}:{SecretKey} \
@@ -147,7 +151,6 @@ curl -X POST \
   https://v3.api.hypertrack.com/trips/{trip_id}
 ```
 
-
 ### Track trips with geofences
 
 If you want to track a device goig to a list of places, call the [Trips API](https://www.hypertrack.com/docs/references/#references-apis-trips)
@@ -162,4 +165,5 @@ Once your app is running, go to the [dashboard](https://dashboard.hypertrack.com
 You can find our integration guide at the [SDK's README](https://github.com/hypertrack/sdk-react-native#integrate-the-react-native-sdk) and API reference on our [documentation website](https://www.hypertrack.com/docs/references/#references-sdks). There is also a full in-code reference for all SDK methods.
 
 ## Support
+
 Join our [Slack community](https://join.slack.com/t/hypertracksupport/shared_invite/enQtNDA0MDYxMzY1MDMxLTdmNDQ1ZDA1MTQxOTU2NTgwZTNiMzUyZDk0OThlMmJkNmE0ZGI2NGY2ZGRhYjY0Yzc0NTJlZWY2ZmE5ZTA2NjI) for instant responses. You can also email us at help@hypertrack.com.

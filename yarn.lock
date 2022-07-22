@@ -3521,8 +3521,8 @@ human-signals@^1.1.1:
   integrity sha512-SEQu7vl8KjNL2eoGBLF3+wAjpsNfA9XMlXAYj/3EdaNfAlxKthD1xjEQfGOUhllCGGJVNY34bRr6lPINhNjyZw==
 
 "hypertrack-sdk-react-native@https://github.com/poterstar/sdk-react-native#feature/upgrading-legacy-api":
-  version "7.18.4"
-  resolved "https://github.com/poterstar/sdk-react-native#bce437aa24ba3573e4fae5b1f2b9e1e97cf4f66b"
+  version "7.19.0"
+  resolved "https://github.com/poterstar/sdk-react-native#ae1a07d9d93e917fcb859c90aa2ff9bd4e6e1ada"
 
 iconv-lite@0.4.24:
   version "0.4.24"
