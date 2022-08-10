@@ -3520,9 +3520,10 @@ human-signals@^1.1.1:
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-1.1.1.tgz#c5b1cd14f50aeae09ab6c59fe63ba3395fe4dfa3"
   integrity sha512-SEQu7vl8KjNL2eoGBLF3+wAjpsNfA9XMlXAYj/3EdaNfAlxKthD1xjEQfGOUhllCGGJVNY34bRr6lPINhNjyZw==
 
-"hypertrack-sdk-react-native@https://github.com/poterstar/sdk-react-native#feature/upgrading-legacy-api":
-  version "7.19.0"
-  resolved "https://github.com/poterstar/sdk-react-native#ae1a07d9d93e917fcb859c90aa2ff9bd4e6e1ada"
+hypertrack-sdk-react-native@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/hypertrack-sdk-react-native/-/hypertrack-sdk-react-native-8.0.0.tgz#2ba4fe68f7750aa9a278d64899d6feded1483fac"
+  integrity sha512-hpTpsOZEaSLSEdrV3HQFdP6YO4aVBt/q2M0ICT4Ugc3Z/lDJ2V7eCU0h1Bqv7i8AeSld5Uz9AR8HvUVPJJT00w==
 
 iconv-lite@0.4.24:
   version "0.4.24"
