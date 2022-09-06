@@ -153,7 +153,7 @@ curl -X POST \
 
 ### Track trips with geofences
 
-If you want to track a device goig to a list of places, call the [Trips API](https://www.hypertrack.com/docs/references/#references-apis-trips)
+If you want to track a device going to a list of places, call the [Trips API](https://www.hypertrack.com/docs/references/#references-apis-trips)
 and add geofences. This way you will get arrival, exit, time spent and route to geofences. Please checkout our [docs](https://www.hypertrack.com/docs/references/#references-apis-trips-start-trip-with-geofences) for more details.
 
 ## Dashboard
@@ -163,6 +163,10 @@ Once your app is running, go to the [dashboard](https://dashboard.hypertrack.com
 ## Documentation
 
 You can find our integration guide at the [SDK's README](https://github.com/hypertrack/sdk-react-native#integrate-the-react-native-sdk) and API reference on our [documentation website](https://www.hypertrack.com/docs/references/#references-sdks). There is also a full in-code reference for all SDK methods.
+
+## Update HyperTrack SDK version
+
+Change the `"hypertrack-sdk-react-native"` version to the latest in `package.json` file
 
 ## Support
 
