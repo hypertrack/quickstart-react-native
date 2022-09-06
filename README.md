@@ -33,7 +33,7 @@ pod install
 
 Insert your HyperTrack publishable key to `const PUBLISHABLE_KEY = 'Paste_your_publishable_key_here';` in `App.tsx`
 
-### Set up silent push notifications (needs to be reviewed)
+### Set up silent push notifications
 
 Set up silent push notifications to manage on-device tracking using HyperTrack cloud APIs from your server.
 
@@ -53,7 +53,7 @@ Upload your Auth Key (file in the format `AuthKey_KEYID.p8` obtained/created f
 
 To run the iOS version open the app's workspace file (`/ios/QuickstartReactNative.xcworkspace`) with Xcode. Select your device (SDK requires real device, and won't work using simulator) and hit Run.
 
-To run the Android version execute `react-native run-android` in the repo's root directory.
+To run the Android version execute `npx react-native run-android` in the repo's root directory.
 
 Enable location and activity permissions (choose "Always Allow" for location).
 
