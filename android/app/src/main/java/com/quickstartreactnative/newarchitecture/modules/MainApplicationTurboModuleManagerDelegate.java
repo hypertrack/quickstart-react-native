@@ -1,4 +1,4 @@
-package com.quickstartreactnative.newarchitecture.modules;
+package com.hypertrack.quickstart.reactnative.android.newarchitecture.modules;
 
 import com.facebook.jni.HybridData;
 import com.facebook.react.ReactPackage;
