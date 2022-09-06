@@ -8,6 +8,10 @@
 
 [Sign up](https://dashboard.hypertrack.com/signup) for HyperTrack and get your publishable key from the [Setup page](https://dashboard.hypertrack.com/setup).
 
+## Environment setup
+
+You need to [set up the development environment for React Native](https://reactnative.dev/docs/environment-setup)
+
 ## Clone Quickstart app
 
 ```sh
