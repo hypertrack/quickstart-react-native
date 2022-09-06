@@ -74,7 +74,7 @@ PODS:
   - fmt (6.2.1)
   - glog (0.3.5)
   - hermes-engine (0.70.0)
-  - hypertrack-sdk-react-native (8.0.0):
+  - hypertrack-sdk-react-native (8.1.0):
     - HyperTrack/Objective-C (= 4.12.4)
     - React-Core
   - HyperTrack/Objective-C (4.12.4)
@@ -549,7 +549,7 @@ SPEC CHECKSUMS:
   glog: 3d02b25ca00c2d456734d0bcff864cbc62f6ae1a
   hermes-engine: 8e84f1284180801c1a1b241f443ba64f931ff561
   HyperTrack: 1462a4b0ac6b0361a9f155549e800198eca9de8e
-  hypertrack-sdk-react-native: bdea8d1a818c138efb2ecb004a8aeff0b7304395
+  hypertrack-sdk-react-native: 5b2e1d5ecd28d93b618c7c65702db42faa54be85
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
   RCT-Folly: 0080d0a6ebf2577475bda044aa59e2ca1f909cda
