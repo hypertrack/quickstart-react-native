@@ -1,4 +1,4 @@
-package com.quickstartreactnative.newarchitecture;
+package com.hypertrack.quickstart.reactnative.android.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.quickstartreactnative.BuildConfig;
-import com.quickstartreactnative.newarchitecture.components.MainComponentsRegistry;
-import com.quickstartreactnative.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.hypertrack.quickstart.reactnative.android.BuildConfig;
+import com.hypertrack.quickstart.reactnative.android.newarchitecture.components.MainComponentsRegistry;
+import com.hypertrack.quickstart.reactnative.android.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -8,6 +8,10 @@
 
 [Sign up](https://dashboard.hypertrack.com/signup) for HyperTrack and get your publishable key from the [Setup page](https://dashboard.hypertrack.com/setup).
 
+## Environment setup
+
+You need to [set up the development environment for React Native](https://reactnative.dev/docs/environment-setup)
+
 ## Clone Quickstart app
 
 ```sh
@@ -33,7 +37,7 @@ pod install
 
 Insert your HyperTrack publishable key to `const PUBLISHABLE_KEY = 'Paste_your_publishable_key_here';` in `App.tsx`
 
-### Set up silent push notifications (needs to be reviewed)
+### Set up silent push notifications
 
 Set up silent push notifications to manage on-device tracking using HyperTrack cloud APIs from your server.
 
@@ -53,7 +57,7 @@ Upload your Auth Key (file in the format `AuthKey_KEYID.p8` obtained/created f
 
 To run the iOS version open the app's workspace file (`/ios/QuickstartReactNative.xcworkspace`) with Xcode. Select your device (SDK requires real device, and won't work using simulator) and hit Run.
 
-To run the Android version execute `react-native run-android` in the repo's root directory.
+To run the Android version execute `npx react-native run-android` in the repo's root directory.
 
 Enable location and activity permissions (choose "Always Allow" for location).
 
@@ -153,7 +157,7 @@ curl -X POST \
 
 ### Track trips with geofences
 
-If you want to track a device goig to a list of places, call the [Trips API](https://www.hypertrack.com/docs/references/#references-apis-trips)
+If you want to track a device going to a list of places, call the [Trips API](https://www.hypertrack.com/docs/references/#references-apis-trips)
 and add geofences. This way you will get arrival, exit, time spent and route to geofences. Please checkout our [docs](https://www.hypertrack.com/docs/references/#references-apis-trips-start-trip-with-geofences) for more details.
 
 ## Dashboard
@@ -163,6 +167,10 @@ Once your app is running, go to the [dashboard](https://dashboard.hypertrack.com
 ## Documentation
 
 You can find our integration guide at the [SDK's README](https://github.com/hypertrack/sdk-react-native#integrate-the-react-native-sdk) and API reference on our [documentation website](https://www.hypertrack.com/docs/references/#references-sdks). There is also a full in-code reference for all SDK methods.
+
+## Update HyperTrack SDK version
+
+Change the `"hypertrack-sdk-react-native"` version to the latest in `package.json` file
 
 ## Support
 

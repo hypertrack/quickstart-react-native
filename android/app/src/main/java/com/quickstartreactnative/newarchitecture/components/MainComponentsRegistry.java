@@ -1,4 +1,4 @@
-package com.quickstartreactnative.newarchitecture.components;
+package com.hypertrack.quickstart.reactnative.android.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;

@@ -1,4 +1,4 @@
-package com.quickstartreactnative;
+package com.hypertrack.quickstart.reactnative.android;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
