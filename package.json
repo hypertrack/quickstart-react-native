@@ -10,7 +10,7 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
-    "hypertrack-sdk-react-native": "^8.1.0",
+    "hypertrack-sdk-react-native": "^8.2.0",
     "react": "18.1.0",
     "react-native": "0.70.0"
   },
