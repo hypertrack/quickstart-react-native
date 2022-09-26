@@ -3515,10 +3515,10 @@ human-signals@^1.1.1:
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-1.1.1.tgz#c5b1cd14f50aeae09ab6c59fe63ba3395fe4dfa3"
   integrity sha512-SEQu7vl8KjNL2eoGBLF3+wAjpsNfA9XMlXAYj/3EdaNfAlxKthD1xjEQfGOUhllCGGJVNY34bRr6lPINhNjyZw==
 
-hypertrack-sdk-react-native@^8.1.0:
-  version "8.1.0"
-  resolved "https://registry.yarnpkg.com/hypertrack-sdk-react-native/-/hypertrack-sdk-react-native-8.1.0.tgz#026cc1aedf1b63a27ae74c88b19bbe40d392947e"
-  integrity sha512-4NPcbzr2wxY8eJdoWrCPWdIsQGX/rEwPslORGNx4h/BAoTG+MFO2Mhbz9+LU/YwoEmvSTygkmC0dv9ADktBz5w==
+hypertrack-sdk-react-native@^8.2.0:
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/hypertrack-sdk-react-native/-/hypertrack-sdk-react-native-8.2.0.tgz#fe047eb160be3c52248c04bbd740445c98e1aa58"
+  integrity sha512-sbZ0KZfoKby9Zu9gCvPC4I6BOFAQGUkQBZ8lYSl4R0vMP3EcYVn96uC+ia/9mT0Z3egfDQSDLmsROdNLVwWkfw==
 
 iconv-lite@0.4.24:
   version "0.4.24"
