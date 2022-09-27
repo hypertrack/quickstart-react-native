@@ -74,7 +74,7 @@ PODS:
   - fmt (6.2.1)
   - glog (0.3.5)
   - hermes-engine (0.70.0)
-  - hypertrack-sdk-react-native (8.2.0):
+  - hypertrack-sdk-react-native (8.2.1):
     - HyperTrack/Objective-C (= 4.13.0)
     - React-Core
   - HyperTrack/Objective-C (4.13.0)
