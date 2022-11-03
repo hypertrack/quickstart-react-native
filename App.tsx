@@ -8,9 +8,10 @@ import {
   ScrollView,
   SafeAreaView,
   StatusBar,
+  EmitterSubscription,
 } from 'react-native';
 
-import HyperTrack, {Location, LocationError} from 'hypertrack-sdk-react-native';
+import HyperTrack from 'hypertrack-sdk-react-native';
 
 const Button = ({title, onPress}: {title: string; onPress: () => void}) => (
   <Pressable
@@ -25,134 +26,141 @@ const Button = ({title, onPress}: {title: string; onPress: () => void}) => (
   </Pressable>
 );
 
-interface LocationType {
-  latitude: number;
-  longitude: number;
-}
-
 const PUBLISHABLE_KEY = 'Paste_your_publishable_key_here';
 
 const App = () => {
-  const hyperTrackRef = useRef<HyperTrack | null>(null);
-  const [enableListeners, setEnableListeners] = useState(false);
-  const [availability, setAvailability] = useState(true);
-  const [deviceID, setDeviceID] = useState('');
-  const [trackingState, setTrackingState] = useState(false);
-  const [location, setLocation] = useState<LocationType | null>(null);
+  const hyperTrack = useRef<HyperTrack | null>(null);
+  const [deviceIdState, setDeviceIdState] = useState('');
+  const [isAvailableState, setAvailabilityState] = useState(false);
+  const [isTrackingState, setIsTrackingState] = useState(false);
+  const [errorsState, setErrorsState] = useState([]);
+
+  const errorsListener = useRef<EmitterSubscription | null | undefined>(null);
+  const trackingListener = useRef<EmitterSubscription | null | undefined>(null);
+  const availabilityListener = useRef<EmitterSubscription | null | undefined>(
+    null,
+  );
 
   useEffect(() => {
     const initSDK = async () => {
-      // (Optional) This turns on logging for underlying native SDKs. Placed on top so SDKs start logging immediately
       try {
-        HyperTrack.enableDebugLogging(true);
-      } catch (error) {
-        console.log('error logging', error);
-      }
-
-      try {
-        const hyperTrack = await HyperTrack.createInstance(
+        const hyperTrackInstance = await HyperTrack.initialize(
           PUBLISHABLE_KEY,
-          true,
+          {
+            loggingEnabled: true,
+            requireBackgroundTrackingPermission: true,
+            allowMockLocations: true,
+          }
         );
-        hyperTrackRef.current = hyperTrack;
+        hyperTrack.current = hyperTrackInstance;
 
-        const ID = await hyperTrackRef.current?.getDeviceID();
-        setDeviceID(ID);
-        console.log('ID', ID);
+        const deviceId = await hyperTrack.current?.getDeviceId();
+        console.log('getDeviceId', deviceId);
+        setDeviceIdState(deviceId);
 
-        // (Optional) Set the device name to display in dashboard (for ex. user name)
-        hyperTrackRef.current?.setDeviceName('RN Driver');
+        const name = 'Quickstart ReactNative'
+        hyperTrack.current?.setName(name);
+        console.log('setName', name);
 
-        // (Optional) Attach any JSON metadata to this device to see in HyperTrack's API responses
-        hyperTrackRef.current?.setMetadata({
-          driver_id: 'RN Quickstart Driver',
-          state: 'IN_PROGRESS',
-        });
-        setEnableListeners(true);
-
-        const available = await hyperTrackRef.current?.isAvailable();
-        setAvailability(available ?? false);
+        const metadata = {
+          app: 'Quickstart ReactNative',
+          value: Math.random(),
+        }
+        hyperTrack.current?.setMetadata(metadata);
+        console.log('setMetadata', metadata);
       } catch (error) {
         console.log(error);
       }
+
+      trackingListener.current = hyperTrack.current?.subscribeToTracking(
+        isTracking => {
+          console.log('Listener isTracking: ', isTracking);
+          setIsTrackingState(isTracking);
+          setErrorsState([])
+        },
+      );
+
+      availabilityListener.current =
+        hyperTrack.current?.subscribeToAvailability(isAvailable => {
+          console.log('Listener isAvailable: ', isAvailable);
+          setAvailabilityState(isAvailable);
+          setErrorsState([])
+        });
+
+      errorsListener.current = hyperTrack.current?.subscribeToErrors(errors => {
+        console.log('Listener onError: ', errors);
+        setErrorsState(errors);
+      });
     };
     initSDK();
-  }, []);
-
-  useEffect(() => {
-    const errorsListener = hyperTrackRef.current?.subscribeToErrors(error => {
-      console.log('Error: ', error);
-      Alert.alert(JSON.stringify(error));
-    });
-
-    const trackingListener = hyperTrackRef.current?.subscribeToTracking(
-      isTracking => {
-        console.log('isTracking: ', isTracking);
-        setTrackingState(isTracking);
-      },
-    );
 
     return () => {
-      errorsListener?.remove();
-      trackingListener?.remove();
+      errorsListener.current?.remove();
+      trackingListener.current?.remove();
+      availabilityListener.current?.remove();
     };
-  }, [enableListeners]);
+  }, []);
+
+  useEffect(() => {}, []);
 
   const getLocation = async () => {
-    function isLocation(loc: LocationError | Location): loc is Location {
-      return (loc as Location).location !== undefined;
-    }
-    if (hyperTrackRef.current !== null) {
-      const loc = await hyperTrackRef.current?.getLocation();
-      console.log('location', loc);
-
-      if (isLocation(loc)) {
-        console.log('location', loc);
-        setLocation({...loc.location});
-      } else {
-        Alert.alert(JSON.stringify(loc));
+    if (hyperTrack.current !== null) {
+      try {
+        const result = await hyperTrack.current?.getLocation();
+        Alert.alert('Result', JSON.stringify(result));
+      } catch (error) {
+        console.log('error', error);
       }
     }
   };
 
   const addGeoTag = async () => {
-    function isLocation(loc: LocationError | Location): loc is Location {
-      return (loc as Location).location !== undefined;
-    }
-    if (hyperTrackRef.current !== null) {
-      const geoTag = await hyperTrackRef.current?.addGeotag({
-        parking: 'test',
-      });
-      if (isLocation(geoTag)) {
-        console.log('geoTag added to: ', geoTag);
-        Alert.alert('successfully added');
-      } else {
-        Alert.alert(JSON.stringify(geoTag));
+    if (hyperTrack.current !== null) {
+      try {
+        const result = await hyperTrack.current?.addGeotag({
+          payload: 'Quickstart ReactNative',
+          value: Math.random(),
+        });
+        console.log('Add geotag: ', result);
+        Alert.alert('Result', JSON.stringify(result));
+      } catch (error) {
+        console.log('error', error);
       }
     }
   };
 
-  const isAvailable = async () => {
-    const available = await hyperTrackRef.current?.isAvailable();
+  const invokeIsTracking = async () => {
+    const isTracking = await hyperTrack.current?.isTracking();
+    console.log('isTracking', isTracking);
+    Alert.alert('isTracking', `${isTracking}`);
+    setAvailabilityState(isTracking ?? false);
+  };
+
+  const invokeIsAvailable = async () => {
+    const available = await hyperTrack.current?.isAvailable();
     console.log('isAvailable', available);
-    setAvailability(available ?? false);
+    Alert.alert('isAvailable', `${available}`);
+    setAvailabilityState(available ?? false);
   };
 
   const changeAvailability = async () => {
-    const res = await hyperTrackRef.current?.setAvailability(!availability);
-    console.log(res);
-    setAvailability(res ?? false);
+    await hyperTrack.current?.setAvailability(!isAvailableState);
   };
 
   const startTracking = async () => {
     console.log('Start tracking');
-    hyperTrackRef.current?.startTracking();
+    hyperTrack.current?.startTracking();
   };
 
   const stopTracking = async () => {
     console.log('Stop tracking');
-    setLocation(null);
-    hyperTrackRef.current?.stopTracking();
+    hyperTrack.current?.stopTracking();
+  };
+
+  const sync = async () => {
+    hyperTrack.current?.sync();
+    console.log('Sync');
+    Alert.alert('Sync performed');
   };
 
   return (
@@ -161,33 +169,35 @@ const App = () => {
       <ScrollView style={styles.wrapper}>
         <Text style={styles.titleText}>Device ID:</Text>
         <Text selectable style={styles.text}>
-          {deviceID}
+          {deviceIdState}
         </Text>
-        <Text style={styles.titleText}>{'Tracking state'}</Text>
-        <Text style={styles.text}>
-          {trackingState === true ? 'Started' : 'Stopped'}
-        </Text>
+
+        <Text style={styles.titleText}>{'isTracking'}</Text>
+        <Text style={styles.text}>{isTrackingState?.toString()}</Text>
+
+        <Text style={styles.titleText}>{'isAvailable'}</Text>
+        <Text style={styles.text}>{isAvailableState?.toString()}</Text>
+
+        <Text style={styles.titleText}>{'errors'}</Text>
+        <Text style={styles.text}>{JSON.stringify(errorsState, null, 4)}</Text>
+
         <View style={styles.buttonWrapper}>
-          <Button title="Start" onPress={startTracking} />
-          <Button title="Stop" onPress={stopTracking} />
+          <Button title="Start tracking" onPress={startTracking} />
+          <Button title="Stop tracking" onPress={stopTracking} />
         </View>
         <View style={styles.buttonWrapper}>
           <Button title="Get location" onPress={getLocation} />
-        </View>
-        <Text style={styles.titleText}>Location:</Text>
-        <Text style={styles.text}>latitude: {location?.latitude}</Text>
-        <Text style={styles.text}>longitude: {location?.longitude}</Text>
-        <View style={styles.buttonWrapper}>
           <Button title="Add geoTag" onPress={addGeoTag} />
         </View>
         <View style={styles.buttonWrapper}>
-          <Button title="Get availability" onPress={isAvailable} />
+          <Button title="isTracking" onPress={invokeIsTracking} />
+          <Button title="isAvailable" onPress={invokeIsAvailable} />
         </View>
-        <Text style={styles.text}>
-          {availability ? 'is available' : 'not available'}
-        </Text>
         <View style={styles.buttonWrapper}>
           <Button title="Change availability" onPress={changeAvailability} />
+        </View>
+        <View style={styles.buttonWrapper}>
+          <Button title="Sync" onPress={sync} />
         </View>
       </ScrollView>
     </SafeAreaView>
