@@ -6,7 +6,6 @@
 
 #import <React/RCTAppSetupUtils.h>
 #import <CoreLocation/CoreLocation.h>
-#import <HyperTrack/HyperTrack-Swift.h>
 
 #if RCT_NEW_ARCH_ENABLED
 #import <React/CoreModulesPlugins.h>
@@ -59,21 +58,17 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
-  [HTSDK registerForRemoteNotifications];
   return YES;
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    [HTSDK didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
-    [HTSDK didFailToRegisterForRemoteNotificationsWithError:error];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-    [HTSDK didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];
-}
+} 
 
 /// This method controls whether the `concurrentRoot`feature of React18 is turned on or off.
 ///
