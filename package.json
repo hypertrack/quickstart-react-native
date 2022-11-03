@@ -10,7 +10,7 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
-    "hypertrack-sdk-react-native": "^8.2.1",
+    "hypertrack-sdk-react-native": "https://github.com/hypertrack/sdk-react-native#feature/transitional-api",
     "react": "18.1.0",
     "react-native": "0.70.0"
   },
