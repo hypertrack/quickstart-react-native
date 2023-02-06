@@ -26,7 +26,8 @@ const Button = ({title, onPress}: {title: string; onPress: () => void}) => (
   </Pressable>
 );
 
-const PUBLISHABLE_KEY = 'Paste_your_publishable_key_here';
+const PUBLISHABLE_KEY =
+  'B42VhCTk6-LoJ-4XcX6Z06achUxt3NFNh-5rejSBUpXeXFMaWJWZF6hBCQvLhrvyGdmUf8uYfYLTXS-Czz2tkw';
 
 const App = () => {
   const hyperTrack = useRef<HyperTrack | null>(null);
