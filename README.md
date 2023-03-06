@@ -1,6 +1,7 @@
 # React Native Quickstart for HyperTrack SDK
 
-![GitHub](https://img.shields.io/github/license/hypertrack/sdk-react-native.svg) ![npm](https://img.shields.io/npm/v/hypertrack-sdk-react-native.svg) ![iOS SDK](https://img.shields.io/badge/iOS%20SDK-4.13.0-brightgreen.svg) ![Android SDK](https://img.shields.io/badge/Android%20SDK-6.3.0-brightgreen.svg)
+![GitHub](https://img.shields.io/github/license/hypertrack/sdk-react-native.svg) 
+![npm](https://img.shields.io/npm/v/hypertrack-sdk-react-native?label=hypertrack-sdk-react-native) 
  
 [HyperTrack](https://www.hypertrack.com/) lets you add live location tracking to your mobile app. Live location is made available along with ongoing activity, tracking controls and tracking outage with reasons. 
 
@@ -42,7 +43,7 @@ pod install
 
 Insert your HyperTrack publishable key to `const PUBLISHABLE_KEY` in `App.tsx`
 
-### [Set up silent push notifications](https://hypertrack.com/docs/install-sdk-react-native/#step-4-set-up-silent-push-notifications)
+### [Set up silent push notifications](https://hypertrack.com/docs/install-sdk-react-native/#set-up-silent-push-notifications)
 
 HyperTrack SDK needs Firebase Cloud Messaging to manage on-device tracking as well as enable using HyperTrack cloud APIs from your server to control the tracking.
 
@@ -58,9 +59,9 @@ Open the app's workspace file (`/ios/QuickstartReactNative.xcworkspace`) with Xc
 
 Select your device (SDK requires real device, it won't work using simulator) and hit Run.
 
-### Enable permissions
+### Grant permissions
 
-Enable location and activity permissions (choose "Always Allow" for location).
+Grant location and activity permissions (choose "Always Allow" for location).
 
 ### Start tracking
 
