@@ -548,8 +548,8 @@ SPEC CHECKSUMS:
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 04b94705f318337d7ead9e6d17c019bd9b1f6b1b
   hermes-engine: 8e84f1284180801c1a1b241f443ba64f931ff561
-  HyperTrack: 5a6dec4bb5ccdd257f75d7ec6411eb85170e9995
-  hypertrack-sdk-react-native: b0f33dd2dccae6d4bcfc73d6b7633cee29648af6
+  HyperTrack: 9093ab5a449ed9add08f044b826f296df4e5c07c
+  hypertrack-sdk-react-native: 81d055dc7b05f6c3ff2d332e33147ebb0967b9ec
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
   RCT-Folly: 0080d0a6ebf2577475bda044aa59e2ca1f909cda
@@ -585,4 +585,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 7e410838711c8351cecc33df68b19bfa1e6f53d8
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.12.0
