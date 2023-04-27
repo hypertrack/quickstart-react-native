@@ -14,7 +14,7 @@ hooks:
     chmod +x .githooks/pre-push
     git config core.hooksPath .githooks
 
-run-android: hooks compile 
+run-android: hooks compile
     npx react-native run-android
 
 start-metro: hooks compile
