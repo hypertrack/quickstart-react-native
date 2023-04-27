@@ -32,178 +32,191 @@ const Button = ({title, onPress}: {title: string; onPress: () => void}) => (
   </Pressable>
 );
 
-// don't forget to update git hooks checking the publishable key if changing
-// this variable name of format
-const PUBLISHABLE_KEY = 'Paste_your_publishable_key_here';
-
 const App = () => {
-  const hyperTrack = useRef<HyperTrack | null>(null);
+  const [errorsState, setErrorsState] = useState('');
   const [deviceIdState, setDeviceIdState] = useState('');
-  const [isAvailableState, setAvailabilityState] = useState(false);
+  const [isAvailableState, setIsAvailableState] = useState(false);
   const [isTrackingState, setIsTrackingState] = useState(false);
-  const [errorsState, setErrorsState] = useState<HyperTrackError[]>([]);
+  const [locationState, setLocationState] = useState('');
 
   const errorsListener = useRef<EmitterSubscription | null | undefined>(null);
-  const trackingListener = useRef<EmitterSubscription | null | undefined>(null);
-  const availabilityListener = useRef<EmitterSubscription | null | undefined>(
+  const isAvailableListener = useRef<EmitterSubscription | null | undefined>(
     null,
   );
+  const isTrackingListener = useRef<EmitterSubscription | null | undefined>(
+    null,
+  );
+  const locationListener = useRef<EmitterSubscription | null | undefined>(null);
 
   useEffect(() => {
     const initSDK = async () => {
       try {
-        const hyperTrackInstance = await HyperTrack.initialize(
-          PUBLISHABLE_KEY,
-          {
-            loggingEnabled: true,
-            requireBackgroundTrackingPermission: true,
-            allowMockLocations: true,
-            automaticallyRequestPermissions: true,
-          },
-        );
-        hyperTrack.current = hyperTrackInstance;
-
-        const deviceId = await hyperTrack.current?.getDeviceId();
+        const deviceId = await HyperTrack.getDeviceId();
         console.log('getDeviceId', deviceId);
         setDeviceIdState(deviceId);
 
         const name = 'Quickstart ReactNative';
-        hyperTrack.current?.setName(name);
+        HyperTrack.setName(name);
         console.log('setName', name);
 
         const metadata = {
           app: 'Quickstart ReactNative',
           value: Math.random(),
         };
-        hyperTrack.current?.setMetadata(metadata);
+        HyperTrack.setMetadata(metadata);
         console.log('setMetadata', metadata);
+
+        errorsListener.current = HyperTrack.subscribeToErrors(
+          (errors: HyperTrackError[]) => {
+            let result = getErrorsText(errors);
+            console.log('Listener errors: ', result);
+            setErrorsState(result);
+          },
+        );
+
+        isAvailableListener.current = HyperTrack.subscribeToIsAvailable(
+          (isAvailable: boolean) => {
+            console.log('Listener isAvailable: ', isAvailable);
+            setIsAvailableState(isAvailable);
+          },
+        );
+
+        isTrackingListener.current = HyperTrack.subscribeToIsTracking(
+          (isTracking: boolean) => {
+            console.log('Listener isTracking: ', isTracking);
+            setIsTrackingState(isTracking);
+          },
+        );
+
+        locationListener.current = HyperTrack.subscribeToLocation(
+          (locationResult: Result<Location, LocationError>) => {
+            console.log('Listener location: ', locationResult);
+            setLocationState(getLocationResponseText(locationResult));
+          },
+        );
       } catch (error) {
         console.log(error, JSON.stringify(error));
       }
-
-      trackingListener.current = hyperTrack.current?.subscribeToTracking(
-        isTracking => {
-          console.log('Listener isTracking: ', isTracking);
-          setIsTrackingState(isTracking);
-          setErrorsState([]);
-        },
-      );
-
-      availabilityListener.current =
-        hyperTrack.current?.subscribeToAvailability(isAvailable => {
-          console.log('Listener isAvailable: ', isAvailable);
-          setAvailabilityState(isAvailable);
-          setErrorsState([]);
-        });
-
-      errorsListener.current = hyperTrack.current?.subscribeToErrors(errors => {
-        console.log('Listener onError: ', errors);
-        setErrorsState(errors);
-      });
     };
     initSDK();
 
     return () => {
       errorsListener.current?.remove();
-      trackingListener.current?.remove();
-      availabilityListener.current?.remove();
+      isTrackingListener.current?.remove();
+      isAvailableListener.current?.remove();
+      locationListener.current?.remove();
     };
   }, []);
 
-  useEffect(() => {}, []);
+  const addGeotag = async () => {
+    try {
+      /**
+       * geotagPayload is an arbitrary object.
+       * You can put there any JSON-serializable data.
+       * It will be displayed in the HyperTrack dashboard and
+       * available in the webhook events.
+       */
+      const geotagPayload = {
+        payload: 'Quickstart ReactNative',
+        value: Math.random(),
+      };
 
-  const getLocation = async () => {
-    if (hyperTrack.current !== null) {
-      try {
-        const result = await hyperTrack.current?.getLocation();
-        Alert.alert('Result', getLocationResponseText(result));
-      } catch (error) {
-        console.log('error', error);
-      }
-    }
-  };
-
-  const addGeoTag = async () => {
-    if (hyperTrack.current !== null) {
-      try {
-        /**
-         * geotagPayload is an arbitrary object.
-         * You can put there any JSON-serializable data.
-         * It will be displayed in the HyperTrack dashboard and
-         * available in the webhook events.
-         */
-        const geotagPayload = {
-          payload: 'Quickstart ReactNative',
-          value: Math.random(),
-        };
-
-        const result = await hyperTrack.current?.addGeotag(geotagPayload);
-        console.log('Add geotag: ', result);
-        Alert.alert('Result', getLocationResponseText(result));
-      } catch (error) {
-        console.log('error', error);
-      }
+      const result = await HyperTrack.addGeotag(geotagPayload);
+      console.log('Add geotag: ', result);
+      Alert.alert('Add geotag', getLocationResponseText(result));
+    } catch (error) {
+      console.log('error', error);
     }
   };
 
   const addGeotagWithExpectedLocation = async () => {
-    if (hyperTrack.current !== null) {
-      try {
-        /**
-         * geotagPayload is an arbitrary object.
-         * You can put there any JSON-serializable data.
-         * It will be displayed in the HyperTrack dashboard and
-         * available in the webhook events.
-         */
-        const geotagPayload = {
-          payload: 'Quickstart ReactNative',
-          value: Math.random(),
-        };
+    try {
+      /**
+       * geotagPayload is an arbitrary object.
+       * You can put there any JSON-serializable data.
+       * It will be displayed in the HyperTrack dashboard and
+       * available in the webhook events.
+       */
+      const geotagPayload = {
+        payload: 'Quickstart ReactNative',
+        value: Math.random(),
+      };
 
-        const result = await hyperTrack.current?.addGeotag(geotagPayload, {
-          latitude: 37.775,
-          longitude: -122.418,
-        });
-        console.log('Add geotag with expected location: ', result);
-        Alert.alert('Result', getLocationWithDeviationResponseText(result));
-      } catch (error) {
-        console.log('error', error);
-      }
+      const result = await HyperTrack.addGeotag(geotagPayload, {
+        latitude: 37.775,
+        longitude: -122.418,
+      });
+      console.log('Add geotag with expected location:', result);
+      Alert.alert(
+        'Add geotag with expected location',
+        getLocationWithDeviationResponseText(result),
+      );
+    } catch (error) {
+      console.log('error', error);
     }
   };
 
-  const invokeIsTracking = async () => {
-    const isTracking = await hyperTrack.current?.isTracking();
-    console.log('isTracking', isTracking);
-    Alert.alert('isTracking', `${isTracking}`);
-    setIsTrackingState(isTracking ?? false);
+  const getErrors = async () => {
+    const errors = await HyperTrack.getErrors();
+    let result = getErrorsText(errors);
+    console.log('Errors:', result);
+    Alert.alert('errors', result);
   };
 
-  const invokeIsAvailable = async () => {
-    const available = await hyperTrack.current?.isAvailable();
+  const getIsAvailable = async () => {
+    const available = await HyperTrack.getIsAvailable();
     console.log('isAvailable', available);
     Alert.alert('isAvailable', `${available}`);
-    setAvailabilityState(available ?? false);
   };
 
-  const changeAvailability = async () => {
-    await hyperTrack.current?.setAvailability(!isAvailableState);
+  const getIsTracking = async () => {
+    const isTracking = await HyperTrack.getIsTracking();
+    console.log('isTracking', isTracking);
+    Alert.alert('isTracking', `${isTracking}`);
   };
 
-  const startTracking = async () => {
-    console.log('Start tracking');
-    hyperTrack.current?.startTracking();
+  const getLocation = async () => {
+    try {
+      const result = await HyperTrack.getLocation();
+      Alert.alert('Location:', getLocationResponseText(result));
+    } catch (error) {
+      console.log('error', error);
+    }
   };
 
-  const stopTracking = async () => {
-    console.log('Stop tracking');
-    hyperTrack.current?.stopTracking();
+  const getMetadata = async () => {
+    const metadata = await HyperTrack.getMetadata();
+    console.log('Metadata:', metadata);
+    Alert.alert('Metadata', JSON.stringify(metadata));
   };
 
-  const sync = async () => {
-    hyperTrack.current?.sync();
-    console.log('Sync');
-    Alert.alert('Sync performed');
+  const getName = async () => {
+    const name = await HyperTrack.getName();
+    console.log('Name:', name);
+    Alert.alert('Name', name);
+  };
+
+  const locate = async () => {
+    HyperTrack.locate((locationResult: Result<Location, HyperTrackError[]>) => {
+      try {
+        let result = getLocateResponseText(locationResult);
+        console.log('Locate:', result);
+        Alert.alert('Result', result);
+      } catch (error) {
+        console.log('error', error);
+      }
+    });
+    console.log('Locate started');
+  };
+
+  const setIsAvailable = async (isAvailable: boolean) => {
+    HyperTrack.setIsAvailable(isAvailable);
+    console.log('setIsAvailable', isAvailable);
+  };
+
+  const setIsTracking = async (isTracking: boolean) => {
+    HyperTrack.setIsTracking(isTracking);
+    console.log('setIsTracking', isTracking);
   };
 
   return (
@@ -215,38 +228,61 @@ const App = () => {
           {deviceIdState}
         </Text>
 
-        <Text style={styles.titleText}>{'isTracking'}</Text>
-        <Text style={styles.text}>{isTrackingState?.toString()}</Text>
+        <Text style={styles.titleText}>{'Location'}</Text>
+        <Text style={styles.text}>{locationState}</Text>
 
-        <Text style={styles.titleText}>{'isAvailable'}</Text>
-        <Text style={styles.text}>{isAvailableState?.toString()}</Text>
-
-        <Text style={styles.titleText}>{'errors'}</Text>
-        <Text style={styles.text}>{JSON.stringify(errorsState, null, 4)}</Text>
+        <Text style={styles.titleText}>{'Errors'}</Text>
+        <Text style={styles.text}>{errorsState}</Text>
 
         <View style={styles.buttonWrapper}>
-          <Button title="Start tracking" onPress={startTracking} />
-          <Button title="Stop tracking" onPress={stopTracking} />
+          <Button title="Start tracking" onPress={() => setIsTracking(true)} />
+          <View>
+            <Text style={styles.titleText}>{'isTracking'}</Text>
+            <Text style={styles.text}>{isTrackingState?.toString()}</Text>
+          </View>
+          <Button title="Stop tracking" onPress={() => setIsTracking(false)} />
         </View>
+
         <View style={styles.buttonWrapper}>
-          <Button title="Get location" onPress={getLocation} />
-          <Button title="Add Geotag" onPress={addGeoTag} />
+          <Button title="Set available" onPress={() => setIsAvailable(true)} />
+          <View>
+            <Text style={styles.titleText}>{'isAvailable'}</Text>
+            <Text style={styles.text}>{isAvailableState?.toString()}</Text>
+          </View>
+          <Button
+            title="Set unavailable"
+            onPress={() => setIsAvailable(false)}
+          />
         </View>
+
+        <View style={styles.buttonWrapper}>
+          <Button title="Add Geotag" onPress={addGeotag} />
+        </View>
+
         <View style={styles.buttonWrapper}>
           <Button
             title="Add Geotag with expected location"
             onPress={addGeotagWithExpectedLocation}
           />
         </View>
+
         <View style={styles.buttonWrapper}>
-          <Button title="isTracking" onPress={invokeIsTracking} />
-          <Button title="isAvailable" onPress={invokeIsAvailable} />
+          <Button title="Locate user" onPress={locate} />
         </View>
+
         <View style={styles.buttonWrapper}>
-          <Button title="Change availability" onPress={changeAvailability} />
+          <Button title="Get errors" onPress={getErrors} />
+          <Button title="Get isAvailable" onPress={getIsAvailable} />
         </View>
+
         <View style={styles.buttonWrapper}>
-          <Button title="Sync" onPress={sync} />
+          <Button title="Get isTracking" onPress={getIsTracking} />
+          <Button title="Get location" onPress={getLocation} />
+        </View>
+
+        <View style={styles.buttonWrapper}>
+          <Button title="Get Metadata" onPress={getMetadata} />
+          <Button title="Get Name" onPress={getName} />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -255,7 +291,22 @@ const App = () => {
 
 export default App;
 
-function getLocationResponseText(response: Result<Location, LocationError>) {
+function getLocateResponseText(response: Result<Location, HyperTrackError[]>) {
+  switch (response.type) {
+    case 'success':
+      return `Location: ${JSON.stringify(
+        [response.value.latitude, response.value.longitude],
+        null,
+        4,
+      )}`;
+    case 'failure':
+      return `Errors:\n${getErrorsText(response.value)}`;
+  }
+}
+
+function getLocationResponseText(
+  response: Result<Location, LocationError>,
+): string {
   switch (response.type) {
     case 'success':
       return `Location: ${JSON.stringify(
@@ -270,8 +321,10 @@ function getLocationResponseText(response: Result<Location, LocationError>) {
         case 'starting':
           return 'Starting';
         case 'errors':
-          return `Errors: ${JSON.stringify(response.value, null, 4)}`;
+          return `Errors:\n${getErrorsText(response.value.value)}`;
       }
+    default:
+      return `Unknown response: $response`;
   }
 }
 
@@ -292,8 +345,24 @@ function getLocationWithDeviationResponseText(
         case 'starting':
           return 'Starting';
         case 'errors':
-          return `Errors: ${JSON.stringify(response.value, null, 4)}`;
+          return `Errors:\n${getErrorsText(response.value.value)}`;
       }
+  }
+}
+
+function getErrorsText(errors: HyperTrackError[]) {
+  if (errors.length === 0) {
+    return 'No errors';
+  } else {
+    return errors
+      .map(error => {
+        if (typeof error === 'string') {
+          return error as string;
+        } else {
+          return `Failed to parse error: ${JSON.stringify(error)}`;
+        }
+      })
+      .join('\n');
   }
 }
 
@@ -311,14 +380,14 @@ const styles = StyleSheet.create({
     color: '#000',
     fontWeight: 'bold',
     padding: 2,
-    fontSize: 20,
+    fontSize: 16,
   },
   text: {
     textAlign: 'center',
     width: '100%',
     color: '#000',
     padding: 5,
-    fontSize: 18,
+    fontSize: 16,
   },
   buttonText: {
     textAlign: 'center',
@@ -335,8 +404,12 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   button: {
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    borderRadius: 5,
+    flex: 1,
+    fontSize: 18,
+    paddingHorizontal: 2,
+    paddingVertical: 2,
+    borderRadius: 3,
+    marginLeft: 20,
+    marginRight: 20,
   },
 });

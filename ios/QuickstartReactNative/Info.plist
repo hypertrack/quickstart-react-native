@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>HyperTrackPublishableKey</key>
+	<string>uvIAA8xJANxUxDgINOX62-LINLuLeymS6JbGieJ9PegAPITcr9fgUpROpfSMdL9kv-qFjl17NeAuBHse8Qu9sw</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -36,11 +38,11 @@
 		</dict>
 	</dict>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>To let your friends and family track you live, you need to allow HyperTrack Live to access this device's location</string>
+	<string>To let your friends and family track you live, you need to allow HyperTrack Live to access this device&apos;s location</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>To let your friends and family track you live, you need to allow HyperTrack Live to access this device's location</string>
+	<string>To let your friends and family track you live, you need to allow HyperTrack Live to access this device&apos;s location</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>To let your friends and family track you live, you need to allow HyperTrack Live to access this device's location</string>
+	<string>To let your friends and family track you live, you need to allow HyperTrack Live to access this device&apos;s location</string>
 	<key>NSMotionUsageDescription</key>
 	<string>To track your movement accurately, HyperTrack Live needs to access motion sensors</string>
 	<key>UIBackgroundModes</key>
