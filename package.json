@@ -12,7 +12,7 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
-    "hypertrack-sdk-react-native": "9.1.0",
+    "hypertrack-sdk-react-native": "https://github.com/hypertrack/sdk-react-native#add-geotag-expected-location",
     "prettier": "^2.8.4",
     "react": "18.1.0",
     "react-dom": "^18.2.0",

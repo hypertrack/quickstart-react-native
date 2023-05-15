@@ -11,7 +11,7 @@ import {
   EmitterSubscription,
 } from 'react-native';
 
-import HyperTrack, { HyperTrackError } from 'hypertrack-sdk-react-native';
+import HyperTrack, {HyperTrackError} from 'hypertrack-sdk-react-native';
 
 const Button = ({title, onPress}: {title: string; onPress: () => void}) => (
   <Pressable
@@ -50,8 +50,8 @@ const App = () => {
             loggingEnabled: true,
             requireBackgroundTrackingPermission: true,
             allowMockLocations: true,
-            automaticallyRequestPermissions: true
-          }
+            automaticallyRequestPermissions: true,
+          },
         );
         hyperTrack.current = hyperTrackInstance;
 
@@ -59,14 +59,14 @@ const App = () => {
         console.log('getDeviceId', deviceId);
         setDeviceIdState(deviceId);
 
-        const name = 'Quickstart ReactNative'
+        const name = 'Quickstart ReactNative';
         hyperTrack.current?.setName(name);
         console.log('setName', name);
 
         const metadata = {
           app: 'Quickstart ReactNative',
           value: Math.random(),
-        }
+        };
         hyperTrack.current?.setMetadata(metadata);
         console.log('setMetadata', metadata);
       } catch (error) {
@@ -77,7 +77,7 @@ const App = () => {
         isTracking => {
           console.log('Listener isTracking: ', isTracking);
           setIsTrackingState(isTracking);
-          setErrorsState([])
+          setErrorsState([]);
         },
       );
 
@@ -85,7 +85,7 @@ const App = () => {
         hyperTrack.current?.subscribeToAvailability(isAvailable => {
           console.log('Listener isAvailable: ', isAvailable);
           setAvailabilityState(isAvailable);
-          setErrorsState([])
+          setErrorsState([]);
         });
 
       errorsListener.current = hyperTrack.current?.subscribeToErrors(errors => {
@@ -123,6 +123,27 @@ const App = () => {
           value: Math.random(),
         });
         console.log('Add geotag: ', result);
+        Alert.alert('Result', JSON.stringify(result));
+      } catch (error) {
+        console.log('error', error);
+      }
+    }
+  };
+
+  const addGeotagWithExpectedLocation = async () => {
+    if (hyperTrack.current !== null) {
+      try {
+        const result = await hyperTrack.current?.addGeotag(
+          {
+            payload: 'Quickstart ReactNative',
+            value: Math.random(),
+          },
+          {
+            latitude: 37.775,
+            longitude: -122.418,
+          },
+        );
+        console.log('Add geotag with expected location: ', result);
         Alert.alert('Result', JSON.stringify(result));
       } catch (error) {
         console.log('error', error);
@@ -188,7 +209,13 @@ const App = () => {
         </View>
         <View style={styles.buttonWrapper}>
           <Button title="Get location" onPress={getLocation} />
-          <Button title="Add geoTag" onPress={addGeoTag} />
+          <Button title="Add Geotag" onPress={addGeoTag} />
+        </View>
+        <View style={styles.buttonWrapper}>
+          <Button
+            title="Get Geotag with expected location"
+            onPress={addGeotagWithExpectedLocation}
+          />
         </View>
         <View style={styles.buttonWrapper}>
           <Button title="isTracking" onPress={invokeIsTracking} />
