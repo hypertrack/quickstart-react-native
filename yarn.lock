@@ -6239,7 +6239,7 @@ human-signals@^2.1.0:
 
 "hypertrack-sdk-react-native@https://github.com/hypertrack/sdk-react-native#add-geotag-expected-location":
   version "9.1.1"
-  resolved "https://github.com/hypertrack/sdk-react-native#322f81b40bb55f0d206f42ecf5f27aa5aa06d958"
+  resolved "https://github.com/hypertrack/sdk-react-native#f11cdb8f68afe696f6ed5e31869c488a715e200b"
 
 hyphenate-style-name@^1.0.3:
   version "1.0.4"
