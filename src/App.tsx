@@ -213,7 +213,7 @@ const App = () => {
         </View>
         <View style={styles.buttonWrapper}>
           <Button
-            title="Get Geotag with expected location"
+            title="Add Geotag with expected location"
             onPress={addGeotagWithExpectedLocation}
           />
         </View>
