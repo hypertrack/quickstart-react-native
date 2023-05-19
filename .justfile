@@ -1,5 +1,5 @@
 alias ag := add-plugin-from-github
-alias av := add-plugin
+alias a := add-plugin
 alias ra := run-android
 alias sm := start-metro
 alias cn := clear-nm
