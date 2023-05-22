@@ -6246,10 +6246,9 @@ human-signals@^2.1.0:
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-2.1.0.tgz#dc91fcba42e4d06e4abaed33b3e7a3c02f514ea0"
   integrity sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==
 
-hypertrack-sdk-react-native@9.2.0:
-  version "9.2.0"
-  resolved "https://registry.yarnpkg.com/hypertrack-sdk-react-native/-/hypertrack-sdk-react-native-9.2.0.tgz#f4a10397d186e1120f973f756ab7fae3128d8999"
-  integrity sha512-s3dACLlMBKotTVTQ29PMcUAR9swJ/Y3hctEdiHWioNAERqhrl7ecJwV813r3ae9DtYUgxyK0tbtsiwe5VGYlqw==
+"hypertrack-sdk-react-native@https://github.com/hypertrack/sdk-react-native#fix-add-geotag-return-type":
+  version "9.2.1"
+  resolved "https://github.com/hypertrack/sdk-react-native#92c61adcb015eca3b8ae5fcc9fbf147b1d44d79a"
 
 hyphenate-style-name@^1.0.3:
   version "1.0.4"
