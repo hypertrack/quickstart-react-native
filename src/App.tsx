@@ -11,7 +11,7 @@ import {
   EmitterSubscription,
 } from 'react-native';
 
-import HyperTrack from 'hypertrack-sdk-react-native';
+import HyperTrack, { HyperTrackError } from 'hypertrack-sdk-react-native';
 
 const Button = ({title, onPress}: {title: string; onPress: () => void}) => (
   <Pressable
@@ -33,7 +33,7 @@ const App = () => {
   const [deviceIdState, setDeviceIdState] = useState('');
   const [isAvailableState, setAvailabilityState] = useState(false);
   const [isTrackingState, setIsTrackingState] = useState(false);
-  const [errorsState, setErrorsState] = useState([]);
+  const [errorsState, setErrorsState] = useState<HyperTrackError[]>([]);
 
   const errorsListener = useRef<EmitterSubscription | null | undefined>(null);
   const trackingListener = useRef<EmitterSubscription | null | undefined>(null);
@@ -50,6 +50,7 @@ const App = () => {
             loggingEnabled: true,
             requireBackgroundTrackingPermission: true,
             allowMockLocations: true,
+            automaticallyRequestPermissions: true
           }
         );
         hyperTrack.current = hyperTrackInstance;
@@ -133,7 +134,7 @@ const App = () => {
     const isTracking = await hyperTrack.current?.isTracking();
     console.log('isTracking', isTracking);
     Alert.alert('isTracking', `${isTracking}`);
-    setAvailabilityState(isTracking ?? false);
+    setIsTrackingState(isTracking ?? false);
   };
 
   const invokeIsAvailable = async () => {

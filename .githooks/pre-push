@@ -1,0 +1,49 @@
+#!/bin/sh
+
+check_error="Git hook check error"
+
+# Check if there are any local dependencies in the package.json file
+local_deps=$(grep -E "file:.*\..*" package.json)
+
+# If local dependencies are found, exit with an error message
+if [ "$local_deps" ]; then
+  echo "$check_error: Local dependencies found in package.json: \n\n $local_deps \n\n Push blocked to prevent committing local dependencies."
+  exit 1
+fi
+
+# Check if there are any Github dependencies in the package.json file
+github_deps=$(grep -E "https://github.com" package.json)
+
+# If github dependencies are found, exit with an error message
+if [ "$github_deps" ]; then
+  echo "$check_error: Github dependencies found in package.json: \n\n $github_deps \n\n Push blocked to prevent committing Github dependencies."
+  exit 1
+fi
+
+# Check if publishable key is set in App.tsx
+# Get the length of the PUBLISHABLE_KEY constant
+LENGTH=$(grep -o 'PUBLISHABLE_KEY = .*' src/App.tsx | cut -d'"' -f2 | wc -c | awk '{$1=$1-1}1')
+
+if [ $LENGTH -eq 86 ]; then
+  echo "$check_error: PUBLISHABLE_KEY is set"
+  exit 1
+fi
+
+xcode_project_config_path="ios/QuickstartReactNative.xcodeproj/project.pbxproj"
+
+# Check if the xcodeproj command line tool is installed
+if ! type "xcodeproj" > /dev/null; then
+  echo "$check_error: The xcodeproj command line tool is not installed. Unable to check if the development team is set up."
+else
+  # Check if the project file exists
+  if [ ! -f $xcode_project_config_path ]; then
+    echo "$check_error: The project file '$xcode_project_config_path' does not exist."
+    exit 1
+  fi
+
+  # Check if the development team is set up
+  if cat $xcode_project_config_path | grep -q -E 'DEVELOPMENT_TEAM\s*=\s*[A-Z0-9]{10}'; then
+    echo "$check_error: iOS Development team is set up."
+    exit 1
+  fi
+fi
