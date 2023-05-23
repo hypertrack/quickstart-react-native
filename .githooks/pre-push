@@ -16,8 +16,8 @@ github_deps=$(grep -E "https://github.com" package.json)
 
 # If github dependencies are found, exit with an error message
 if [ "$github_deps" ]; then
-  echo "$check_error: Github dependencies found in package.json: \n\n $github_deps \n\n Push blocked to prevent committing Github dependencies."
-  exit 1
+ echo "$check_error: Github dependencies found in package.json: \n\n $github_deps \n\n Push blocked to prevent committing Github dependencies."
+ exit 1
 fi
 
 # Check if publishable key is set in App.tsx
@@ -25,8 +25,8 @@ fi
 LENGTH=$(grep -o 'PUBLISHABLE_KEY = .*' src/App.tsx | cut -d'"' -f2 | wc -c | awk '{$1=$1-1}1')
 
 if [ $LENGTH -eq 86 ]; then
-  echo "$check_error: PUBLISHABLE_KEY is set"
-  exit 1
+ echo "$check_error: PUBLISHABLE_KEY is set"
+ exit 1
 fi
 
 xcode_project_config_path="ios/QuickstartReactNative.xcodeproj/project.pbxproj"

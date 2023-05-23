@@ -1,4 +1,6 @@
 google-services.json
+/.vscode
+
 # OSX
 #
 .DS_Store
