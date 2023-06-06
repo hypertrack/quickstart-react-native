@@ -11,7 +11,7 @@ import {
   EmitterSubscription,
 } from 'react-native';
 
-import HyperTrack, {HyperTrackError} from 'hypertrack-sdk-react-native';
+import HyperTrack, {HyperTrackError, Location, LocationError} from 'hypertrack-sdk-react-native';
 
 const Button = ({title, onPress}: {title: string; onPress: () => void}) => (
   <Pressable
@@ -50,7 +50,7 @@ const App = () => {
             loggingEnabled: true,
             requireBackgroundTrackingPermission: true,
             allowMockLocations: true,
-            automaticallyRequestPermissions: true,
+            // automaticallyRequestPermissions: true,
           },
         );
         hyperTrack.current = hyperTrackInstance;
@@ -108,7 +108,7 @@ const App = () => {
     if (hyperTrack.current !== null) {
       try {
         const result = await hyperTrack.current?.getLocation();
-        Alert.alert('Result', JSON.stringify(result));
+        Alert.alert('Result', getLocationResponseText(result));
       } catch (error) {
         console.log('error', error);
       }
@@ -123,7 +123,7 @@ const App = () => {
           value: Math.random(),
         });
         console.log('Add geotag: ', result);
-        Alert.alert('Result', JSON.stringify(result));
+        Alert.alert('Result', getLocationResponseText(result));
       } catch (error) {
         console.log('error', error);
       }
@@ -138,13 +138,13 @@ const App = () => {
             payload: 'Quickstart ReactNative',
             value: Math.random(),
           },
-          {
-            latitude: 37.775,
-            longitude: -122.418,
-          },
+          // {
+          //   latitude: 37.775,
+          //   longitude: -122.418,
+          // },
         );
         console.log('Add geotag with expected location: ', result);
-        Alert.alert('Result', JSON.stringify(result));
+        Alert.alert('Result', getLocationResponseText(result));
       } catch (error) {
         console.log('error', error);
       }
@@ -233,6 +233,24 @@ const App = () => {
 };
 
 export default App;
+
+function getLocationResponseText(response: Location | LocationError) {
+  switch (response.type) {
+    case 'location':
+      return `Location: ${JSON.stringify([
+        response.value.latitude,
+        response.value.longitude,
+      ], null, 4)}`;
+    case 'notRunning':
+      return 'Not running';
+    case 'starting': 
+      return 'Starting';
+    case 'errors':
+      return `Errors: ${JSON.stringify(response.value, null, 4)}`;
+    default:
+      return 'Invalid response: ' + JSON.stringify(response, null, 4);
+    }
+}
 
 const styles = StyleSheet.create({
   container: {
