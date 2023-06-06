@@ -47,12 +47,12 @@ const App = () => {
       try {
         const hyperTrackInstance = await HyperTrack.initialize(
           PUBLISHABLE_KEY,
-          {
-            loggingEnabled: true,
-            requireBackgroundTrackingPermission: true,
-            allowMockLocations: true,
-            // automaticallyRequestPermissions: true,
-          },
+          // {
+          //   loggingEnabled: true,
+          //   requireBackgroundTrackingPermission: true,
+          //   allowMockLocations: true,
+          //   automaticallyRequestPermissions: true,
+          // },
         );
         hyperTrack.current = hyperTrackInstance;
 
