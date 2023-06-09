@@ -11,7 +11,7 @@ import {
   EmitterSubscription,
 } from 'react-native';
 
-import HyperTrack, {HyperTrackError} from 'hypertrack-sdk-react-native';
+import HyperTrack, {HyperTrackError, Location, LocationError, LocationWithDeviation, Result} from 'hypertrack-sdk-react-native';
 
 const Button = ({title, onPress}: {title: string; onPress: () => void}) => (
   <Pressable
@@ -26,7 +26,8 @@ const Button = ({title, onPress}: {title: string; onPress: () => void}) => (
   </Pressable>
 );
 
-const PUBLISHABLE_KEY = 'Paste_your_publishable_key_here';
+const PUBLISHABLE_KEY =
+  'B42VhCTk6-LoJ-4XcX6Z06achUxt3NFNh-5rejSBUpXeXFMaWJWZF6hBCQvLhrvyGdmUf8uYfYLTXS-Czz2tkw';
 
 const App = () => {
   const hyperTrack = useRef<HyperTrack | null>(null);
@@ -108,7 +109,7 @@ const App = () => {
     if (hyperTrack.current !== null) {
       try {
         const result = await hyperTrack.current?.getLocation();
-        Alert.alert('Result', JSON.stringify(result));
+        Alert.alert('Result', getLocationResponseText(result));
       } catch (error) {
         console.log('error', error);
       }
@@ -123,7 +124,7 @@ const App = () => {
           value: Math.random(),
         });
         console.log('Add geotag: ', result);
-        Alert.alert('Result', JSON.stringify(result));
+        Alert.alert('Result', getLocationResponseText(result));
       } catch (error) {
         console.log('error', error);
       }
@@ -144,7 +145,7 @@ const App = () => {
           },
         );
         console.log('Add geotag with expected location: ', result);
-        Alert.alert('Result', JSON.stringify(result));
+        Alert.alert('Result', getLocationWithDeviationResponseText(result));
       } catch (error) {
         console.log('error', error);
       }
@@ -233,6 +234,48 @@ const App = () => {
 };
 
 export default App;
+
+function getLocationResponseText(
+  response: Result<Location, LocationError>
+) {
+  switch (response.type) {
+    case 'success':
+      return `Location: ${JSON.stringify([
+        response.value.latitude,
+        response.value.longitude,
+      ], null, 4)}`;
+    case 'failure':
+      switch (response.value.type) {
+        case 'notRunning':
+          return 'Not running';
+        case 'starting': 
+          return 'Starting';
+        case 'errors':
+          return `Errors: ${JSON.stringify(response.value, null, 4)}`;
+      }
+  }
+}
+
+function getLocationWithDeviationResponseText(
+  response: Result<LocationWithDeviation, LocationError>
+) {
+  switch (response.type) {
+    case 'success':
+      return `Location: ${JSON.stringify([
+        response.value.location.latitude,
+        response.value.location.longitude,
+      ], null, 4)}\nDeviation: ${response.value.deviation}`;
+    case 'failure':
+      switch (response.value.type) {
+        case 'notRunning':
+          return 'Not running';
+        case 'starting': 
+          return 'Starting';
+        case 'errors':
+          return `Errors: ${JSON.stringify(response.value, null, 4)}`;
+      }
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
