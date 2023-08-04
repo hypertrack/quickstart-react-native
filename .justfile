@@ -7,6 +7,14 @@ alias cpn := clear-plugin-nm
 alias c := compile
 alias oi := open-ios
 
+apk output_folder:
+    #!/usr/bin/env sh
+    export ENTRY_FILE="index.native.js"
+    cd android
+    # ./gradlew assembleRelease
+    echo "APK generated: android/app/build/outputs/apk/release/app-release.apk"
+    cp app/build/outputs/apk/release/app-release.apk {{output_folder}}
+
 compile: hooks
     npx tsc
 
