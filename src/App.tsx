@@ -78,7 +78,7 @@ const App = () => {
         hyperTrack.current?.setMetadata(metadata);
         console.log('setMetadata', metadata);
       } catch (error) {
-        console.log(error);
+        console.log(error, JSON.stringify(error));
       }
 
       trackingListener.current = hyperTrack.current?.subscribeToTracking(
