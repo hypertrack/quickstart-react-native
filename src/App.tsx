@@ -126,10 +126,18 @@ const App = () => {
   const addGeoTag = async () => {
     if (hyperTrack.current !== null) {
       try {
-        const result = await hyperTrack.current?.addGeotag({
+        /**
+         * geotagPayload is an arbitrary object.
+         * You can put there any JSON-serializable data.
+         * It will be displayed in the HyperTrack dashboard and
+         * available in the webhook events.
+         */
+        const geotagPayload = {
           payload: 'Quickstart ReactNative',
           value: Math.random(),
-        });
+        };
+
+        const result = await hyperTrack.current?.addGeotag(geotagPayload);
         console.log('Add geotag: ', result);
         Alert.alert('Result', getLocationResponseText(result));
       } catch (error) {
@@ -141,16 +149,21 @@ const App = () => {
   const addGeotagWithExpectedLocation = async () => {
     if (hyperTrack.current !== null) {
       try {
-        const result = await hyperTrack.current?.addGeotag(
-          {
-            payload: 'Quickstart ReactNative',
-            value: Math.random(),
-          },
-          {
-            latitude: 37.775,
-            longitude: -122.418,
-          },
-        );
+        /**
+         * geotagPayload is an arbitrary object.
+         * You can put there any JSON-serializable data.
+         * It will be displayed in the HyperTrack dashboard and
+         * available in the webhook events.
+         */
+        const geotagPayload = {
+          payload: 'Quickstart ReactNative',
+          value: Math.random(),
+        };
+
+        const result = await hyperTrack.current?.addGeotag(geotagPayload, {
+          latitude: 37.775,
+          longitude: -122.418,
+        });
         console.log('Add geotag with expected location: ', result);
         Alert.alert('Result', getLocationWithDeviationResponseText(result));
       } catch (error) {
