@@ -5,6 +5,7 @@ alias sm := start-metro
 alias cn := clear-nm
 alias cpn := clear-plugin-nm
 alias c := compile
+alias oi := open-ios
 
 compile: hooks
     npx tsc
@@ -33,3 +34,6 @@ clear-nm: hooks
 
 clear-plugin-nm:
     rm -rf node_modules/hypertrack-sdk-react-native
+
+open-ios:
+    open ios/QuickstartReactNative.xcworkspace
