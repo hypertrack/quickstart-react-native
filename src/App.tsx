@@ -65,36 +65,36 @@ const App = () => {
         };
         HyperTrack.setMetadata(metadata);
         console.log('setMetadata', metadata);
+
+        errorsListener.current = HyperTrack.subscribeToErrors(errors => {
+          let result = getErrorsText(errors);
+          console.log('Listener errors: ', result);
+          setErrorsState(result);
+        });
+
+        isAvailableListener.current = HyperTrack.subscribeToIsAvailable(
+          isAvailable => {
+            console.log('Listener isAvailable: ', isAvailable);
+            setIsAvailableState(isAvailable);
+          },
+        );
+
+        isTrackingListener.current = HyperTrack.subscribeToIsTracking(
+          isTracking => {
+            console.log('Listener isTracking: ', isTracking);
+            setIsTrackingState(isTracking);
+          },
+        );
+
+        locationListener.current = HyperTrack.subscribeToLocation(
+          locationResult => {
+            console.log('Listener location: ', locationResult);
+            setLocationState(getLocationResponseText(locationResult));
+          },
+        );
       } catch (error) {
         console.log(error, JSON.stringify(error));
       }
-
-      errorsListener.current = HyperTrack.subscribeToErrors(errors => {
-        let result = getErrorsText(errors);
-        console.log('Listener errors: ', result);
-        setErrorsState(result);
-      });
-
-      isAvailableListener.current = HyperTrack.subscribeToIsAvailable(
-        isAvailable => {
-          console.log('Listener isAvailable: ', isAvailable);
-          setIsAvailableState(isAvailable);
-        },
-      );
-
-      isTrackingListener.current = HyperTrack.subscribeToIsTracking(
-        isTracking => {
-          console.log('Listener isTracking: ', isTracking);
-          setIsTrackingState(isTracking);
-        },
-      );
-
-      locationListener.current = HyperTrack.subscribeToLocation(
-        locationResult => {
-          console.log('Listener location: ', locationResult);
-          setLocationState(getLocationResponseText(locationResult));
-        },
-      );
     };
     initSDK();
 
