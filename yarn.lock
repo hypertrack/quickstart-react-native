@@ -6369,7 +6369,7 @@ human-signals@^2.1.0:
 
 "hypertrack-sdk-react-native@https://github.com/hypertrack/sdk-react-native#new-sdk-api":
   version "11.0.0"
-  resolved "https://github.com/hypertrack/sdk-react-native#de4b86e28d54e61e1272661d847ece244d922b3e"
+  resolved "https://github.com/hypertrack/sdk-react-native#cc19cabd16822257a54e522b6e3d60b3a14b3471"
 
 hyphenate-style-name@^1.0.3:
   version "1.0.4"
