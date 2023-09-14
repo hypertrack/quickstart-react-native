@@ -22,12 +22,9 @@
             </intent-filter>
         </activity>
 
-        
-
         <meta-data
             android:name="HyperTrackPublishableKey"
             android:value="<!-- Paste_your_publishable_key_here -->" />
-
 
     </application>
 </manifest>
