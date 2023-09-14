@@ -25,12 +25,12 @@ if grep -q "'.\{86\}'" "src/App.tsx"; then
   exit 1
 fi
 
-if ! grep -q "value=\"-- Paste_your_publishable_key_here --" "android/app/src/main/AndroidManifest.xml"; then
+if ! grep -q "value=\"Paste_your_publishable_key_here" "android/app/src/main/AndroidManifest.xml"; then
   echo "$check_error: PUBLISHABLE_KEY is probably set ('Paste_your_publishable_key_here' not found in AndroidManifest)"
   exit 1
 fi
 
-if ! grep -q "<string>-- Paste_your_publishable_key_here --" "ios/QuickstartReactNative/Info.plist"; then
+if ! grep -q "<string>Paste_your_publishable_key_here" "ios/QuickstartReactNative/Info.plist"; then
   echo "$check_error: PUBLISHABLE_KEY is probably set ('Paste_your_publishable_key_here' not found in Info.plist)"
   exit 1
 fi

@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>HyperTrackPublishableKey</key>
-	<string>-- Paste_your_publishable_key_here --</string>
+	<string>Paste_your_publishable_key_here</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
