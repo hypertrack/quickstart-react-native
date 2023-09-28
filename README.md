@@ -1,7 +1,7 @@
 # React Native Quickstart for HyperTrack SDK
 
 [![GitHub](https://img.shields.io/github/license/hypertrack/quickstart-react-native?color=orange)](./LICENSE)
-[![Github](https://img.shields.io/npm/v/hypertrack-sdk-react-native?label=hypertrack-sdk-react-native)](https://github.com/hypertrack/sdk-react-native)
+[![Github](https://img.shields.io/badge/hypertrack_sdk_react_native-11.0.0-brightgreen.svg)](https://github.com/hypertrack/sdk-react-native)
  
 [HyperTrack](https://www.hypertrack.com/) lets you add live location tracking to your mobile app. Live location is made available along with ongoing activity, tracking controls and tracking outage with reasons. 
 
