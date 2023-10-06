@@ -3624,10 +3624,10 @@ human-signals@^2.1.0:
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-2.1.0.tgz#dc91fcba42e4d06e4abaed33b3e7a3c02f514ea0"
   integrity sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==
 
-hypertrack-sdk-react-native@11.0.0:
-  version "11.0.0"
-  resolved "https://registry.yarnpkg.com/hypertrack-sdk-react-native/-/hypertrack-sdk-react-native-11.0.0.tgz#0a21867e494153353a19666adb778749f6bbb938"
-  integrity sha512-n6wkxyL6+MWr0nje5U5ubkAFshJbvPc46PtCIkjMtsiHrZ4xyRq570rysDEsDkKJ594zPEDGcC76zRHCfO37NQ==
+hypertrack-sdk-react-native@11.0.4:
+  version "11.0.4"
+  resolved "https://registry.yarnpkg.com/hypertrack-sdk-react-native/-/hypertrack-sdk-react-native-11.0.4.tgz#e90983f28cc5e4d0a8b373f4b8370f9e66e1c433"
+  integrity sha512-rdGQhL6acbE7IS8ZpXQvCNDQURRRbMxPjro3uLI1kYMnwcBkBOUKUgWpbnYGDUeqhKnJWwUMmWKIgbZDeFJwBQ==
 
 ieee754@^1.1.13:
   version "1.2.1"
