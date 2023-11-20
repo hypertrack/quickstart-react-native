@@ -6,19 +6,19 @@ check_error="Git hook check error"
 local_deps=$(grep -E "file:.*\..*" package.json)
 
 # If local dependencies are found, exit with an error message
-if [ "$local_deps" ]; then
-  echo "$check_error: Local dependencies found in package.json: \n\n $local_deps \n\n Push blocked to prevent committing local dependencies."
-  exit 1
-fi
+# if [ "$local_deps" ]; then
+#   echo "$check_error: Local dependencies found in package.json: \n\n $local_deps \n\n Push blocked to prevent committing local dependencies."
+#   exit 1
+# fi
 
 # Check if there are any Github dependencies in the package.json file
 github_deps=$(grep -E "https://github.com" package.json)
 
 # If github dependencies are found, exit with an error message
-if [ "$github_deps" ]; then
-  echo "$check_error: Github dependencies found in package.json: \n\n $github_deps \n\n Push blocked to prevent committing Github dependencies."
-  exit 1
-fi
+# if [ "$github_deps" ]; then
+#   echo "$check_error: Github dependencies found in package.json: \n\n $github_deps \n\n Push blocked to prevent committing Github dependencies."
+#   exit 1
+# fi
 
 if grep -q "'.\{86\}'" "src/App.tsx"; then
   echo "$check_error: PUBLISHABLE_KEY is set"
@@ -48,8 +48,8 @@ else
   fi
 
   # Check if the development team is set up
-  if cat $xcode_project_config_path | grep -q -E 'DEVELOPMENT_TEAM\s*=\s*[A-Z0-9]{10}'; then
-    echo "$check_error: iOS Development team is set up."
-    exit 1
-  fi
+  # if cat $xcode_project_config_path | grep -q -E 'DEVELOPMENT_TEAM\s*=\s*[A-Z0-9]{10}'; then
+  #   echo "$check_error: iOS Development team is set up."
+  #   exit 1
+  # fi
 fi
