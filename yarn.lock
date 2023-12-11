@@ -3624,10 +3624,14 @@ human-signals@^2.1.0:
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-2.1.0.tgz#dc91fcba42e4d06e4abaed33b3e7a3c02f514ea0"
   integrity sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==
 
-hypertrack-sdk-react-native@11.0.8:
-  version "11.0.8"
-  resolved "https://registry.yarnpkg.com/hypertrack-sdk-react-native/-/hypertrack-sdk-react-native-11.0.8.tgz#ad452bf266c75a13e2331b4f3203d4ddbaa0bbdf"
-  integrity sha512-jpOKdqh8RzC5ymP3UCF7FqjLksnIVZidXx0UDTsGMXN4Mygj6N72e7tUU1kBptazaAOeF6c1p1Fe+qheTMP5uQ==
+"hypertrack-sdk-react-native-plugin-android-location-services-google@file:../sdk-react-native/plugin_android_location_services_google":
+  version "12.0.0"
+
+"hypertrack-sdk-react-native-plugin-android-push-service-firebase@file:../sdk-react-native/plugin_android_push_service_firebase":
+  version "12.0.0"
+
+"hypertrack-sdk-react-native@file:../sdk-react-native/sdk":
+  version "12.0.0"
 
 ieee754@^1.1.13:
   version "1.2.1"
