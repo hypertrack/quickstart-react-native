@@ -10,7 +10,9 @@
     "test": "jest"
   },
   "dependencies": {
-    "hypertrack-sdk-react-native": "11.0.8",
+    "hypertrack-sdk-react-native": "12.0.0",
+    "hypertrack-sdk-react-native-plugin-android-location-services-google": "12.0.0",
+    "hypertrack-sdk-react-native-plugin-android-push-service-firebase": "12.0.0",
     "react": "18.2.0",
     "react-native": "0.72.4"
   },
