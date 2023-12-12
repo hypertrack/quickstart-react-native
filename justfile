@@ -6,7 +6,7 @@ alias cn := clear-nm
 alias cpn := clear-plugin-nm
 alias c := compile
 alias oi := open-ios
-alias e := extract-plugin-nm
+alias epn := extract-plugin-nm
 alias al := add-plugin-local
 
 SDK_PLUGIN_LOCAL_PATH := "../sdk-react-native/sdk"
@@ -39,6 +39,8 @@ add-plugin version: hooks
 
 add-plugin-local: hooks
     #!/usr/bin/env sh
+    yarn add hypertrack-sdk-react-native
+    just extract-plugin-nm
     if grep -q '"hypertrack-sdk-react-native"' package.json; then
         yarn remove hypertrack-sdk-react-native
     fi
