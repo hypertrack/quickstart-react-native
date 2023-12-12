@@ -34,11 +34,26 @@ start-metro: hooks compile
     npx react-native start
 
 add-plugin version: hooks
-    yarn remove hypertrack-sdk-react-native
+    #!/usr/bin/env sh
+    set -euo pipefail
+    
+    if grep -q '"hypertrack-sdk-react-native"' package.json; then
+        yarn remove hypertrack-sdk-react-native
+    fi
+    if grep -q '"hypertrack-sdk-react-native-plugin-android-location-services-google"' package.json; then
+        yarn remove hypertrack-sdk-react-native-plugin-android-location-services-google
+    fi
+    if grep -q '"hypertrack-sdk-react-native-plugin-android-push-service-firebase"' package.json; then
+        yarn remove hypertrack-sdk-react-native-plugin-android-push-service-firebase
+    fi
     yarn add hypertrack-sdk-react-native@{{version}}
+    yarn add hypertrack-sdk-react-native-plugin-android-location-services-google@{{version}}
+    yarn add hypertrack-sdk-react-native-plugin-android-push-service-firebase@{{version}}
 
 add-plugin-local: hooks
     #!/usr/bin/env sh
+    set -euo pipefail
+
     yarn add hypertrack-sdk-react-native
     just extract-plugin-nm
     if grep -q '"hypertrack-sdk-react-native"' package.json; then
