@@ -1,42 +1,26 @@
-alias ag := add-plugin-from-github
 alias a := add-plugin
+alias al := add-plugin-local
+alias ap := add-plugin
+alias c := compile
+alias cn := clear-nm
+alias epn := extract-plugin-nm
+alias oi := open-ios
 alias ra := run-android
 alias sm := start-metro
-alias cn := clear-nm
-alias cpn := clear-plugin-nm
-alias c := compile
-alias oi := open-ios
-alias epn := extract-plugin-nm
-alias al := add-plugin-local
 
-SDK_PLUGIN_LOCAL_PATH := "../sdk-react-native/sdk"
+# Source: https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string
+# \ are escaped
+SEMVER_REGEX := "(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?"
+
 LOCATION_SERVICES_GOOGLE_PLUGIN_LOCAL_PATH := "../sdk-react-native/plugin_android_location_services_google"
 LOCATION_SERVICES_GOOGLE_19_0_1_PLUGIN_LOCAL_PATH := "../sdk-react-native/plugin_android_location_services_google_19_0_1"
 PUSH_SERVICE_FIREBASE_PLUGIN_LOCAL_PATH := "../sdk-react-native/plugin_android_push_service_firebase"
-
-
-extract-plugin-nm:
-    rm -rf {{SDK_PLUGIN_LOCAL_PATH}}/node_modules
-    mkdir {{SDK_PLUGIN_LOCAL_PATH}}/node_modules
-    cp -r node_modules/hypertrack-sdk-react-native/node_modules {{SDK_PLUGIN_LOCAL_PATH}}/node_modules
-
-compile: hooks
-    npx tsc
-
-hooks:
-    chmod +x .githooks/pre-push
-    git config core.hooksPath .githooks
-
-run-android: hooks compile
-    npx react-native run-android
-
-start-metro: hooks compile
-    npx react-native start
+SDK_PLUGIN_LOCAL_PATH := "../sdk-react-native/sdk"
 
 add-plugin version: hooks
     #!/usr/bin/env sh
     set -euo pipefail
-    
+
     if grep -q '"hypertrack-sdk-react-native"' package.json; then
         yarn remove hypertrack-sdk-react-native
     fi
@@ -46,9 +30,13 @@ add-plugin version: hooks
     if grep -q '"hypertrack-sdk-react-native-plugin-android-push-service-firebase"' package.json; then
         yarn remove hypertrack-sdk-react-native-plugin-android-push-service-firebase
     fi
+
+    MAJOR_VERSION=$(echo {{version}} | grep -o '^[0-9]\+')
+    if [ $MAJOR_VERSION -ge 12 ]; then
+        yarn add hypertrack-sdk-react-native-plugin-android-location-services-google@{{version}}
+        yarn add hypertrack-sdk-react-native-plugin-android-push-service-firebase@{{version}}
+    fi
     yarn add hypertrack-sdk-react-native@{{version}}
-    yarn add hypertrack-sdk-react-native-plugin-android-location-services-google@{{version}}
-    yarn add hypertrack-sdk-react-native-plugin-android-push-service-firebase@{{version}}
 
 add-plugin-local: hooks
     #!/usr/bin/env sh
@@ -69,16 +57,30 @@ add-plugin-local: hooks
     yarn add hypertrack-sdk-react-native-plugin-android-location-services-google@file:{{LOCATION_SERVICES_GOOGLE_PLUGIN_LOCAL_PATH}}
     yarn add hypertrack-sdk-react-native-plugin-android-push-service-firebase@file:{{PUSH_SERVICE_FIREBASE_PLUGIN_LOCAL_PATH}}
 
-add-plugin-from-github branch: hooks
-    yarn remove hypertrack-sdk-react-native
-    yarn add hypertrack-sdk-react-native@https://github.com/hypertrack/sdk-react-native#{{branch}}
-
 clear-nm: hooks
     rm -rf node_modules
     rm yarn.lock
 
-clear-plugin-nm:
-    rm -rf node_modules/hypertrack-sdk-react-native
+compile: hooks
+    npx tsc
+
+extract-plugin-nm:
+    rm -rf {{SDK_PLUGIN_LOCAL_PATH}}/node_modules
+    mkdir {{SDK_PLUGIN_LOCAL_PATH}}/node_modules
+    cp -r node_modules/hypertrack-sdk-react-native/node_modules {{SDK_PLUGIN_LOCAL_PATH}}/node_modules
+
+hooks:
+    chmod +x .githooks/pre-push
+    git config core.hooksPath .githooks
 
 open-ios:
     open ios/QuickstartReactNative.xcworkspace
+
+run-android: hooks compile
+    npx react-native run-android
+
+start-metro: hooks compile
+    npx react-native start
+
+version:
+    @cat package.json | grep hypertrack-sdk-react-native | head -n 1 | grep -o -E '{{SEMVER_REGEX}}'
