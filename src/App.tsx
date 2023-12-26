@@ -10,6 +10,7 @@ import {
   StatusBar,
   EmitterSubscription,
 } from 'react-native';
+import {Platform} from 'react-native';
 
 import HyperTrack, {
   HyperTrackError,
@@ -59,9 +60,25 @@ const App = () => {
         HyperTrack.setName(name);
         console.log('setName', name);
 
+        let platformName = '';
+        if (Platform.OS === 'android') {
+          platformName = 'android';
+        } else if (Platform.OS === 'ios') {
+          platformName = 'ios';
+        }
         const metadata = {
-          app: 'Quickstart ReactNative',
-          value: Math.random(),
+          /**
+           * `driver_handle` is used to link the device and the driver.
+           * You can use any unique user identifier here.
+           * The recommended way is to set it on app login in set it to null on logout
+           * (to remove the link between the device and the driver)
+           **/
+          driver_handle: `test_driver_quickstart_react_native_${platformName}`,
+          /**
+           * You can also add any custom data to the metadata.
+           */
+          source: name,
+          employee_id: Math.round(Math.random() * 10000),
         };
         HyperTrack.setMetadata(metadata);
         console.log('setMetadata', metadata);
