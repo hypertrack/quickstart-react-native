@@ -60,7 +60,9 @@ Run `npx react-native run-android`
 
 Open the app's workspace file (`/ios/QuickstartReactNative.xcworkspace`) with Xcode.
 
-Select your device (SDK requires real device, the tracking won't work using simulator) and hit Run.
+Select your device and hit Run.
+
+The SDK works both on real devices and simulators.
 
 ### Grant permissions
 
