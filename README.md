@@ -22,8 +22,7 @@ You need to [set up the development environment for React Native](https://reactn
 ### Setup the project
 
 - run `yarn`
-- run `pod install --project-directory=ios`
-  - install [CocoaPods](https://cocoapods.org) if you don't have it
+- run `npx pod install`
 
 ### Set your publishable key
 
