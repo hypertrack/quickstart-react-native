@@ -15,36 +15,21 @@ For information about how to get started with React Native SDK, please check thi
 
 [Sign up](https://dashboard.hypertrack.com/signup) for HyperTrack and get your publishable key from the [Setup page](https://dashboard.hypertrack.com/setup).
 
-### Set up the environment
+### Setup the environment
 
 You need to [set up the development environment for React Native](https://reactnative.dev/docs/environment-setup)
 
-### Clone Quickstart app
+### Setup the project
 
-### Install Dependencies
+- run `yarn`
+- run `pod install --project-directory=ios`
+  - install [CocoaPods](https://cocoapods.org) if you don't have it
 
-#### General Dependencies
-
-Run
-
-- `yarn`
-
-#### iOS dependencies
-
-Quickstart app uses [CocoaPods](https://cocoapods.org/) dependency manager to install the latest version of the iOS SDK. Using the latest version of CocoaPods is advised.
-
-If you don't have CocoaPods, [install it first](https://guides.cocoapods.org/using/getting-started.html#installation).
-
-```sh
-cd ios
-pod install
-```
-
-### Set up the publishable key
+### Set your publishable key
 
 Follow the [instructions on setting up publishable key](https://hypertrack.com/docs/install-sdk-react-native#set-the-publishable-key) in our docs
 
-### Set up silent push notifications
+### Setup silent push notifications
 
 Follow the [instructions on setting up silent push notifications](https://hypertrack.com/docs/install-sdk-react-native/#set-up-silent-push-notifications) in our docs.
 
@@ -52,17 +37,8 @@ HyperTrack SDK needs Firebase Cloud Messaging and APNS to manage on-device track
 
 ### Run the app
 
-#### Android
-
-Run `npx react-native run-android`
-
-#### iOS
-
-Open the app's workspace file (`/ios/QuickstartReactNative.xcworkspace`) with Xcode.
-
-Select your device and hit Run.
-
-The SDK works both on real devices and simulators.
+- Android: run `npx react-native run-android`
+- iOS: run `npx react-native run-ios`
 
 ### Grant permissions
 
