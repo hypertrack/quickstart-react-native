@@ -4,9 +4,12 @@ alias ap := add-plugin
 alias c := compile
 alias cn := clear-nm
 alias epn := extract-plugin-nm
+alias ogp := open-github-prs
 alias oi := open-ios
 alias ra := run-android
 alias sm := start-metro
+
+REPOSITORY_NAME := "quickstart-react-native"
 
 # Source: https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string
 # \ are escaped
@@ -72,6 +75,9 @@ extract-plugin-nm:
 hooks:
     chmod +x .githooks/pre-push
     git config core.hooksPath .githooks
+
+open-github-prs:
+    open "https://github.com/hypertrack/{{REPOSITORY_NAME}}/pulls"
 
 open-ios:
     open ios/QuickstartReactNative.xcworkspace
