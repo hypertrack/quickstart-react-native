@@ -17,6 +17,7 @@ import HyperTrack, {
   Location,
   LocationError,
   LocationWithDeviation,
+  OrderStatus,
   Result,
 } from 'hypertrack-sdk-react-native';
 
@@ -138,7 +139,16 @@ const App = () => {
         value: Math.random(),
       };
 
-      const result = await HyperTrack.addGeotag(geotagPayload);
+      const orderHandle = 'test_order';
+      const orderStatus: OrderStatus = {
+        type: 'orderStatusCustom',
+        value: 'test_status',
+      };
+      const result = await HyperTrack.addGeotag(
+        orderHandle,
+        orderStatus,
+        geotagPayload,
+      );
       console.log('Add geotag: ', result);
       Alert.alert('Add geotag', getLocationResponseText(result));
     } catch (error) {
@@ -159,10 +169,20 @@ const App = () => {
         value: Math.random(),
       };
 
-      const result = await HyperTrack.addGeotag(geotagPayload, {
-        latitude: 37.775,
-        longitude: -122.418,
-      });
+      const orderHandle = 'test_order';
+      const orderStatus: OrderStatus = {
+        type: 'orderStatusCustom',
+        value: 'test_status',
+      };
+      const result = await HyperTrack.addGeotag(
+        orderHandle,
+        orderStatus,
+        geotagPayload,
+        {
+          latitude: 37.775,
+          longitude: -122.418,
+        },
+      );
       console.log('Add geotag with expected location:', result);
       Alert.alert(
         'Add geotag with expected location',
