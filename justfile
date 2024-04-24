@@ -41,6 +41,11 @@ add-plugin version: hooks
     fi
     yarn add hypertrack-sdk-react-native@{{version}}
 
+    cd ios
+    rm Podfile.lock
+    pod install
+    cd ..
+
 add-plugin-local: hooks
     #!/usr/bin/env sh
     set -euo pipefail
@@ -59,6 +64,11 @@ add-plugin-local: hooks
     yarn add hypertrack-sdk-react-native@file:{{SDK_PLUGIN_LOCAL_PATH}}
     yarn add hypertrack-sdk-react-native-plugin-android-location-services-google@file:{{LOCATION_SERVICES_GOOGLE_PLUGIN_LOCAL_PATH}}
     yarn add hypertrack-sdk-react-native-plugin-android-push-service-firebase@file:{{PUSH_SERVICE_FIREBASE_PLUGIN_LOCAL_PATH}}
+
+    cd ios
+    rm Podfile.lock
+    pod install
+    cd ..
 
 clear-nm: hooks
     rm -rf node_modules
