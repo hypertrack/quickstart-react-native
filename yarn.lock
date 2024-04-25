@@ -3637,20 +3637,20 @@ human-signals@^2.1.0:
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-2.1.0.tgz#dc91fcba42e4d06e4abaed33b3e7a3c02f514ea0"
   integrity sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==
 
-hypertrack-sdk-react-native-plugin-android-location-services-google@13.3.0:
-  version "13.3.0"
-  resolved "https://registry.yarnpkg.com/hypertrack-sdk-react-native-plugin-android-location-services-google/-/hypertrack-sdk-react-native-plugin-android-location-services-google-13.3.0.tgz#bafdfb34b718f6850430f05581478efedad1aa1e"
-  integrity sha512-Ehcr8/THgcmTLvXaFL+t3hGn++zm9WWBQLYsY5PF07DlDh2O8ISxgxCEKk0c+6Qq2HIwU4ZGCeZASovrBFSu8A==
+hypertrack-sdk-react-native-plugin-android-location-services-google@13.3.1:
+  version "13.3.1"
+  resolved "https://registry.yarnpkg.com/hypertrack-sdk-react-native-plugin-android-location-services-google/-/hypertrack-sdk-react-native-plugin-android-location-services-google-13.3.1.tgz#e90af07fb9189ac5b75116f012f7baf91d1b06f0"
+  integrity sha512-hHmjb8qYM4G+DIp3u/m3TUM3PDSvGPUGsmkzZGE1jz94sP39y5BQG8f6QUT+MGKHZCMyxxLoKO09bHzuEcFoPw==
 
-hypertrack-sdk-react-native-plugin-android-push-service-firebase@13.3.0:
-  version "13.3.0"
-  resolved "https://registry.yarnpkg.com/hypertrack-sdk-react-native-plugin-android-push-service-firebase/-/hypertrack-sdk-react-native-plugin-android-push-service-firebase-13.3.0.tgz#4d9fd0bd8cf252a430d69c0715ef0f3b1f8b88fa"
-  integrity sha512-/8lG7kDBHhu/y8OrW/AoXxfFSTgs4eYescWw1A1vf1japwLPDe0g+a6yhdrTc30yQUaYOrd9P/kY8cm5wVHjJQ==
+hypertrack-sdk-react-native-plugin-android-push-service-firebase@13.3.1:
+  version "13.3.1"
+  resolved "https://registry.yarnpkg.com/hypertrack-sdk-react-native-plugin-android-push-service-firebase/-/hypertrack-sdk-react-native-plugin-android-push-service-firebase-13.3.1.tgz#2fcedccd1b0e73432f6896c0cf6372ac57d45899"
+  integrity sha512-AR8VOORORFO6gyS21Po9Cu4DQ+HTo2eZyBiF1zXUiFaxa7hJn5s/Cri1mYUASBYS5fdsIseyGDHKUWZTOt0XEA==
 
-hypertrack-sdk-react-native@13.3.0:
-  version "13.3.0"
-  resolved "https://registry.yarnpkg.com/hypertrack-sdk-react-native/-/hypertrack-sdk-react-native-13.3.0.tgz#965a9b1234f95d5e4935d8db6fd351fa2ff6e575"
-  integrity sha512-HWUtz8YCTT+RX6MxNgAdON1DcJlATxxtt7JUT7y5qUORB0PISItu9R5TomisPv+m+2wJ2/y6ASQoNSQK+s1HFA==
+hypertrack-sdk-react-native@13.3.1:
+  version "13.3.1"
+  resolved "https://registry.yarnpkg.com/hypertrack-sdk-react-native/-/hypertrack-sdk-react-native-13.3.1.tgz#0c6b44c1acb25c3fa6cdf5af75424abcba17b4e8"
+  integrity sha512-WZscYQaOZtqC1CYHYHRwTQD/1tV+Kw+6tmR+BFa+5Z3uQcjceGM6OZ9ub0tB2ZhEDRbyGS8PT871EVusRwDKIg==
 
 ieee754@^1.1.13:
   version "1.2.1"
