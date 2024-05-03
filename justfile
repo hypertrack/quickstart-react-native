@@ -6,10 +6,13 @@ alias cn := clear-nm
 alias epn := extract-plugin-nm
 alias ogp := open-github-prs
 alias oi := open-ios
+alias pi := pod-install
 alias ra := run-android
 alias sm := start-metro
+alias us := update-sdk
 
 REPOSITORY_NAME := "quickstart-react-native"
+SDK_NAME := "HyperTrack SDK React Native"
 
 # Source: https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string
 # \ are escaped
@@ -41,6 +44,8 @@ add-plugin version: hooks
     fi
     yarn add hypertrack-sdk-react-native@{{version}}
 
+    just pod-install
+
 add-plugin-local: hooks
     #!/usr/bin/env sh
     set -euo pipefail
@@ -59,6 +64,8 @@ add-plugin-local: hooks
     yarn add hypertrack-sdk-react-native@file:{{SDK_PLUGIN_LOCAL_PATH}}
     yarn add hypertrack-sdk-react-native-plugin-android-location-services-google@file:{{LOCATION_SERVICES_GOOGLE_PLUGIN_LOCAL_PATH}}
     yarn add hypertrack-sdk-react-native-plugin-android-push-service-firebase@file:{{PUSH_SERVICE_FIREBASE_PLUGIN_LOCAL_PATH}}
+
+    just pod-install
 
 clear-nm: hooks
     rm -rf node_modules
@@ -82,11 +89,25 @@ open-github-prs:
 open-ios:
     open ios/QuickstartReactNative.xcworkspace
 
+pod-install:
+    #!/usr/bin/env sh
+    cd ios
+    rm -f Podfile.lock
+    pwd
+    pod install --repo-update
+    cd ..
+
 run-android: hooks compile
     npx react-native run-android
 
 start-metro: hooks compile
     npx react-native start
+
+update-sdk version: hooks
+    git checkout -b update-sdk-{{version}}
+    just add-plugin {{version}}
+    git commit -am "Update {{SDK_NAME}} to {{version}}"
+    just open-github-prs
 
 version:
     @cat package.json | grep hypertrack-sdk-react-native | head -n 1 | grep -o -E '{{SEMVER_REGEX}}'
