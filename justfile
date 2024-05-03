@@ -9,8 +9,10 @@ alias oi := open-ios
 alias pi := pod-install
 alias ra := run-android
 alias sm := start-metro
+alias us := update-sdk
 
 REPOSITORY_NAME := "quickstart-react-native"
+SDK_NAME := "HyperTrack SDK React Native"
 
 # Source: https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string
 # \ are escaped
@@ -100,6 +102,12 @@ run-android: hooks compile
 
 start-metro: hooks compile
     npx react-native start
+
+update-sdk version: hooks
+    git checkout -b update-sdk-{{version}}
+    just add-plugin {{version}}
+    git commit -am "Update {{SDK_NAME}} to {{version}}"
+    just open-github-prs
 
 version:
     @cat package.json | grep hypertrack-sdk-react-native | head -n 1 | grep -o -E '{{SEMVER_REGEX}}'
