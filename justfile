@@ -10,6 +10,8 @@ alias pi := pod-install
 alias ra := run-android
 alias sm := start-metro
 alias us := update-sdk
+alias v := version
+alias va := version-android
 
 REPOSITORY_NAME := "quickstart-react-native"
 SDK_NAME := "HyperTrack SDK React Native"
@@ -111,3 +113,10 @@ update-sdk version: hooks
 
 version:
     @cat package.json | grep hypertrack-sdk-react-native | head -n 1 | grep -o -E '{{SEMVER_REGEX}}'
+
+version-android:
+    #!/usr/bin/env sh
+    set -euo pipefail
+    cd android
+    ./gradlew app:dependencies | grep "com.hypertrack:sdk-android" | head -n 1 | grep -o -E '{{SEMVER_REGEX}}'
+    cd ..
