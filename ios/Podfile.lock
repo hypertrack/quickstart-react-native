@@ -73,9 +73,9 @@ PODS:
   - hermes-engine (0.72.4):
     - hermes-engine/Pre-built (= 0.72.4)
   - hermes-engine/Pre-built (0.72.4)
-  - HyperTrack (5.5.4)
-  - hypertrack-sdk-react-native (13.3.4):
-    - HyperTrack (= 5.5.4)
+  - HyperTrack (5.6.0)
+  - hypertrack-sdk-react-native (13.4.0):
+    - HyperTrack (= 5.6.0)
     - React-Core
   - libevent (2.1.12)
   - OpenSSL-Universal (1.1.1100)
@@ -678,8 +678,8 @@ SPEC CHECKSUMS:
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 04b94705f318337d7ead9e6d17c019bd9b1f6b1b
   hermes-engine: 81191603c4eaa01f5e4ae5737a9efcf64756c7b2
-  HyperTrack: cb0dea255b6d8a98e0b6966027447f3f0a6a11e9
-  hypertrack-sdk-react-native: 0635f5d194e607ac85a27a5077a7a8a637b1374c
+  HyperTrack: a061c5fdc30fe463b3065a6da60a46695582ac40
+  hypertrack-sdk-react-native: 6d5776eb30a72d3ada23c0145bc2316494739095
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
   RCT-Folly: 424b8c9a7a0b9ab2886ffe9c3b041ef628fd4fb1
