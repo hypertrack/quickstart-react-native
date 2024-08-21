@@ -9,6 +9,7 @@ alias oi := open-ios
 alias pi := pod-install
 alias ra := run-android
 alias sm := start-metro
+alias td := test-device
 alias us := update-sdk
 alias v := version
 alias va := version-android
@@ -104,6 +105,55 @@ run-android: hooks compile
 
 start-metro: hooks compile
     npx react-native start
+
+test-device token="no_data":
+    #!/usr/bin/env sh
+    HASH=$(uuidgen)
+    DATETIME=$(date -u +"%Y-%m-%dT%H:%M:%S.%3NZ")
+    # echo $DATETIME
+
+    # get the latest device id for the worker_handle
+
+# provide the key as recipe param
+# store key securely
+#     curl --location 'https://v3.api.hypertrack.com/drivers/test_driver_quickstart_react_native_android' \
+# --header 'Authorization: Basic {{token}}'
+
+    # cat input.txt | jq -r '.markers[] | select(.type == "device_linked") | "\(.timestamp),\(.device_id)"' > output.txt
+    echo "$DATETIME,6698EA79-4F81-48B1-B3F1-01872E7AC86F" > output.txt
+
+    DEVICE_ID=""
+    output=$(grep -Eo "^([^,]+)," output.txt)
+
+    while read -r line; do
+        if [[ "$line" > "$DATETIME" || "$line" == "$DATETIME"* ]]; then
+            LINE=$(grep "$line" output.txt)
+            DEVICE_ID=$(echo "$LINE" | cut -d, -f2)
+            # echo "Device ID: $DEVICE_ID"
+            break
+        fi
+    done <<< "$output" 
+
+    if [ -z "$DEVICE_ID" ]; then
+        echo "Device not found"
+        exit 1
+    fi
+    echo "Device ID: $DEVICE_ID"
+
+    # todo: update run hash in sources
+    # todo: update tests code in sources
+    just ra
+    sleep 30s
+
+    # todo: get geotags
+    # todo: store key securely
+#     curl --location 'https://v3.api.hypertrack.com/workers/test_driver_quickstart_react_native_android/history' \
+# --header 'Authorization: Basic {{token}}'
+
+    cat result.json | jq ".markers[].data | select(.metadata != null) | [.recorded_at, (.metadata | tojson)] | @csv" > geotags.txt
+
+
+
 
 update-sdk version: hooks
     git checkout -b update-sdk-{{version}}

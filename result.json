@@ -1,0 +1,749 @@
+{
+    "completed_at": "2024-09-25T15:32:21.336Z",
+    "distance": 0,
+    "duration": 297,
+    "locations": {},
+    "markers": [
+        {
+            "device_id": "6698EA79-4F81-48B1-B3F1-01872E7AC86F",
+            "timestamp": "2024-09-24T15:32:21.336Z",
+            "type": "device_linked"
+        },
+        {
+            "data": {
+                "distance": 0,
+                "duration": 85782,
+                "end": {
+                    "recorded_at": "2024-09-25T15:22:03.477Z"
+                },
+                "reason": "stopped_programmatically",
+                "start": {
+                    "recorded_at": "2024-09-24T15:32:21.336Z"
+                },
+                "steps": 0,
+                "value": "inactive"
+            },
+            "marker_id": "f8e82e4e-d63e-4535-bc6a-5fe7066b66c7",
+            "type": "device_status"
+        },
+        {
+            "data": {
+                "arrival": {
+                    "location": {
+                        "geometry": {
+                            "coordinates": [
+                                "-122.084",
+                                "37.421998",
+                                "0"
+                            ],
+                            "type": "Point"
+                        },
+                        "recorded_at": "2024-09-25T15:22:07.554Z"
+                    }
+                },
+                "duration": 376,
+                "exit": {
+                    "location": {
+                        "geometry": {
+                            "coordinates": [
+                                "-122.08399999999952",
+                                "37.421998000000485",
+                                "0"
+                            ],
+                            "type": "Point"
+                        },
+                        "recorded_at": "2024-09-25T15:28:23.167Z"
+                    }
+                },
+                "geofence": {
+                    "geofence_id": "9fbdffd5-bb38-4ee2-a068-d365165e65a2",
+                    "geometry": {
+                        "coordinates": [
+                            "-122.08392206579445",
+                            "37.42209670903373"
+                        ],
+                        "type": "Point"
+                    },
+                    "metadata": {
+                        "address": "Mountain View, Amphitheatre Parkway, 1600",
+                        "integration": {
+                            "id": "8335169353",
+                            "name": "TROUBLE COFFEE"
+                        },
+                        "name": "TROUBLE COFFEE"
+                    },
+                    "radius": "100"
+                },
+                "route_to": {
+                    "distance": "0",
+                    "duration": "4"
+                }
+            },
+            "marker_id": "1dda91ed-2b05-4cd2-bc1c-797ac2305140",
+            "type": "geofence"
+        },
+        {
+            "data": {
+                "activity": "stop",
+                "address": "Google Building 40, Amphitheatre Parkway, Mountain View, Santa Clara County, California, 94043, United States",
+                "duration": 267,
+                "end": {
+                    "location": {
+                        "geometry": {
+                            "coordinates": [
+                                -122.084,
+                                37.421998
+                            ],
+                            "type": "Point"
+                        },
+                        "recorded_at": "2024-09-25T15:26:34.217Z"
+                    },
+                    "recorded_at": "2024-09-25T15:26:34.217Z"
+                },
+                "start": {
+                    "location": {
+                        "geometry": {
+                            "coordinates": [
+                                -122.084,
+                                37.421998
+                            ],
+                            "type": "Point"
+                        },
+                        "recorded_at": "2024-09-25T15:22:07.554Z"
+                    },
+                    "recorded_at": "2024-09-25T15:22:07.554Z"
+                },
+                "steps": "0",
+                "value": "active"
+            },
+            "marker_id": "932c495d-9970-4eaf-8b57-945b872923f6",
+            "type": "device_status"
+        },
+        {
+            "data": {
+                "duration": 4,
+                "end": {
+                    "location": {
+                        "geometry": {
+                            "coordinates": [
+                                -122.084,
+                                37.421998
+                            ],
+                            "type": "Point"
+                        },
+                        "recorded_at": "2024-09-25T15:26:37.934Z"
+                    },
+                    "recorded_at": "2024-09-25T15:26:37.934Z"
+                },
+                "reason": "stopped_programmatically",
+                "start": {
+                    "location": {
+                        "geometry": {
+                            "coordinates": [
+                                -122.084,
+                                37.421998
+                            ],
+                            "type": "Point"
+                        },
+                        "recorded_at": "2024-09-25T15:26:37.934Z"
+                    },
+                    "recorded_at": "2024-09-25T15:26:34.217Z"
+                },
+                "value": "inactive"
+            },
+            "marker_id": "0b4d307f-d099-43e3-8dac-20fc3cd7be56",
+            "type": "device_status"
+        },
+        {
+            "data": {
+                "activity": "stop",
+                "address": "Google Building 40, Amphitheatre Parkway, Mountain View, Santa Clara County, California, 94043, United States",
+                "duration": 1,
+                "end": {
+                    "location": {
+                        "geometry": {
+                            "coordinates": [
+                                -122.084,
+                                37.421998
+                            ],
+                            "type": "Point"
+                        },
+                        "recorded_at": "2024-09-25T15:26:39.220Z"
+                    },
+                    "recorded_at": "2024-09-25T15:26:39.220Z"
+                },
+                "start": {
+                    "location": {
+                        "geometry": {
+                            "coordinates": [
+                                -122.084,
+                                37.421998
+                            ],
+                            "type": "Point"
+                        },
+                        "recorded_at": "2024-09-25T15:26:37.934Z"
+                    },
+                    "recorded_at": "2024-09-25T15:26:37.934Z"
+                },
+                "steps": "0",
+                "value": "active"
+            },
+            "marker_id": "8d2e9bc0-cd4c-4ac7-89f3-bdc260aa968e",
+            "type": "device_status"
+        },
+        {
+            "data": {
+                "distance": 0,
+                "duration": 45,
+                "end": {
+                    "recorded_at": "2024-09-25T15:27:24.007Z"
+                },
+                "reason": "stopped_programmatically",
+                "start": {
+                    "recorded_at": "2024-09-25T15:26:39.220Z"
+                },
+                "steps": 0,
+                "value": "inactive"
+            },
+            "marker_id": "0144fbab-c615-4d37-ab42-8ddd4a714960",
+            "type": "device_status"
+        },
+        {
+            "data": {
+                "activity": "stop",
+                "address": "Google Building 40, Amphitheatre Parkway, Mountain View, Santa Clara County, California, 94043, United States",
+                "duration": 4,
+                "end": {
+                    "location": {
+                        "geometry": {
+                            "coordinates": [
+                                -122.084,
+                                37.421998
+                            ],
+                            "type": "Point"
+                        },
+                        "recorded_at": "2024-09-25T15:27:28.973Z"
+                    },
+                    "recorded_at": "2024-09-25T15:27:28.973Z"
+                },
+                "start": {
+                    "location": {
+                        "geometry": {
+                            "coordinates": [
+                                -122.084,
+                                37.421998
+                            ],
+                            "type": "Point"
+                        },
+                        "recorded_at": "2024-09-25T15:27:25.022Z"
+                    },
+                    "recorded_at": "2024-09-25T15:27:25.022Z"
+                },
+                "steps": "0",
+                "value": "active"
+            },
+            "marker_id": "966d7fcc-a96f-4707-a4f3-b33fafddbe74",
+            "type": "device_status"
+        },
+        {
+            "data": {
+                "distance": 0,
+                "duration": 35,
+                "end": {
+                    "recorded_at": "2024-09-25T15:28:04.123Z"
+                },
+                "reason": "stopped_programmatically",
+                "start": {
+                    "recorded_at": "2024-09-25T15:27:28.973Z"
+                },
+                "steps": 0,
+                "value": "inactive"
+            },
+            "marker_id": "797836b5-a6a8-416e-a59a-c1a3b35d6e50",
+            "type": "device_status"
+        },
+        {
+            "data": {
+                "activity": "stop",
+                "address": "Google Building 40, Amphitheatre Parkway, Mountain View, Santa Clara County, California, 94043, United States",
+                "duration": 4,
+                "end": {
+                    "location": {
+                        "geometry": {
+                            "coordinates": [
+                                -122.084,
+                                37.421998
+                            ],
+                            "type": "Point"
+                        },
+                        "recorded_at": "2024-09-25T15:28:09.131Z"
+                    },
+                    "recorded_at": "2024-09-25T15:28:09.131Z"
+                },
+                "start": {
+                    "location": {
+                        "geometry": {
+                            "coordinates": [
+                                -122.084,
+                                37.421998
+                            ],
+                            "type": "Point"
+                        },
+                        "recorded_at": "2024-09-25T15:28:04.954Z"
+                    },
+                    "recorded_at": "2024-09-25T15:28:04.954Z"
+                },
+                "steps": "0",
+                "value": "active"
+            },
+            "marker_id": "eda8a27e-7864-40a9-b0fb-d5d4751135b0",
+            "type": "device_status"
+        },
+        {
+            "data": {
+                "distance": 0,
+                "duration": 9,
+                "end": {
+                    "recorded_at": "2024-09-25T15:28:18.142Z"
+                },
+                "reason": "stopped_programmatically",
+                "start": {
+                    "recorded_at": "2024-09-25T15:28:09.131Z"
+                },
+                "steps": 0,
+                "value": "inactive"
+            },
+            "marker_id": "013fdb00-fce0-4a9b-b34b-2be33bcbc96d",
+            "type": "device_status"
+        },
+        {
+            "data": {
+                "activity": "stop",
+                "address": "Google Building 40, Amphitheatre Parkway, Mountain View, Santa Clara County, California, 94043, United States",
+                "duration": 1,
+                "end": {
+                    "location": {
+                        "geometry": {
+                            "coordinates": [
+                                -122.084,
+                                37.421998
+                            ],
+                            "type": "Point"
+                        },
+                        "recorded_at": "2024-09-25T15:28:23.167Z"
+                    },
+                    "recorded_at": "2024-09-25T15:28:23.167Z"
+                },
+                "start": {
+                    "location": {
+                        "geometry": {
+                            "coordinates": [
+                                -122.084,
+                                37.421998
+                            ],
+                            "type": "Point"
+                        },
+                        "recorded_at": "2024-09-25T15:28:22.034Z"
+                    },
+                    "recorded_at": "2024-09-25T15:28:22.034Z"
+                },
+                "steps": "0",
+                "value": "active"
+            },
+            "marker_id": "d5988308-bb34-489a-9ea1-ab95de435137",
+            "type": "device_status"
+        },
+        {
+            "data": {
+                "actual_address": "Google Building 40, Amphitheatre Parkway, Mountain View, Santa Clara County, California, 94043, United States",
+                "location": {
+                    "coordinates": [
+                        -122.084,
+                        37.421998
+                    ],
+                    "type": "Point"
+                },
+                "metadata": {},
+                "recorded_at": "2024-09-25T15:28:23.165Z",
+                "route_to": null
+            },
+            "marker_id": "ed996d60-ac3f-487b-9252-a20d67ffca50",
+            "type": "trip_marker"
+        },
+        {
+            "data": {
+                "distance": 0,
+                "duration": 8,
+                "end": {
+                    "recorded_at": "2024-09-25T15:28:31.041Z"
+                },
+                "reason": "stopped_programmatically",
+                "start": {
+                    "recorded_at": "2024-09-25T15:28:23.167Z"
+                },
+                "steps": 0,
+                "value": "inactive"
+            },
+            "marker_id": "3838b7a9-292f-4344-ba92-1e5b7aeac8f1",
+            "type": "device_status"
+        },
+        {
+            "data": {
+                "actual_address": "Google Building 40, Amphitheatre Parkway, Mountain View, Santa Clara County, California, 94043, United States",
+                "location": {
+                    "coordinates": [
+                        -122.084,
+                        37.421998,
+                        5.0
+                    ],
+                    "type": "Point"
+                },
+                "metadata": {},
+                "outage_reason": "stopped_programmatically",
+                "recorded_at": "2024-09-25T15:28:25.773Z",
+                "route_to": null
+            },
+            "marker_id": "7244373d-0d33-409c-8888-5b62aecad98e",
+            "type": "trip_marker"
+        },
+        {
+            "data": {
+                "activity": "stop",
+                "address": "Google Building 40, Amphitheatre Parkway, Mountain View, Santa Clara County, California, 94043, United States",
+                "duration": 1,
+                "end": {
+                    "location": {
+                        "geometry": {
+                            "coordinates": [
+                                -122.084,
+                                37.421998
+                            ],
+                            "type": "Point"
+                        },
+                        "recorded_at": "2024-09-25T15:28:36.065Z"
+                    },
+                    "recorded_at": "2024-09-25T15:28:36.065Z"
+                },
+                "start": {
+                    "location": {
+                        "geometry": {
+                            "coordinates": [
+                                -122.084,
+                                37.421998
+                            ],
+                            "type": "Point"
+                        },
+                        "recorded_at": "2024-09-25T15:28:34.864Z"
+                    },
+                    "recorded_at": "2024-09-25T15:28:34.864Z"
+                },
+                "steps": "0",
+                "value": "active"
+            },
+            "marker_id": "e09578c3-2c1a-412c-9c45-80d404a65c63",
+            "type": "device_status"
+        },
+        {
+            "data": {
+                "actual_address": "Google Building 40, Amphitheatre Parkway, Mountain View, Santa Clara County, California, 94043, United States",
+                "location": {
+                    "coordinates": [
+                        -122.084,
+                        37.421998
+                    ],
+                    "type": "Point"
+                },
+                "metadata": {
+                    "source": "wrapper_tests"
+                },
+                "recorded_at": "2024-09-25T15:28:36.063Z",
+                "route_to": null
+            },
+            "marker_id": "33918def-f0e3-4d7b-8501-7d74d8f95ecd",
+            "type": "trip_marker"
+        },
+        {
+            "data": {
+                "distance": 0,
+                "duration": 6,
+                "end": {
+                    "recorded_at": "2024-09-25T15:28:42.030Z"
+                },
+                "reason": "stopped_programmatically",
+                "start": {
+                    "recorded_at": "2024-09-25T15:28:36.065Z"
+                },
+                "steps": 0,
+                "value": "inactive"
+            },
+            "marker_id": "7c0095a7-7da6-4b43-bb39-38bce8ccf326",
+            "type": "device_status"
+        },
+        {
+            "data": {
+                "actual_address": "Google Building 40, Amphitheatre Parkway, Mountain View, Santa Clara County, California, 94043, United States",
+                "location": {
+                    "coordinates": [
+                        -122.084,
+                        37.421998,
+                        5.0
+                    ],
+                    "type": "Point"
+                },
+                "metadata": {
+                    "source": "wrapper_tests"
+                },
+                "outage_reason": "stopped_programmatically",
+                "recorded_at": "2024-09-25T15:28:40.534Z",
+                "route_to": null
+            },
+            "marker_id": "856d33e4-41f2-4f83-965f-444ddbac4fac",
+            "type": "trip_marker"
+        },
+        {
+            "data": {
+                "activity": "stop",
+                "address": "Google Building 40, Amphitheatre Parkway, Mountain View, Santa Clara County, California, 94043, United States",
+                "duration": 1,
+                "end": {
+                    "location": {
+                        "geometry": {
+                            "coordinates": [
+                                -122.084,
+                                37.421998
+                            ],
+                            "type": "Point"
+                        },
+                        "recorded_at": "2024-09-25T15:28:47.042Z"
+                    },
+                    "recorded_at": "2024-09-25T15:28:47.042Z"
+                },
+                "start": {
+                    "location": {
+                        "geometry": {
+                            "coordinates": [
+                                -122.084,
+                                37.421998
+                            ],
+                            "type": "Point"
+                        },
+                        "recorded_at": "2024-09-25T15:28:46.194Z"
+                    },
+                    "recorded_at": "2024-09-25T15:28:46.194Z"
+                },
+                "steps": "0",
+                "value": "active"
+            },
+            "marker_id": "cc6efb91-8009-42b5-9da0-0ff39c69b795",
+            "type": "device_status"
+        },
+        {
+            "data": {
+                "actual_address": "Google Building 40, Amphitheatre Parkway, Mountain View, Santa Clara County, California, 94043, United States",
+                "location": {
+                    "coordinates": [
+                        -122.084,
+                        37.421998
+                    ],
+                    "type": "Point"
+                },
+                "metadata": {
+                    "result": "success",
+                    "source": "wrapper_tests"
+                },
+                "recorded_at": "2024-09-25T15:28:47.040Z",
+                "route_to": null
+            },
+            "marker_id": "f1bf933a-50fd-4471-9216-12fa967ce799",
+            "type": "trip_marker"
+        },
+        {
+            "data": {
+                "distance": 0,
+                "duration": 192,
+                "end": {
+                    "recorded_at": "2024-09-25T15:31:59.128Z"
+                },
+                "reason": "stopped_programmatically",
+                "start": {
+                    "recorded_at": "2024-09-25T15:28:47.042Z"
+                },
+                "steps": 0,
+                "value": "inactive"
+            },
+            "marker_id": "cd1299b6-1b3f-490d-b037-67c0912bbbdf",
+            "type": "device_status"
+        },
+        {
+            "data": {
+                "actual_address": "Google Building 40, Amphitheatre Parkway, Mountain View, Santa Clara County, California, 94043, United States",
+                "location": {
+                    "coordinates": [
+                        -122.084,
+                        37.421998
+                    ],
+                    "type": "Point"
+                },
+                "metadata": {
+                    "result": "success",
+                    "source": "wrapper_tests"
+                },
+                "recorded_at": "2024-09-25T15:29:34.629Z",
+                "route_to": null
+            },
+            "marker_id": "5f492099-ecc3-40ee-bc97-8f0128530eaa",
+            "type": "trip_marker"
+        },
+        {
+            "data": {
+                "arrival": {
+                    "location": {
+                        "geometry": {
+                            "coordinates": [
+                                "-122.084",
+                                "37.421998",
+                                "0"
+                            ],
+                            "type": "Point"
+                        },
+                        "recorded_at": "2024-09-25T15:32:03.063Z"
+                    }
+                },
+                "duration": null,
+                "geofence": {
+                    "geofence_id": "9fbdffd5-bb38-4ee2-a068-d365165e65a2",
+                    "geometry": {
+                        "coordinates": [
+                            "-122.08392206579445",
+                            "37.42209670903373"
+                        ],
+                        "type": "Point"
+                    },
+                    "metadata": {
+                        "address": "Mountain View, Amphitheatre Parkway, 1600",
+                        "integration": {
+                            "id": "8335169353",
+                            "name": "TROUBLE COFFEE"
+                        },
+                        "name": "TROUBLE COFFEE"
+                    },
+                    "radius": "100"
+                },
+                "route_to": {
+                    "distance": "0",
+                    "duration": "4"
+                }
+            },
+            "marker_id": "7b42d2d1-750d-4866-aefa-aba9cf778dd7",
+            "type": "geofence"
+        },
+        {
+            "data": {
+                "activity": "stop",
+                "address": "Google Building 40, Amphitheatre Parkway, Mountain View, Santa Clara County, California, 94043, United States",
+                "duration": 18,
+                "end": {
+                    "location": {
+                        "geometry": {
+                            "coordinates": [
+                                -122.084,
+                                37.421998
+                            ],
+                            "type": "Point"
+                        },
+                        "recorded_at": "2024-09-25T15:32:21.336Z"
+                    },
+                    "recorded_at": "2024-09-25T15:32:21.336Z"
+                },
+                "start": {
+                    "location": {
+                        "geometry": {
+                            "coordinates": [
+                                -122.084,
+                                37.421998
+                            ],
+                            "type": "Point"
+                        },
+                        "recorded_at": "2024-09-25T15:32:03.063Z"
+                    },
+                    "recorded_at": "2024-09-25T15:32:03.063Z"
+                },
+                "steps": 0,
+                "value": "active"
+            },
+            "type": "device_status"
+        },
+        {
+            "data": {
+                "actual_address": "Google Building 40, Amphitheatre Parkway, Mountain View, Santa Clara County, California, 94043, United States",
+                "location": {
+                    "coordinates": [
+                        -122.084,
+                        37.421998
+                    ],
+                    "type": "Point"
+                },
+                "metadata": {
+                    "payload": "Quickstart ReactNative",
+                    "value": 0.6488299185393702
+                },
+                "recorded_at": "2024-09-25T15:32:09.261Z",
+                "route_to": null
+            },
+            "marker_id": "59c60dd6-622b-44d1-95c9-f3442263ba8f",
+            "type": "trip_marker"
+        },
+        {
+            "data": {
+                "actual_address": "Google Building 40, Amphitheatre Parkway, Mountain View, Santa Clara County, California, 94043, United States",
+                "location": {
+                    "coordinates": [
+                        -122.084,
+                        37.421998
+                    ],
+                    "type": "Point"
+                },
+                "metadata": {
+                    "payload": "Quickstart ReactNative",
+                    "value": 0.467295836007034
+                },
+                "recorded_at": "2024-09-25T15:32:10.543Z",
+                "route_to": null
+            },
+            "marker_id": "2429c2f0-3c66-4e1f-965a-3fa7ea48b792",
+            "type": "trip_marker"
+        },
+        {
+            "data": {
+                "actual_address": "Google Building 40, Amphitheatre Parkway, Mountain View, Santa Clara County, California, 94043, United States",
+                "deviation": 49040,
+                "expected_address": "11th & Market (on-street), 11th Street, Civic Center, San Francisco, California, 94103, United States",
+                "expected_location": {
+                    "coordinates": [
+                        -122.418,
+                        37.775
+                    ],
+                    "type": "Point"
+                },
+                "location": {
+                    "coordinates": [
+                        -122.084,
+                        37.421998
+                    ],
+                    "type": "Point"
+                },
+                "metadata": {
+                    "payload": "Quickstart ReactNative",
+                    "value": 0.1553683705385931
+                },
+                "recorded_at": "2024-09-25T15:32:11.944Z",
+                "route_to": null
+            },
+            "marker_id": "c305bd56-981c-4503-912e-95b7475d8c07",
+            "type": "trip_marker"
+        }
+    ],
+    "started_at": "2024-09-24T15:32:21.336Z",
+    "steps": 0,
+    "worker_handle": "test_driver_quickstart_react_native_android"
+}
