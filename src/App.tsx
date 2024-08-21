@@ -17,6 +17,7 @@ import HyperTrack, {
   Location,
   LocationError,
   LocationWithDeviation,
+  Order,
   OrderStatus,
   Result,
 } from 'hypertrack-sdk-react-native';
@@ -40,6 +41,7 @@ const App = () => {
   const [isAvailableState, setIsAvailableState] = useState(false);
   const [isTrackingState, setIsTrackingState] = useState(false);
   const [locationState, setLocationState] = useState('');
+  const [ordersState, setOrdersState] = useState(new Map<string, Order>());
 
   const errorsListener = useRef<EmitterSubscription | null | undefined>(null);
   const isAvailableListener = useRef<EmitterSubscription | null | undefined>(
@@ -49,6 +51,7 @@ const App = () => {
     null,
   );
   const locationListener = useRef<EmitterSubscription | null | undefined>(null);
+  const ordersListener = useRef<EmitterSubscription | null | undefined>(null);
 
   useEffect(() => {
     const initSDK = async () => {
@@ -119,6 +122,13 @@ const App = () => {
             setLocationState(getLocationResponseText(locationResult));
           },
         );
+
+        ordersListener.current = HyperTrack.subscribeToOrders(
+          (orders: Map<string, Order>) => {
+            console.log('Listener orders: ', orders);
+            setOrdersState(orders);
+          },
+        );
       } catch (error) {
         console.log(error, JSON.stringify(error));
       }
@@ -130,6 +140,7 @@ const App = () => {
       isTrackingListener.current?.remove();
       isAvailableListener.current?.remove();
       locationListener.current?.remove();
+      ordersListener.current?.remove();
     };
   }, []);
 
@@ -272,6 +283,18 @@ const App = () => {
           {deviceIdState}
         </Text>
 
+        <Text style={styles.titleText}>Orders:</Text>
+        {Array.from(ordersState.values()).map(order => {
+          return (
+            <View key={order.orderHandle}>
+              <Text selectable style={styles.text}>
+                {order.orderHandle}
+              </Text>
+              <Text>{getIsInsideGeofenceText(order.isInsideGeofence)}</Text>
+            </View>
+          );
+        })}
+
         <Text style={styles.titleText}>{'Location'}</Text>
         <Text style={styles.text}>{locationState}</Text>
 
@@ -407,6 +430,24 @@ function getErrorsText(errors: HyperTrackError[]) {
         }
       })
       .join('\n');
+  }
+}
+
+function getIsInsideGeofenceText(
+  isInsideResult: Result<boolean, LocationError>,
+) {
+  switch (isInsideResult.type) {
+    case 'success':
+      return isInsideResult.value ? 'inside' : 'outside';
+    case 'failure':
+      switch (isInsideResult.value.type) {
+        case 'notRunning':
+          return 'Not running';
+        case 'starting':
+          return 'Starting';
+        case 'errors':
+          return `Errors:\n${getErrorsText(isInsideResult.value.value)}`;
+      }
   }
 }
 
