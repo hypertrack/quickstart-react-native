@@ -96,7 +96,7 @@ pod-install:
     cd ios
     rm -f Podfile.lock
     pwd
-    pod install --repo-update
+    NO_FLIPPER=1 pod install --repo-update
     cd ..
 
 run-android: hooks compile
