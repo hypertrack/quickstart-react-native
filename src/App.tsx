@@ -251,6 +251,12 @@ const App = () => {
     Alert.alert('Name', name);
   };
 
+  const getOrders = async () => {
+    const orders = await HyperTrack.getOrders();
+    console.log('Orders:', orders);
+    Alert.alert('Orders', getOrdersText(orders));
+  };
+
   const locate = async () => {
     HyperTrack.locate((locationResult: Result<Location, HyperTrackError[]>) => {
       try {
@@ -351,6 +357,10 @@ const App = () => {
           <Button title="Get Metadata" onPress={getMetadata} />
           <Button title="Get Name" onPress={getName} />
         </View>
+
+        <View style={styles.buttonWrapper}>
+          <Button title="Get Orders" onPress={getOrders} />
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -438,7 +448,7 @@ function getIsInsideGeofenceText(
 ) {
   switch (isInsideResult.type) {
     case 'success':
-      return isInsideResult.value ? 'inside' : 'outside';
+      return isInsideResult.value.toString();
     case 'failure':
       switch (isInsideResult.value.type) {
         case 'notRunning':
@@ -449,6 +459,16 @@ function getIsInsideGeofenceText(
           return `Errors:\n${getErrorsText(isInsideResult.value.value)}`;
       }
   }
+}
+
+function getOrdersText(orders: Map<string, Order>) {
+  return Array.from(orders.values())
+    .map(order => {
+      return `${order.orderHandle}:\n\t\t${getIsInsideGeofenceText(
+        order.isInsideGeofence,
+      )}`;
+    })
+    .join('\n');
 }
 
 const styles = StyleSheet.create({
