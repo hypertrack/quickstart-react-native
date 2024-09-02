@@ -14,9 +14,9 @@ PODS:
   - hermes-engine (0.72.4):
     - hermes-engine/Pre-built (= 0.72.4)
   - hermes-engine/Pre-built (0.72.4)
-  - HyperTrack (5.6.0)
-  - hypertrack-sdk-react-native (13.4.0):
-    - HyperTrack (= 5.6.0)
+  - HyperTrack (5.7.0)
+  - hypertrack-sdk-react-native (13.5.0):
+    - HyperTrack (= 5.7.0)
     - React-Core
   - libevent (2.1.12)
   - RCT-Folly (2021.07.22.00):
@@ -574,8 +574,8 @@ SPEC CHECKSUMS:
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 04b94705f318337d7ead9e6d17c019bd9b1f6b1b
   hermes-engine: 81191603c4eaa01f5e4ae5737a9efcf64756c7b2
-  HyperTrack: a061c5fdc30fe463b3065a6da60a46695582ac40
-  hypertrack-sdk-react-native: 6d5776eb30a72d3ada23c0145bc2316494739095
+  HyperTrack: 755bc0faa935302dfd5e11289b027bff7513bc26
+  hypertrack-sdk-react-native: 7bc5935c925e41e96ff16363715b76c80f215e60
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   RCT-Folly: 424b8c9a7a0b9ab2886ffe9c3b041ef628fd4fb1
   RCTRequired: c0569ecc035894e4a68baecb30fe6a7ea6e399f9
@@ -614,4 +614,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: a1dac362169304a953679efa3eb46496e50113a7
 
-COCOAPODS: 1.14.3
+COCOAPODS: 1.15.2
