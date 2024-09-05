@@ -11,6 +11,7 @@ import {
   EmitterSubscription,
 } from 'react-native';
 import {Platform} from 'react-native';
+import {check, PERMISSIONS, request, RESULTS} from 'react-native-permissions';
 
 import HyperTrack, {
   HyperTrackError,
@@ -270,6 +271,10 @@ const App = () => {
     console.log('Locate started');
   };
 
+  const requestMotionActivityPermission = async () => {
+    await request(PERMISSIONS.IOS.MOTION);
+  };
+
   const setIsAvailable = async (isAvailable: boolean) => {
     HyperTrack.setIsAvailable(isAvailable);
     console.log('setIsAvailable', isAvailable);
@@ -360,6 +365,13 @@ const App = () => {
 
         <View style={styles.buttonWrapper}>
           <Button title="Get Orders" onPress={getOrders} />
+        </View>
+
+        <View style={styles.buttonWrapper}>
+          <Button
+            title="Request Motion Activity Permission"
+            onPress={requestMotionActivityPermission}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
