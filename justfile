@@ -20,6 +20,7 @@ SDK_NAME := "HyperTrack SDK React Native"
 # \ are escaped
 SEMVER_REGEX := "(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?"
 
+ACTIVITY_SERVICE_GOOGLE_PLUGIN_LOCAL_PATH := "../sdk-react-native/plugin_android_activity_service_google"
 LOCATION_SERVICES_GOOGLE_PLUGIN_LOCAL_PATH := "../sdk-react-native/plugin_android_location_services_google"
 LOCATION_SERVICES_GOOGLE_19_0_1_PLUGIN_LOCAL_PATH := "../sdk-react-native/plugin_android_location_services_google_19_0_1"
 PUSH_SERVICE_FIREBASE_PLUGIN_LOCAL_PATH := "../sdk-react-native/plugin_android_push_service_firebase"
@@ -32,6 +33,9 @@ add-plugin version: hooks
     if grep -q '"hypertrack-sdk-react-native"' package.json; then
         yarn remove hypertrack-sdk-react-native
     fi
+    if grep -q '"hypertrack-sdk-react-native-plugin-android-activity-service-google"' package.json; then
+        yarn remove hypertrack-sdk-react-native-plugin-android-activity-service-google
+    fi
     if grep -q '"hypertrack-sdk-react-native-plugin-android-location-services-google"' package.json; then
         yarn remove hypertrack-sdk-react-native-plugin-android-location-services-google
     fi
@@ -41,6 +45,7 @@ add-plugin version: hooks
 
     MAJOR_VERSION=$(echo {{version}} | grep -o '^[0-9]\+')
     if [ $MAJOR_VERSION -ge 12 ]; then
+        yarn add hypertrack-sdk-react-native-plugin-android-activity-service-google@{{version}}
         yarn add hypertrack-sdk-react-native-plugin-android-location-services-google@{{version}}
         yarn add hypertrack-sdk-react-native-plugin-android-push-service-firebase@{{version}}
     fi
@@ -57,13 +62,18 @@ add-plugin-local: hooks
     if grep -q '"hypertrack-sdk-react-native"' package.json; then
         yarn remove hypertrack-sdk-react-native
     fi
+    if grep -q '"hypertrack-sdk-react-native-plugin-android-activity-service-google"' package.json; then
+        yarn remove hypertrack-sdk-react-native-plugin-android-activity-service-google
+    fi
     if grep -q '"hypertrack-sdk-react-native-plugin-android-location-services-google"' package.json; then
         yarn remove hypertrack-sdk-react-native-plugin-android-location-services-google
     fi
     if grep -q '"hypertrack-sdk-react-native-plugin-android-push-service-firebase"' package.json; then
         yarn remove hypertrack-sdk-react-native-plugin-android-push-service-firebase
     fi
+    
     yarn add hypertrack-sdk-react-native@file:{{SDK_PLUGIN_LOCAL_PATH}}
+    yarn add hypertrack-sdk-react-native-plugin-android-activity-service-google@file:{{ACTIVITY_SERVICE_GOOGLE_PLUGIN_LOCAL_PATH}}
     yarn add hypertrack-sdk-react-native-plugin-android-location-services-google@file:{{LOCATION_SERVICES_GOOGLE_PLUGIN_LOCAL_PATH}}
     yarn add hypertrack-sdk-react-native-plugin-android-push-service-firebase@file:{{PUSH_SERVICE_FIREBASE_PLUGIN_LOCAL_PATH}}
 

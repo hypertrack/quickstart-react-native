@@ -14,9 +14,9 @@ PODS:
   - hermes-engine (0.72.4):
     - hermes-engine/Pre-built (= 0.72.4)
   - hermes-engine/Pre-built (0.72.4)
-  - HyperTrack (5.7.0)
-  - hypertrack-sdk-react-native (13.5.0):
-    - HyperTrack (= 5.7.0)
+  - HyperTrack (5.8.0)
+  - hypertrack-sdk-react-native (13.6.1):
+    - HyperTrack (= 5.8.0)
     - React-Core
   - libevent (2.1.12)
   - RCT-Folly (2021.07.22.00):
@@ -429,6 +429,8 @@ PODS:
     - React-jsi (= 0.72.4)
     - React-logger (= 0.72.4)
     - React-perflogger (= 0.72.4)
+  - RNPermissions (4.1.5):
+    - React-Core
   - SocketRocket (0.6.1)
   - Yoga (1.14.0)
 
@@ -474,6 +476,7 @@ DEPENDENCIES:
   - React-runtimescheduler (from `../node_modules/react-native/ReactCommon/react/renderer/runtimescheduler`)
   - React-utils (from `../node_modules/react-native/ReactCommon/react/utils`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - RNPermissions (from `../node_modules/react-native-permissions`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -563,6 +566,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/react/utils"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  RNPermissions:
+    :path: "../node_modules/react-native-permissions"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -574,8 +579,8 @@ SPEC CHECKSUMS:
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 04b94705f318337d7ead9e6d17c019bd9b1f6b1b
   hermes-engine: 81191603c4eaa01f5e4ae5737a9efcf64756c7b2
-  HyperTrack: 755bc0faa935302dfd5e11289b027bff7513bc26
-  hypertrack-sdk-react-native: 7bc5935c925e41e96ff16363715b76c80f215e60
+  HyperTrack: 900840194d24a21e393f306517e26519909b6d47
+  hypertrack-sdk-react-native: 411fc41348403665230ce9ff2616877507d5dea9
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   RCT-Folly: 424b8c9a7a0b9ab2886ffe9c3b041ef628fd4fb1
   RCTRequired: c0569ecc035894e4a68baecb30fe6a7ea6e399f9
@@ -609,9 +614,10 @@ SPEC CHECKSUMS:
   React-runtimescheduler: 4941cc1b3cf08b792fbf666342c9fc95f1969035
   React-utils: b79f2411931f9d3ea5781404dcbb2fa8a837e13a
   ReactCommon: 4b2bdcb50a3543e1c2b2849ad44533686610826d
+  RNPermissions: 14d1566e2e8696d188c01e176055fa77139cdebc
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 3efc43e0d48686ce2e8c60f99d4e6bd349aff981
 
-PODFILE CHECKSUM: a1dac362169304a953679efa3eb46496e50113a7
+PODFILE CHECKSUM: 5f5c18bf029b4994fb513a74e6612e24ae5fc8e3
 
 COCOAPODS: 1.15.2
