@@ -4081,16 +4081,16 @@ human-signals@^2.1.0:
   integrity sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==
 
 "hypertrack-sdk-react-native-plugin-android-activity-service-google@file:../sdk-react-native/plugin_android_activity_service_google":
-  version "13.6.3"
+  version "13.8.0"
 
 "hypertrack-sdk-react-native-plugin-android-location-services-google@file:../sdk-react-native/plugin_android_location_services_google":
-  version "13.6.3"
+  version "13.8.0"
 
 "hypertrack-sdk-react-native-plugin-android-push-service-firebase@file:../sdk-react-native/plugin_android_push_service_firebase":
-  version "13.6.3"
+  version "13.8.0"
 
 "hypertrack-sdk-react-native@file:../sdk-react-native/sdk":
-  version "13.6.3"
+  version "13.8.0"
 
 ieee754@^1.1.13:
   version "1.2.1"
@@ -5889,6 +5889,11 @@ react-is@^18.3.1:
   version "18.3.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.3.1.tgz#e83557dc12eae63a99e003a46388b1dcbb44db7e"
   integrity sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==
+
+react-native-doctor@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-doctor/-/react-native-doctor-0.0.1.tgz#cffe28dbba122c42067bd5ac40d66e49765e030e"
+  integrity sha512-n/uJiNE5uOZZ/8U1KRycT/6bxLgkphTKfDrRMGVAa87u10zfP4203cmcxJJprSBPRfZD+NzCMLwgCH+a3q26Gw==
 
 react-native-permissions@^4.1.5:
   version "4.1.5"
