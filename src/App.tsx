@@ -384,6 +384,12 @@ const App = () => {
             onPress={requestMotionActivityPermission}
           />
         </View>
+
+        <View style={styles.buttonWrapper}>
+          <Button title="Allow Mock Location" onPress={() => setAllowMockLocation(true)} />
+          <Button title="Disallow Mock Location" onPress={() => setAllowMockLocation(false)} />
+          <Button title="Get Allow Mock Location" onPress={getAllowMockLocation} />
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
