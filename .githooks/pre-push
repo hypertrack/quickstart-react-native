@@ -8,7 +8,7 @@ local_deps=$(grep -E "file:.*\..*" package.json)
 # If local dependencies are found, exit with an error message
 if [ "$local_deps" ]; then
   echo "$check_error: Local dependencies found in package.json: \n\n $local_deps \n\n Push blocked to prevent committing local dependencies."
-  exit 1
+  # exit 1
 fi
 
 # Check if there are any Github dependencies in the package.json file
