@@ -212,6 +212,12 @@ const App = () => {
     }
   };
 
+  const getAllowMockLocation = async () => {
+    const allowMockLocation = await HyperTrack.getAllowMockLocation();
+    console.log('AllowMockLocation:', allowMockLocation);
+    Alert.alert('AllowMockLocation', `${allowMockLocation}`);
+  }
+
   const getErrors = async () => {
     const errors = await HyperTrack.getErrors();
     let result = getErrorsText(errors);
@@ -274,6 +280,11 @@ const App = () => {
   const requestMotionActivityPermission = async () => {
     await request(PERMISSIONS.IOS.MOTION);
   };
+
+  const setAllowMockLocation = async (allowMockLocation: boolean) => {
+    HyperTrack.setAllowMockLocation(allowMockLocation);
+    console.log('setAllowMockLocation', allowMockLocation);
+  }
 
   const setIsAvailable = async (isAvailable: boolean) => {
     HyperTrack.setIsAvailable(isAvailable);
