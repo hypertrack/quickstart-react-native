@@ -10,10 +10,10 @@
     "test": "jest"
   },
   "dependencies": {
-    "hypertrack-sdk-react-native": "13.7.1",
-    "hypertrack-sdk-react-native-plugin-android-activity-service-google": "13.7.1",
-    "hypertrack-sdk-react-native-plugin-android-location-services-google": "13.7.1",
-    "hypertrack-sdk-react-native-plugin-android-push-service-firebase": "13.7.1",
+    "hypertrack-sdk-react-native": "file:../sdk-react-native/sdk",
+    "hypertrack-sdk-react-native-plugin-android-activity-service-google": "file:../sdk-react-native/plugin_android_activity_service_google",
+    "hypertrack-sdk-react-native-plugin-android-location-services-google": "file:../sdk-react-native/plugin_android_location_services_google",
+    "hypertrack-sdk-react-native-plugin-android-push-service-firebase": "file:../sdk-react-native/plugin_android_push_service_firebase",
     "react": "18.2.0",
     "react-native": "0.72.17",
     "react-native-permissions": "^4.1.5"
