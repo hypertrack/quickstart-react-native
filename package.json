@@ -15,7 +15,7 @@
     "hypertrack-sdk-react-native-plugin-android-location-services-google": "13.7.1",
     "hypertrack-sdk-react-native-plugin-android-push-service-firebase": "13.7.1",
     "react": "18.2.0",
-    "react-native": "0.72.4",
+    "react-native": "0.72.17",
     "react-native-permissions": "^4.1.5"
   },
   "devDependencies": {
