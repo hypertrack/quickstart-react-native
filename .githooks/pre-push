@@ -50,6 +50,6 @@ else
   # Check if the development team is set up
   if cat $xcode_project_config_path | grep -q -E 'DEVELOPMENT_TEAM\s*=\s*[A-Z0-9]{10}'; then
     echo "$check_error: iOS Development team is set up."
-    # exit 1
+    exit 1
   fi
 fi
