@@ -42,7 +42,7 @@ const App = () => {
   const [isAvailableState, setIsAvailableState] = useState(false);
   const [isTrackingState, setIsTrackingState] = useState(false);
   const [locationState, setLocationState] = useState('');
-  const [ordersState, setOrdersState] = useState(new Map<string, Order>());
+  const [ordersState, setOrdersState] = useState('N/A');
 
   const errorsListener = useRef<EmitterSubscription | null | undefined>(null);
   const isAvailableListener = useRef<EmitterSubscription | null | undefined>(
@@ -88,7 +88,7 @@ const App = () => {
          * (to remove the link between the device and the worker)
          **/
         HyperTrack.setWorkerHandle(
-          `test_driver_quickstart_react_native_${platformName}`,
+          `test_worker_quickstart_react_native_${platformName}`,
         );
         console.log('workerHandle is set');
 
@@ -125,9 +125,10 @@ const App = () => {
         );
 
         ordersListener.current = HyperTrack.subscribeToOrders(
-          (orders: Map<string, Order>) => {
+          async (orders: Map<string, Order>) => {
             console.log('Listener orders: ', orders);
-            setOrdersState(orders);
+            const text = await getOrdersResponseText(orders);
+            setOrdersState(text);
           },
         );
       } catch (error) {
@@ -216,7 +217,7 @@ const App = () => {
     const allowMockLocation = await HyperTrack.getAllowMockLocation();
     console.log('AllowMockLocation:', allowMockLocation);
     Alert.alert('AllowMockLocation', `${allowMockLocation}`);
-  }
+  };
 
   const getErrors = async () => {
     const errors = await HyperTrack.getErrors();
@@ -261,7 +262,8 @@ const App = () => {
   const getOrders = async () => {
     const orders = await HyperTrack.getOrders();
     console.log('Orders:', orders);
-    Alert.alert('Orders', getOrdersText(orders));
+    const text = await getOrdersResponseText(orders);
+    Alert.alert('Orders', text);
   };
 
   const locate = async () => {
@@ -284,7 +286,7 @@ const App = () => {
   const setAllowMockLocation = async (allowMockLocation: boolean) => {
     HyperTrack.setAllowMockLocation(allowMockLocation);
     console.log('setAllowMockLocation', allowMockLocation);
-  }
+  };
 
   const setIsAvailable = async (isAvailable: boolean) => {
     HyperTrack.setIsAvailable(isAvailable);
@@ -306,16 +308,7 @@ const App = () => {
         </Text>
 
         <Text style={styles.titleText}>Orders:</Text>
-        {Array.from(ordersState.values()).map(order => {
-          return (
-            <View key={order.orderHandle}>
-              <Text selectable style={styles.text}>
-                {order.orderHandle}
-              </Text>
-              <Text>{getIsInsideGeofenceText(order.isInsideGeofence)}</Text>
-            </View>
-          );
-        })}
+        <Text style={styles.text}>{ordersState}</Text>
 
         <Text style={styles.titleText}>{'Location'}</Text>
         <Text style={styles.text}>{locationState}</Text>
@@ -386,9 +379,18 @@ const App = () => {
         </View>
 
         <View style={styles.buttonWrapper}>
-          <Button title="Allow Mock Location" onPress={() => setAllowMockLocation(true)} />
-          <Button title="Disallow Mock Location" onPress={() => setAllowMockLocation(false)} />
-          <Button title="Get Allow Mock Location" onPress={getAllowMockLocation} />
+          <Button
+            title="Allow Mock Location"
+            onPress={() => setAllowMockLocation(true)}
+          />
+          <Button
+            title="Disallow Mock Location"
+            onPress={() => setAllowMockLocation(false)}
+          />
+          <Button
+            title="Get Allow Mock Location"
+            onPress={getAllowMockLocation}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -410,6 +412,17 @@ function getLocateResponseText(response: Result<Location, HyperTrackError[]>) {
   }
 }
 
+function getLocationErrorResponseText(locationError: LocationError) {
+  switch (locationError.type) {
+    case 'notRunning':
+      return 'Not running';
+    case 'starting':
+      return 'Starting';
+    case 'errors':
+      return `Errors:\n${getErrorsText(locationError.value)}`;
+  }
+}
+
 function getLocationResponseText(
   response: Result<Location, LocationError>,
 ): string {
@@ -421,16 +434,7 @@ function getLocationResponseText(
         4,
       )}`;
     case 'failure':
-      switch (response.value.type) {
-        case 'notRunning':
-          return 'Not running';
-        case 'starting':
-          return 'Starting';
-        case 'errors':
-          return `Errors:\n${getErrorsText(response.value.value)}`;
-      }
-    default:
-      return `Unknown response: $response`;
+      return getLocationErrorResponseText(response.value);
   }
 }
 
@@ -445,14 +449,31 @@ function getLocationWithDeviationResponseText(
         4,
       )}\nDeviation: ${response.value.deviation}`;
     case 'failure':
-      switch (response.value.type) {
-        case 'notRunning':
-          return 'Not running';
-        case 'starting':
-          return 'Starting';
-        case 'errors':
-          return `Errors:\n${getErrorsText(response.value.value)}`;
-      }
+      return getLocationErrorResponseText(response.value);
+  }
+}
+
+async function getOrdersResponseText(orders: Map<string, Order>) {
+  if (orders.size === 0) {
+    return 'No orders';
+  } else {
+    return await Promise.all(
+      Array.from(orders).map(async ([_, order]) => {
+        let isInsideGeofenceText: string;
+        const isInsideGeofence = await order.isInsideGeofence();
+        switch (isInsideGeofence.type) {
+          case 'success':
+            isInsideGeofenceText = isInsideGeofence.value.toString();
+            break;
+          case 'failure':
+            isInsideGeofenceText = getLocationErrorResponseText(
+              isInsideGeofence.value,
+            );
+            break;
+        }
+        return `Order: ${order.orderHandle}\nIsInsideGeofence: ${isInsideGeofenceText}`;
+      }),
+    ).then(texts => texts.join('\n'));
   }
 }
 
@@ -470,34 +491,6 @@ function getErrorsText(errors: HyperTrackError[]) {
       })
       .join('\n');
   }
-}
-
-function getIsInsideGeofenceText(
-  isInsideResult: Result<boolean, LocationError>,
-) {
-  switch (isInsideResult.type) {
-    case 'success':
-      return isInsideResult.value.toString();
-    case 'failure':
-      switch (isInsideResult.value.type) {
-        case 'notRunning':
-          return 'Not running';
-        case 'starting':
-          return 'Starting';
-        case 'errors':
-          return `Errors:\n${getErrorsText(isInsideResult.value.value)}`;
-      }
-  }
-}
-
-function getOrdersText(orders: Map<string, Order>) {
-  return Array.from(orders.values())
-    .map(order => {
-      return `${order.orderHandle}:\n\t\t${getIsInsideGeofenceText(
-        order.isInsideGeofence,
-      )}`;
-    })
-    .join('\n');
 }
 
 const styles = StyleSheet.create({

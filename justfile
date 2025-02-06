@@ -1,13 +1,15 @@
 alias a := add-plugin
 alias al := add-plugin-local
 alias ap := add-plugin
-alias c := compile
+alias c := clean
+alias cm := compile
 alias cn := clear-nm
 alias epn := extract-plugin-nm
 alias ogp := open-github-prs
 alias oi := open-ios
 alias pi := pod-install
 alias ra := run-android
+alias s := setup
 alias sm := start-metro
 alias us := update-sdk
 alias v := version
@@ -79,6 +81,9 @@ add-plugin-local: hooks
 
     just pod-install
 
+clean:
+    just clear-nm
+
 clear-nm: hooks
     rm -rf node_modules
     rm yarn.lock
@@ -111,6 +116,10 @@ pod-install:
 
 run-android: hooks compile
     npx react-native run-android
+
+setup: hooks
+    yarn
+    just pi
 
 start-metro: hooks compile
     npx react-native start
