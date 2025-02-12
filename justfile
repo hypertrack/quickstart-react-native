@@ -82,6 +82,12 @@ add-plugin-local: hooks
     just pod-install
 
 clean:
+    #!/usr/bin/env sh
+    set -euo pipefail
+
+    cd android
+    ./gradlew clean
+    cd ..
     just clear-nm
 
 clear-nm: hooks
