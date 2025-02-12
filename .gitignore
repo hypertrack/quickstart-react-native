@@ -1,6 +1,8 @@
 .vscode
 google-services.json
 /.vscode
+update_storage/
+rn_files.txt
 
 # OSX
 #

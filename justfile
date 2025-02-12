@@ -10,6 +10,7 @@ alias oi := open-ios
 alias pi := pod-install
 alias ra := run-android
 alias s := setup
+alias sf := store-files-for-update
 alias sm := start-metro
 alias us := update-sdk
 alias v := version
@@ -124,6 +125,19 @@ setup: hooks
 start-metro: hooks compile
     npx react-native start
 
+store-files-for-update: _get_rn_files
+    #!/usr/bin/env sh
+    set -euo pipefail
+
+    mkdir -p update_storage
+    cp android/app/src/main/AndroidManifest.xml update_storage/AndroidManifest.xml
+    cp ios/QuickstartReactNative/Info.plist update_storage/Info.plist
+    cp src/App.tsx update_storage/App.tsx
+    cp .eslintrc.js update_storage/.eslintrc.js
+    cp .prettierrc.js update_storage/prettierrc.js
+    cp .yarnrc.yml update_storage/yarnrc.yml
+    cp app.json update_storage/app.json
+
 update-sdk version: hooks
     git checkout -b update-sdk-{{version}}
     just add-plugin {{version}}
@@ -139,3 +153,31 @@ version-android:
     cd android
     ./gradlew app:dependencies | grep "com.hypertrack:sdk-android" | head -n 1 | grep -o -E '{{SEMVER_REGEX}}'
     cd ..
+
+_get_rn_files:
+    #!/usr/bin/env sh
+    set -euo pipefail
+
+    TARGET_DIR="$PWD"
+
+    # not related to RN 
+    EXCEPTIONS=(
+        ".git"
+        ".githooks"
+        ".idea"
+        "CONTRIBUTING.md"
+        "justfile"
+        "LICENSE"
+        "README.md"
+        "text.txt"
+        "rn_files.txt"
+    )
+
+    # Construct the exclusion filter safely
+    EXCLUDE_ARGS=()
+    for item in "${EXCEPTIONS[@]}"; do
+        EXCLUDE_ARGS+=(! -name "$item")
+    done
+
+    find "$TARGET_DIR" -mindepth 1 -maxdepth 1 "${EXCLUDE_ARGS[@]}" -print > rn_files.txt
+
