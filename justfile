@@ -2,6 +2,7 @@ alias a := add-plugin
 alias al := add-plugin-local
 alias ap := add-plugin
 alias c := clean
+alias ca := create-rn-app
 alias cm := compile
 alias cn := clear-nm
 alias epn := extract-plugin-nm
@@ -92,6 +93,29 @@ clear-nm: hooks
 compile: hooks
     npx tsc
 
+create-rn-app version="0.77.0": store-files-for-update
+    #!/usr/bin/env sh
+    set -euo pipefail
+
+    # check if react-native-cli and @react-native-community/cli are installed and delete if they are
+    if [ -x "$(npm list -g react-native-cli)" ]; then
+        echo "To avoid conflicts, uninstall react-native-cli globally with \n 'npm uninstall -g react-native-cli'"
+        exit 1
+    fi
+    if [ -x "$(npm list -g @react-native-community/cli)" ]; then
+        echo "To avoid conflicts, uninstall @react-native-community/cli globally with \n 'npm uninstall -g @react-native-community/cli'"
+        exit 1
+    fi
+
+    if [[ "{{version}}" > "0.71.0" ]]; then
+        npx @react-native-community/cli@latest init QuickstartReactNative --version {{version}} --pm yarn
+    else
+        npx @react-native-community/cli@latest init QuickstartReactNative --version {{version}} --pm yarn --template react-native-template-typescript
+    fi
+
+    cp -r QuickstartReactNative/* .
+    rm -rf QuickstartReactNative
+
 extract-plugin-nm:
     rm -rf {{SDK_PLUGIN_LOCAL_PATH}}/node_modules
     mkdir {{SDK_PLUGIN_LOCAL_PATH}}/node_modules
@@ -130,13 +154,19 @@ store-files-for-update: _get_rn_files
     set -euo pipefail
 
     mkdir -p update_storage
-    cp android/app/src/main/AndroidManifest.xml update_storage/AndroidManifest.xml
-    cp ios/QuickstartReactNative/Info.plist update_storage/Info.plist
-    cp src/App.tsx update_storage/App.tsx
-    cp .eslintrc.js update_storage/.eslintrc.js
-    cp .prettierrc.js update_storage/prettierrc.js
-    cp .yarnrc.yml update_storage/yarnrc.yml
-    cp app.json update_storage/app.json
+    cp android/app/src/main/AndroidManifest.xml update_storage/AndroidManifest.xml 2>/dev/null || true
+    cp ios/QuickstartReactNative/Info.plist update_storage/Info.plist 2>/dev/null || true
+    cp src/App.tsx update_storage/App.tsx 2>/dev/null || true
+    cp .eslintrc.js update_storage/.eslintrc.js 2>/dev/null || true
+    cp .prettierrc.js update_storage/prettierrc.js 2>/dev/null || true
+    cp .yarnrc.yml update_storage/yarnrc.yml 2>/dev/null || true
+    cp app.json update_storage/app.json 2>/dev/null || true
+    cp README.md update_storage/README.md 2>/dev/null || true
+
+    # remove all files listed in rn_files.txt
+    while IFS= read -r line; do
+        rm -rf "$line"
+    done < rn_files.txt
 
 update-sdk version: hooks
     git checkout -b update-sdk-{{version}}
@@ -162,8 +192,10 @@ _get_rn_files:
 
     # not related to RN 
     EXCEPTIONS=(
+        "update_storage"
         ".git"
         ".githooks"
+        ".gitignore"
         ".idea"
         "CONTRIBUTING.md"
         "justfile"
