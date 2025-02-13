@@ -10,6 +10,7 @@ alias ogp := open-github-prs
 alias oi := open-ios
 alias pi := pod-install
 alias ra := run-android
+alias rf := restore-files-for-update
 alias s := setup
 alias sf := store-files-for-update
 alias sm := start-metro
@@ -139,6 +140,19 @@ pod-install:
     NO_FLIPPER=1 pod install --repo-update
     cd ..
 
+restore-files-for-update:
+    #!/usr/bin/env sh
+    set -euo pipefail
+
+    cp -f update_storage/AndroidManifest.xml android/app/src/main/AndroidManifest.xml 2>/dev/null || true
+    cp -f update_storage/Info.plist ios/QuickstartReactNative/Info.plist 2>/dev/null || true
+    cp -f update_storage/App.tsx src/App.tsx 2>/dev/null || true
+    cp -f update_storage/.eslintrc.js .eslintrc.js 2>/dev/null || true
+    cp -f update_storage/prettierrc.js .prettierrc.js 2>/dev/null || true
+    cp -f update_storage/yarnrc.yml .yarnrc.yml 2>/dev/null || true
+    cp -f update_storage/app.json app.json 2>/dev/null || true
+    cp -f update_storage/README.md README.md 2>/dev/null || true
+
 run-android: hooks compile
     npx react-native run-android
 
@@ -153,6 +167,7 @@ store-files-for-update: _get_rn_files
     #!/usr/bin/env sh
     set -euo pipefail
 
+    rm -rf update_storage
     mkdir -p update_storage
     cp android/app/src/main/AndroidManifest.xml update_storage/AndroidManifest.xml 2>/dev/null || true
     cp ios/QuickstartReactNative/Info.plist update_storage/Info.plist 2>/dev/null || true
