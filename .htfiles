@@ -1,0 +1,9 @@
+android/app/src/main/AndroidManifest.xml
+ios/QuickstartReactNative/Info.plist
+src/App.tsx
+.eslintrc.js
+.prettierrc.js
+.yarnrc.yml
+app.json
+README.md
+.nvmrc

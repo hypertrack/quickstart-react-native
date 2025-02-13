@@ -1,0 +1,5 @@
+android/app/build.gradle
+android/build.gradle
+android/gradle.properties
+ios/Podfile
+package.json
