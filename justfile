@@ -122,8 +122,7 @@ restore-manual:
     set -euo pipefail
 
     while IFS= read -r line; do
-        filename=$(basename "$line")
-        cp -f update_storage/"$filename" "$line" 2>/dev/null && rm -f update_storage/"$filename" || echo "Failed to restore $line"
+        cp -f "update_storage/$line" "$line" 2>/dev/null && rm -f "update_storage/$line" || echo "Failed to restore $line"
     done < .htfiles_manual
 
 run-android: hooks compile
