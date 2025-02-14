@@ -1,6 +1,6 @@
 {
-  "name": "QuickstartReactNative",
-  "version": "0.0.1",
+  "name": "hypertrack-quickstart-reactnative",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
