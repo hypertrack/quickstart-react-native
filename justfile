@@ -11,6 +11,7 @@ alias pi := pod-install
 alias ra := run-android
 alias s := setup
 alias sm := start-metro
+alias urn := update-react-native
 alias us := update-sdk
 alias v := version
 alias va := version-android
@@ -114,6 +115,14 @@ pod-install:
     NO_FLIPPER=1 pod install --repo-update
     cd ..
 
+restore-manual:
+    #!/usr/bin/env sh
+    set -euo pipefail
+
+    while IFS= read -r line; do
+        cp -f "update_storage/$line" "$line" 2>/dev/null && rm -f "update_storage/$line" || echo "Failed to restore $line"
+    done < .htfiles_manual
+
 run-android: hooks compile
     npx react-native run-android
 
@@ -130,6 +139,27 @@ update-sdk version: hooks
     git commit -am "Update {{SDK_NAME}} to {{version}}"
     just open-github-prs
 
+update-react-native version:  
+    #!/usr/bin/env sh
+    set -euo pipefail
+
+    just _store-files-for-update
+    just _clear-files-before-update
+    just _create-rn-app "{{version}}"
+    just _restore-files-for-update
+
+    rm -rf __tests__
+    rm -f App.tsx
+    rm index.js
+
+    ./scripts/update_file.sh ios/QuickstartReactNative.xcodeproj/project.pbxproj "org.reactjs.native.example.\$(PRODUCT_NAME:.*)" "com.hypertrack.quickstart.reactnative.ios"
+
+    cp -f index.native.js index.js
+
+    echo "Now commit changes and manually merge these files with 'just restore-manual':\n"
+    cat .htfiles_manual
+    echo "\nIf you are getting BuildConfig not found error in Android, add 'import com.quickstartreactnative.BuildConfig' in MainApplication.kt'"
+
 version:
     @cat package.json | grep hypertrack-sdk-react-native | head -n 1 | grep -o -E '{{SEMVER_REGEX}}'
 
@@ -139,3 +169,100 @@ version-android:
     cd android
     ./gradlew app:dependencies | grep "com.hypertrack:sdk-android" | head -n 1 | grep -o -E '{{SEMVER_REGEX}}'
     cd ..
+
+_get_rn_files:
+    #!/usr/bin/env sh
+    set -euo pipefail
+
+    TARGET_DIR="$PWD"
+
+    # not related to RN 
+    EXCEPTIONS=(
+        "update_storage"
+        ".git"
+        ".githooks"
+        ".gitignore"
+        ".idea"
+        "CONTRIBUTING.md"
+        "justfile"
+        "LICENSE"
+        "text.txt"
+        "rn_files.txt"
+        ".rnignore"
+        ".htfiles"
+        ".htfiles_manual"
+        "scripts"
+    )
+
+    # Construct the exclusion filter safely
+    EXCLUDE_ARGS=()
+    for item in "${EXCEPTIONS[@]}"; do
+        EXCLUDE_ARGS+=(! -name "$item")
+    done
+
+    find "$TARGET_DIR" -mindepth 1 -maxdepth 1 "${EXCLUDE_ARGS[@]}" -print > rn_files.txt
+
+_store-files-for-update: 
+    #!/usr/bin/env sh
+    set -euo pipefail
+
+    rm -rf update_storage
+    mkdir -p update_storage
+    
+    while IFS= read -r line; do
+        foldername=$(dirname "update_storage/$line")
+        mkdir -p "$foldername"
+        cp -f "$line" "update_storage/$line"
+    done < .htfiles
+
+    while IFS= read -r line; do
+        foldername=$(dirname "update_storage/$line")
+        mkdir -p "$foldername"
+        cp -f "$line" "update_storage/$line" 2>/dev/null || true
+    done < .htfiles_manual
+
+_clear-files-before-update: _get_rn_files
+    #!/usr/bin/env sh
+    set -euo pipefail
+
+    # remove all files listed in rn_files.txt
+    while IFS= read -r line; do
+        rm -rf "$line"
+    done < rn_files.txt
+
+    rm -f rn_files.txt
+    rm -f App.tsx
+    rm -f index.js
+
+_create-rn-app version="0.77.0":
+    #!/usr/bin/env sh
+    set -euo pipefail
+
+    # check if react-native-cli and @react-native-community/cli are installed and delete if they are
+    if [ -x "$(npm list -g react-native-cli)" ]; then
+        echo "To avoid conflicts, uninstall react-native-cli globally with \n 'npm uninstall -g react-native-cli'"
+        exit 1
+    fi
+    if [ -x "$(npm list -g @react-native-community/cli)" ]; then
+        echo "To avoid conflicts, uninstall @react-native-community/cli globally with \n 'npm uninstall -g @react-native-community/cli'"
+        exit 1
+    fi
+
+    if [[ "{{version}}" > "0.71.0" ]]; then
+        npx @react-native-community/cli@latest init QuickstartReactNative --version {{version}} --pm yarn
+    else
+        npx @react-native-community/cli@latest init QuickstartReactNative --version {{version}} --pm yarn --template react-native-template-typescript
+    fi
+
+    cp -r QuickstartReactNative/* .
+    rm -rf QuickstartReactNative
+
+_restore-files-for-update:
+    #!/usr/bin/env sh
+    set -euo pipefail
+
+    while IFS= read -r line; do
+        foldername=$(dirname "$line")
+        mkdir -p "$foldername"
+        cp -f "update_storage/$line" "$line" 2>/dev/null && rm -f "update_storage/$line" || echo "Failed to restore $line"
+    done < .htfiles
