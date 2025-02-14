@@ -154,6 +154,8 @@ update-react-native version:
 
     ./scripts/update_file.sh ios/QuickstartReactNative.xcodeproj/project.pbxproj "org.reactjs.native.example.\$(PRODUCT_NAME:.*)" "com.hypertrack.quickstart.reactnative.ios"
 
+    cp -f index.native.js index.js
+
     echo "Now commit changes and manually merge these files with 'just restore-manual':\n"
     cat .htfiles_manual
     echo "\nIf you are getting BuildConfig not found error in Android, add 'import com.quickstartreactnative.BuildConfig' in MainApplication.kt'"
