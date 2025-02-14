@@ -92,8 +92,6 @@ clear-nm: hooks
 compile: hooks
     npx tsc
 
-
-
 extract-plugin-nm:
     rm -rf {{SDK_PLUGIN_LOCAL_PATH}}/node_modules
     mkdir {{SDK_PLUGIN_LOCAL_PATH}}/node_modules
@@ -154,6 +152,8 @@ update-react-native version:
     rm -f App.tsx
     rm index.js
 
+    ./scripts/update_file.sh ios/QuickstartReactNative.xcodeproj/project.pbxproj "org.reactjs.native.example.\$(PRODUCT_NAME:.*)" "com.hypertrack.quickstart.reactnative.ios"
+
     echo "Now commit changes and manually merge these files with 'just restore-manual':\n"
     cat .htfiles_manual
     echo "\nIf you are getting BuildConfig not found error in Android, add 'import com.quickstartreactnative.BuildConfig' in MainApplication.kt'"
@@ -184,12 +184,12 @@ _get_rn_files:
         "CONTRIBUTING.md"
         "justfile"
         "LICENSE"
-        "README.md"
         "text.txt"
         "rn_files.txt"
         ".rnignore"
         ".htfiles"
         ".htfiles_manual"
+        "scripts"
     )
 
     # Construct the exclusion filter safely
