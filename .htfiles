@@ -7,3 +7,6 @@ src/App.tsx
 app.json
 README.md
 .nvmrc
+android/app/google-services.json
+index.native.js
+src/index.web.js

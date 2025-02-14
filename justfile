@@ -154,8 +154,9 @@ update-react-native version:
     rm -f App.tsx
     rm index.js
 
-    echo "Now commit changes and manually merge these files with 'just restore-manual':"
+    echo "Now commit changes and manually merge these files with 'just restore-manual':\n"
     cat .htfiles_manual
+    echo "\nIf you are getting BuildConfig not found error in Android, add 'import com.quickstartreactnative.BuildConfig' in MainApplication.kt'"
 
 version:
     @cat package.json | grep hypertrack-sdk-react-native | head -n 1 | grep -o -E '{{SEMVER_REGEX}}'
