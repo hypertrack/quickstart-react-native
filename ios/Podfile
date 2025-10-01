@@ -9,10 +9,13 @@ def node_require(script)
       {paths: [process.argv[1]]},
     )", __dir__]).strip
 end
-  
+
 # Use it to require both react-native's and this package's scripts:
 node_require('react-native/scripts/react_native_pods.rb')
 node_require('react-native-permissions/scripts/setup.rb')
+
+platform :ios, min_ios_version_supported
+prepare_react_native_project!
 
 setup_permissions([
   # 'AppTrackingTransparency',
@@ -37,6 +40,8 @@ setup_permissions([
   # 'StoreKit',
 ])
 
+ENV['RCT_NEW_ARCH_ENABLED'] = '1'
+
 linkage = ENV['USE_FRAMEWORKS']
 if linkage != nil
   Pod::UI.puts "Configuring Pod with #{linkage}ally linked Frameworks".green
@@ -46,8 +51,14 @@ end
 target 'QuickstartReactNative' do
   config = use_native_modules!
 
+  # Flags change depending on the env values.
+  flags = get_default_flags()
+
   use_react_native!(
     :path => config[:reactNativePath],
+    # Hermes is now enabled by default. Disable by setting this flag to false.
+    :hermes_enabled => flags[:hermes_enabled],
+    :fabric_enabled => flags[:fabric_enabled],
     # An absolute path to your application root.
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
@@ -57,8 +68,7 @@ target 'QuickstartReactNative' do
     react_native_post_install(
       installer,
       config[:reactNativePath],
-      :mac_catalyst_enabled => false,
-      # :ccache_enabled => true
+      :mac_catalyst_enabled => false
     )
   end
 end

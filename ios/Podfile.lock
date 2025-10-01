@@ -8,9 +8,9 @@ PODS:
   - hermes-engine (0.77.1):
     - hermes-engine/Pre-built (= 0.77.1)
   - hermes-engine/Pre-built (0.77.1)
-  - HyperTrack (5.11.0)
-  - hypertrack-sdk-react-native (14.0.0):
-    - HyperTrack (= 5.11.0)
+  - HyperTrack (5.11.2)
+  - hypertrack-sdk-react-native (14.0.3):
+    - HyperTrack (= 5.11.2)
     - RCT-Folly
     - RCTRequired
     - RCTTypeSafety
@@ -1758,8 +1758,8 @@ SPEC CHECKSUMS:
   fmt: a40bb5bd0294ea969aaaba240a927bd33d878cdd
   glog: eb93e2f488219332457c3c4eafd2738ddc7e80b8
   hermes-engine: ccc24d29d650ea725d582a9a53d57cd417fbdb53
-  HyperTrack: aa6f271e6f9b1339790667c20e281e470531cc21
-  hypertrack-sdk-react-native: 88c5e81026ef6d1f41eab503df03f0b78214f3ca
+  HyperTrack: a1f93d5f5923a345c36ee233f75ca8d3b6adc865
+  hypertrack-sdk-react-native: 71a59a10ffb4f17cd3ed30607791f3fe1f18ffd9
   RCT-Folly: e78785aa9ba2ed998ea4151e314036f6c49e6d82
   RCTDeprecation: 664055db806cce35c3c1b43c84414dd66e117ae6
   RCTRequired: dc9a83fa1012054f94430d210337ca3a1afe6fc0
@@ -1823,6 +1823,6 @@ SPEC CHECKSUMS:
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Yoga: 1fd059161b449018342943b095a6d4e69bcaa719
 
-PODFILE CHECKSUM: 2c0750bf02f66589346700e55a8fc5b183ea664a
+PODFILE CHECKSUM: 17556c8c486366f7a83b4cc7e4f70d276a30c353
 
 COCOAPODS: 1.16.2
